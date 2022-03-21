@@ -1,0 +1,52 @@
+body{
+    width: 100%;
+    background-color: #F6EEE8;
+    font-family: 'Comfortaa';
+}
+
+#login{
+    width: 400px;
+    padding: 8px;
+    border-radius: 4px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+h2{
+    text-align: center;
+    font-size: 20px;
+    font-family: 'Montserrat';
+}
+input[type=text]{
+    font-family: 'Comfortaa';
+    width: 100%;
+    padding:12px 14px;
+    margin: 8px 0;
+    display: inline-block;
+    border: none;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+.centerButton{
+    text-align: center;
+    width: 100%;
+}
+
+input[type=submit]{
+    font-family: 'Comfortaa';
+    text-align: center;
+    border-radius: 8px;
+    width: fit-content;
+    border: none;
+    padding: 12px 20px;
+    margin: 3px;
+    color: white;
+    background-color: #D6001C;
+}
+
+#cancel{
+    background-color: gray;
+}
+
