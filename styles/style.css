@@ -53,6 +53,20 @@ input[type=submit] {
   background-color: #D6001C;
 }
 
+#create {
+  font-family: 'Comfortaa';
+  text-align: center;
+  border-radius: 8px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  border: none;
+  padding: 12px 20px;
+  margin: 3px;
+  color: white;
+  background-color: #D6001C;
+}
+
 #cancel {
   font-family: 'Comfortaa';
   text-align: center;
