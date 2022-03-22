@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link href='https://fonts.googleapis.com/css?family=Comfortaa' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+    <script src="https://raw.githack.com/sabieber/token-autocomplete/master/built/token-autocomplete.js"></script>
+    <link href="styles/token-autocomplete.css" rel="stylesheet" type="text/css" media="all">
+</head>
+<body>
+    <div class="review">
+        <h1>Review</h1>
+        
+        <div class="rating">
+        <span class="star-rating">
+            <input type="radio" name="rating" value="1"><i></i>
+            <input type="radio" name="rating" value="2"><i></i>
+            <input type="radio" name="rating" value="3"><i></i>
+            <input type="radio" name="rating" value="4"><i></i>
+            <input type="radio" name="rating" value="5"><i></i>
+          </span>
+        </div>
+        <form>
+        <textarea id="comment"></textarea>
+        <br>
+        <h3>Keywords</h3>
+        <div id="keywords"></div>
+        
+        <br><br>
+        <input id="cancel" type="button" value="Cancel">
+        <input type="submit" value="Add Rating">
+        </form>
+    </div>
+        
+
+    <script>
+        let tokenAutocomplete = new TokenAutocomplete({
+        name: 'keywords',
+        selector: '#keywords',
+        noMatchesText: 'No matching results...',
+        initialSuggestions: [
+            {value: 'lotsHomework', text: 'Lots of Homework'},
+            {value: 'lecHeavy', text: 'Lecture Heavy'},
+            {value: 'fun', text: 'Fun'},
+            {value: 'informative', text: 'Informative'},
+            {value: 'participMatters', text: 'Participation Matters'},
+            {value: 'clearGrading', text: 'Clear Grading Criteria'}
+        ]
+    });
+    tokenAutocomplete.debug(true);
+    </script>
+    
+</body>
+</html>

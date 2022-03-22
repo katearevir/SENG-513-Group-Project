@@ -1,0 +1,90 @@
+.token-autocomplete-container {
+    display: inline-flex;
+    flex-wrap: wrap;
+    width: 80%;
+    border: 1px solid #E6E6E6;
+    background-color: #FFFFFF;
+}
+
+.token-autocomplete-container, .token-autocomplete-container * {
+    background-color: #EA576A;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+}
+
+.token-autocomplete-container .token-autocomplete-input {
+    color: white;
+    font-size: 16px;
+    line-height: 32px;
+    margin: 4px 2px;
+    padding: 0px 8px;
+}
+
+.token-autocomplete-container .token-autocomplete-input:empty::before {
+    content: attr(data-placeholder);
+    color: white;
+}
+
+.token-autocomplete-container .token-autocomplete-token {
+    font-size: 16px;
+    line-height: 32px;
+    background-color: #FFA300;
+    color: white;
+    margin: 4px 2px;
+    border-radius: 32px;
+    padding: 0px 8px;
+    pointer-events: none;
+}
+
+.token-autocomplete-container .token-autocomplete-token:hover {
+    background-color: #EF9A9A;
+}
+
+.token-autocomplete-container .token-autocomplete-token .token-autocomplete-token-delete {
+    background-color: #FFA300;
+    cursor: pointer;
+    font-size: 24px;
+    line-height: 16px;
+    margin-left: 4px;
+    pointer-events: auto;
+    border-radius: 50%;
+    height: 24px;
+    width: 24px;
+    display: inline-block;
+    text-align: center;
+}
+
+.token-autocomplete-container .token-autocomplete-token .token-autocomplete-token-delete:hover {
+    background-color: #e55858;
+}
+
+.token-autocomplete-container .token-autocomplete-suggestions {
+    display: none;
+    width: 100%;
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+.token-autocomplete-container .token-autocomplete-suggestions li {
+    color: white;
+    width: 100%;
+    padding: 8px;
+    cursor: pointer;
+}
+
+.token-autocomplete-container .token-autocomplete-suggestions li.token-autocomplete-suggestion-active {
+    color: #747474;
+    background-color: red;
+}
+
+.token-autocomplete-container .token-autocomplete-suggestions li.token-autocomplete-suggestion-highlighted {
+    background-color: #95caec;
+}
+
+.token-autocomplete-container .token-autocomplete-suggestions li .token-autocomplete-suggestion-description {
+    display:block;
+    font-size: 0.7em;
+    color: red;
+}
