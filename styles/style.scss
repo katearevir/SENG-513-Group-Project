@@ -78,3 +78,22 @@ input[type=submit]{
     margin-left: 10px;
 }
 
+//for add/modifyCourses.html start
+
+textarea {
+     resize: none;
+     height: 5rem;
+    font-family: 'Comfortaa';
+    width: 100%;
+    padding:12px 14px;
+    margin: 8px 0;
+    display: inline-block;
+    border: none;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+.confirmButtons{
+    display: inline-block;
+}
+//for add/modifyCourses.html end
