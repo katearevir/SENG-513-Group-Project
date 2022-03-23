@@ -23,15 +23,20 @@
                 <input type="submit" value="Login">
             </div>
             <div class="centerButton">
-                <input id="cancel" type="submit" value="Cancel">
+                <input id="cancel" type="button" value="Cancel">
             </div>
                 
             <h2>Don't have an account?</h2>
             <div class="centerButton">
-                <input type="submit" value="Create an Account">
+                <input id="create" type="button" value="Create an Account">
             </div>
         </div>
     </div>
     
 </body>
+<script src="/socket.io/socket.io.js"></script>
+
+<script>
+    var socket = io();
+</script>
 </html>

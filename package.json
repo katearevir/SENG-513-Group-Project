@@ -1,0 +1,10 @@
+{
+    "name": "my_uofc_courses",
+    "version": "0.0.1",
+    "description": "",
+    "dependencies": {
+        "express": "^4.17.3",
+        "mongoose": "^6.2.7",
+        "socket.io": "^4.4.1"
+    }
+}
