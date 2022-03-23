@@ -15,8 +15,8 @@
         <div id="login">
             <h1>Login</h1>
             <form>
-                <input type="text" placeholder="Email">
-                <input type="text" placeholder="Password">
+                <input id="email" type="text" placeholder="Email" required>
+                <input id="password" type="text" placeholder="Password" required>
                 
             </form>
             <div class="centerButton">
@@ -34,9 +34,4 @@
     </div>
     
 </body>
-<script src="/socket.io/socket.io.js"></script>
-
-<script>
-    var socket = io();
-</script>
 </html>

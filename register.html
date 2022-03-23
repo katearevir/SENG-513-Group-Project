@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
-    <link rel="stylesheet" href="styles/style.css">
+    <link type="css" rel="stylesheet" href="styles/style.css">
     <link href='https://fonts.googleapis.com/css?family=Comfortaa' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
 </head>
@@ -14,13 +14,13 @@
         <div id="login">
             <h1>Register</h1>
             <form>
-                <input type="text" placeholder="Email">
-                <input type="text" placeholder="Password">
-                <input type="text" placeholder="Confirm Password">
+                <input id="email" type="email" placeholder="Email" required>
+                <input id="password" type="password" placeholder="Password" required>
+                <input id="confirmPassword" type="password" placeholder="Confirm Password">
                 
             </form>
             <div class="centerButton">
-                <input type="submit" value="Next">
+                <input id="submit" type="submit" value="Next">
             </div>
             <div class="centerButton">
                 <input id="cancel" type="button" value="Cancel">
@@ -28,4 +28,32 @@
         </div>
     </div>
 </body>
+<script src="/socket.io/socket.io.js"></script>
+
+<script>
+    var socket = io("localhost:3000");
+
+    let email = document.getElementById("email");
+    let password = document.getElementById("password");
+    let confirmPassword = document.getElementById("confirmPassword");
+    let submit = document.getElementById("submit");
+
+    submit.addEventListener('click', (e) => {
+        e.preventDefault();
+        email.textContent = "wha"
+        if (!email.value) {
+            console.log("User registration: need email");
+            return;
+        } else if (!password.value) {
+            console.log("User registration: need password");
+            return;
+        } else if (password.value !== confirmPassword.value) {
+            console.log("User registration: passwords do not match");
+            return;
+        }
+        console.log("User registration successful");
+        socket.emit('user_registration', email.value, password.value);
+    })
+
+</script>
 </html>
