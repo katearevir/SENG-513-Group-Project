@@ -151,4 +151,10 @@ textarea {
 .confirmButtons {
   display: inline-block;
 }
+
+#userComments {
+  height: 20rem;
+  border-color: aquamarine;
+  width: 110%;
+}
 /*# sourceMappingURL=style.css.map */

@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,IAAI,CAAA;EACA,gBAAgB,EAAE,OAAO;EACzB,WAAW,EAAE,WAAW;CAC3B;;AAED,AAAA,SAAS,CAAA;EACL,gBAAgB,EAAE,OAAO;EACzB,aAAa,EAAE,GAAG;CAErB",
+    "sources": [
+        "userPageCommentsStyle.scss"
+    ],
+    "names": [],
+    "file": "userPageCommentsStyle.css"
+}
