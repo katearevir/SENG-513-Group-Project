@@ -29,7 +29,7 @@
             </div>
         </div>
 
-        <form>
+        <form id="review">
         <textarea id="comment"></textarea>
         <br>
         <h3>Keywords</h3>
@@ -37,7 +37,7 @@
         
         <br><br>
         <input id="cancel" type="button" value="Cancel">
-        <input type="submit" value="Add Rating">
+        <input id="addRating" type="button" value="Add Rating">
         </form>
     </div>
         
@@ -54,9 +54,37 @@
             {value: 'informative', text: 'Informative'},
             {value: 'participMatters', text: 'Participation Matters'},
             {value: 'clearGrading', text: 'Clear Grading Criteria'}
-        ]
+        ],
     });
-    tokenAutocomplete.debug(true);
+    //tokenAutocomplete.debug(true);
+    
+    //Click on "Add Rating", type=button for now, might change to type=submit if using POST method
+    document.getElementById("addRating").addEventListener("click", function () {
+
+        //get rating
+        var ratings = document.getElementsByName('rate');
+        for (var i = 0; i < ratings.length; i++) {
+            if (ratings[i].checked){
+                console.log("Rating: " + ratings[i].value); //for testing, placeholder
+                break;
+            }
+        }
+
+        //get comment
+        var comment = document.getElementById('comment');
+        console.log("Comment: " + comment.value); //for testing, placeholder
+
+        //get keywords
+        var keywords = document.getElementsByClassName('token-autocomplete-token');
+        var keywordArr = [];
+        for (var i = 0; i < keywords.length; i++) {
+        keywordArr.push(keywords[i].attributes[1].value);
+        }
+        console.log("Keywords: " + keywordArr); //for testing, placeholder
+        
+    });
+    
+    
     </script>
     
 </body>
