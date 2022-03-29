@@ -1,0 +1,102 @@
+body {
+    background-color: #F6EEE8;
+}
+
+h1{
+    font-family: 'Comfortaa';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 21px;
+    line-height: 23px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    color: #FFFFFF;
+    padding-left: 11px;
+}
+
+h2{
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 18px;
+    display: flex;
+    align-items: center;
+    letter-spacing: -0.5px;
+    color: #000000;
+    padding-left: 49%;
+}
+
+.dropdown .dropbtn {
+    font-size: 16px;  
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px 16px;
+    background-color: #9C0534;
+    font-family: 'Comfortaa';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 20px;
+    color: #EAE6ED;
+    border-radius: 6px;
+    margin-top: 5%;
+    margin-left: 40%;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #9C0534;
+    min-width: 305px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 6px;
+    margin-left: 40%;
+}
+
+.dropdown-content a {
+    float: none;
+    color: #EAE6ED;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 20px;
+    align-items: center;
+}
+
+#WebAppTitle {
+    width: 255px;
+    height: 39px;
+    background: rgba(214,0,28,1);
+    opacity: 1;
+    position: relative;
+    top: 0px;
+    left: 0px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    overflow: hidden;
+}
+
+#top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    width: 100%;
+    height: 45%;
+    background: #FFD9DE;
+}

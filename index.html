@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rate My UofC Course</title>
+    <link rel="stylesheet" href="styles/indexStyle.css">
+    <link href='https://fonts.googleapis.com/css?family=Comfortaa' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<body>
+
+    <div class="container">
+        <div id="top">
+            <div id="WebAppTitle">
+                <h1>Rate My UofC Course</h1>
+            </div> 
+            <div class="dropdown">
+                <button class="dropbtn">Select a department 
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content">
+                    <a href="#">MATH</a>
+                    <a href="#">SENG</a>
+                    <a href="#">GRST</a>
+                </div>
+            </div> 
+            <h2>OR</h2>
+        </div>
+    </div>
+    
+</body>
+<script src="/socket.io/socket.io.js"></script>
+
+<script>
+    var socket = io();
+</script>
+</html>
