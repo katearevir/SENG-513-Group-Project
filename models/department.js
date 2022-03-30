@@ -9,7 +9,7 @@ const DepartmentSchema = new Schema({
     },
    
     //holds the courses that belong to the department from CoursesSchema
-    course: [{
+    courses: [{
         type: Schema.Types.ObjectId,
         ref: "Course"
     }]
