@@ -6,6 +6,8 @@ const http = require('http');
 const server = http.createServer(app);
 const io = new Server(server);
 
+const loginRouter = require('./routers/loginRouter')
+
 const mongoose = require('mongoose');
 const mongoDB = 'mongodb+srv://ahfhafh:jEYduRc7cZmHExJ@cluster0.3cy1i.mongodb.net/users-database?retryWrites=true&w=majority';
 mongoose.connect(mongoDB).then(() => {
@@ -18,6 +20,8 @@ app.use(express.static('public'));
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/register.html');
 });
+
+app.use('/login', loginRouter);
 
 server.listen(3000, () => {
     console.log('listening on *:3000');
