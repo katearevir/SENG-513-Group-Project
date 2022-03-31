@@ -1,0 +1,277 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+}
+
+body {
+    background-color: #F6EEE8;
+}
+
+p {
+    margin: 8px;
+}
+
+b {
+    font-weight: 700;
+}
+ 
+/* Navigation */
+
+.nav-container{
+    background: #FFD9DE;
+}
+
+.wrapper{
+    max-width: 1500px;
+    margin: 0 auto;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+nav ul{
+    display: flex;
+}
+
+.logo{
+    font-family: 'Comfortaa';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 21px;
+    line-height: 23px;
+    display: flex;
+    align-items: center;
+    background: #D6001C;
+    border-radius: 10px;
+    color: #FFFFFF;
+    padding: 6px;
+    padding-top: 10px;
+    margin: 15px;
+}
+
+.nav-items li {
+    list-style: none;
+}
+
+.nav-items li a {
+    font-family: 'Comfortaa';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    /* identical to box height */
+    color: #FFFFFF;
+    background: #FFA300;
+    padding: 10px;
+    margin: 15px;
+    border-radius: 10px;
+    transform: matrix(1, 0, 0, 1, 0, 0);
+    text-decoration: none;
+}
+
+/* Header */
+
+.header-container{
+    background: #FFD9DE;
+    display: flex;
+    align-items: center;
+    padding-bottom: 40px;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header h2 {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 18px;
+    /* identical to box height, or 75% */
+    display: flex;
+    align-items: center;
+    letter-spacing: -0.5px;
+    color: #000000;
+    margin: 15px;
+    padding-left: 188px;
+}
+
+header select {
+    background: #9C0534;
+    border-radius: 6px;
+    font-family: 'Comfortaa';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 20px;
+    /* or 83% */
+    color: #EAE6ED;
+    width: 473px;
+    height: 47px;
+}
+
+.search-box input{
+    width: 473px;
+    height: 47px;
+    background: #9C0534;
+    /* Dropshadow 1 */
+    border-radius: 6px;
+    font-family: 'Comfortaa';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 20px;
+    /* identical to box height, or 83% */
+
+    display: flex;
+    align-items: center;
+
+    color: #EAE6ED;
+}
+
+.search-box input::placeholder {
+    font-family: 'Comfortaa';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 20px;
+    color: #EAE6ED;
+}
+
+/* Body Container */
+
+.body-container{
+    display: flex;
+    align-items: center;
+}
+
+.body-container h2{
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 18px;
+    /* or 75% */
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: -0.5px;
+    color: #000000;
+    margin: 33px;
+    margin-left: 154px;
+}
+
+.course-filter select{
+    background: #B6B3AB;
+    border-radius: 6px;
+    width: 138px;
+    height: 41px;
+    font-family: 'Comfortaa';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 20px;
+    /* identical to box height, or 83% */
+    color: #EAE6ED;
+    margin-left: 76px;
+}
+
+.course-sort select{
+    background: #B6B3AB;
+    border-radius: 6px;
+    width: 138px;
+    height: 41px;
+    font-family: 'Comfortaa';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 20px;
+    /* identical to box height, or 83% */
+    color: #EAE6ED;
+    margin-left: 50px;
+}
+
+.filters {
+    display: flex;
+}
+
+/* Style the button that is used to open and close the collapsible content */
+.collapsible {
+    background: rgba(214, 0, 28, 0.6);
+    border-radius: 8px;
+    cursor: pointer;
+    padding: 18px;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    font-family: 'Comfortaa';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 18px;
+    /* or 112% */
+
+    display: flex;
+    align-items: center;
+    letter-spacing: -0.5px;
+
+    /* System / Disabled / Title 60% */
+
+    color: rgba(54, 70, 99, 0.6);
+    width: 473px;
+    height: 52px;
+    margin-top: 20px;
+  }
+  
+  /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+
+  .active, .collapsible:hover {
+      border-bottom-right-radius: 0px;
+      border-bottom-left-radius: 0px;
+  }
+  
+  /* Style the collapsible content. Note: hidden by default */
+  .course-contents {
+    padding: 0 18px;
+    display: none;
+    overflow: hidden;
+    background: rgba(214, 0, 28, 0.6);
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+    width: 473px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 18px;
+    /* or 129% */
+    align-items: center;
+    letter-spacing: -0.5px;
+
+    color: #000000;
+  }
+
+  .course-contents a {
+    text-decoration: none;
+    font-family: 'Comfortaa';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #FFFFFF;
+    background: #68CC58;
+    border-radius: 8px;
+    transform: matrix(1, 0, -0.02, 1, 0, 0);
+    padding: 5px;
+    justify-content: center;
+  }
