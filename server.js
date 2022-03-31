@@ -13,7 +13,11 @@ const mongoDB = 'mongodb+srv://ahfhafh:jEYduRc7cZmHExJ@cluster0.3cy1i.mongodb.ne
 mongoose.connect(mongoDB).then(() => {
     console.log("Mongoose connected");
 }).catch((err) => console.log(err));
+
 const User = require('./models/user')
+const Course = require('./models/course')
+const Department = require('./models/department')
+const Feedback = require('./models/feedback')
 
 app.use(express.static('public'));
 
