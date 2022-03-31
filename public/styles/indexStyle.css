@@ -301,7 +301,7 @@ header select {
     display: none;
     position: absolute;
     background-color: white;
-    min-width: 160px;
+    min-width: 170px;
     overflow: auto;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     right: 0;
@@ -310,10 +310,29 @@ header select {
   
   .menu-content a {
     font-family: 'Comfortaa';
-    color: black;
+    color: white;
     padding: 12px 16px;
+    border-radius: 4px;
+    margin: 3px;
     text-decoration: none;
     display: block;
+  }
+
+  #addCourse{
+      background-color: #2652CC;
+      
+  }
+
+  #modifyCourse{
+    background-color: #C18AFF;
+  }
+
+  #removeCourse{
+      background-color: #68CC58;
+  }
+
+  #logout{
+    background-color: #FFA300;
   }
   
   .dropdownMenu a:hover {background-color: #ddd;}
