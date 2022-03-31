@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const CourseSchema = new Schema({
-    course: { 
+    course: {
         type: String, // Example of input structure: DEPT NUM eg. SENG 513. may need to verify somewhere that it is in this format 
         required: true,
         index: true
@@ -11,7 +11,7 @@ const CourseSchema = new Schema({
         type: String,
         required: true,
     },
-  
+
     messages: [{
         type: Schema.Types.ObjectId,
         ref: "Feedback"

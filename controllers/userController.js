@@ -20,7 +20,6 @@ let UserQueries = {
         res.json(savedUser);
     },
 
-
     //find all the comments for a specific user
     getAllCommentsFromUser: async (req,res) => {
         let foundUser = await userModel.find({email: req.params.email}).populate("messages");

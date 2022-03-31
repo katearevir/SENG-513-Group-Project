@@ -20,7 +20,6 @@ let FeedbackQueries = {
         res.json(savedFeedback);
     },
 
-
     //find the course linked to this feedback
     getCourseForComment: async (req,res) => {
         let foundCourse = await userModel.find({feedback_id: req.params.email}).populate("course");

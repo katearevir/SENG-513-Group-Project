@@ -20,7 +20,6 @@ let DepartmentQueries = {
         res.json(savedDepartment);
     },
 
-
     //find all the courses for a specific department
     getAllCoursesForDepartment: async (req,res) => {
         let foundDepartment = await departmentModel.find({department: req.params.departmentName}).populate("courses");

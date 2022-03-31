@@ -7,7 +7,7 @@ const DepartmentSchema = new Schema({
         required: true,
         index: true
     },
-   
+
     //holds the courses that belong to the department from CoursesSchema
     courses: [{
         type: Schema.Types.ObjectId,
@@ -16,7 +16,5 @@ const DepartmentSchema = new Schema({
 }, {
     timestamps: true
 });
-
-
 
 module.exports = mongoose.model('Department', DepartmentSchema);
