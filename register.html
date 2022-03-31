@@ -31,28 +31,6 @@
             </div>
         </div>
     </div>
-
-<script src="/socket.io/socket.io.js"></script>
-<script>
-    var socket = io();
-    
-    var form = document.getElementById('registerForm');
-    var email = document.getElementById('email');
-    var pass = document.getElementById('password');
-    var conPass = document.getElementById('cPassword');
-
-    form.addEventListener('submit', function(e){
-        if (pass.value !== conPass.value){
-            alert("Passwords do not match!");
-        }
-        else{
-            socket.emit('email', email.value);
-            socket.emit('password', pass.value);
-            //verify in server if taken or not?
-        }
-    });
-
-</script>
 </body>
 <script src="/socket.io/socket.io.js"></script>
 
