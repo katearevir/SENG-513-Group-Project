@@ -276,3 +276,43 @@ header select {
     padding: 5px;
     justify-content: center;
   }
+
+  .menubtn {
+    background: none;
+    color: black;
+    padding: 5px;
+    font-size: 40px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .menubtn:hover, .menubtn:focus {
+    background-color: #3e8e41;
+  }
+  
+  .dropdownMenu {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .menu-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    right: 0;
+    z-index: 1;
+  }
+  
+  .menu-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .dropdownMenu a:hover {background-color: #ddd;}
+  
+  .show {display: block;}
