@@ -18,7 +18,7 @@ h2{
     font-size: 20px;
     font-family: 'Montserrat';
 }
-input[type=text]{
+input[type=text], input[type=password]{
     font-family: 'Comfortaa';
     width: 100%;
     padding:12px 14px;
@@ -42,30 +42,35 @@ input[type=submit], #addRating{
     border: none;
     padding: 12px 20px;
     margin: 3px;
+    font-size: 15px;
     color: white;
     background-color: #D6001C;
 }
 
 #create{
+    text-decoration: none;
     font-family: 'Comfortaa';
     text-align: center;
     border-radius: 8px;
     width: fit-content;
     border: none;
     padding: 12px 20px;
+    font-size: 15px;
     margin: 3px;
     color: white;
     background-color: #D6001C;
 }
 
 #cancel{
+    text-decoration: none;
     font-family: 'Comfortaa';
     text-align: center;
     border-radius: 8px;
     width: fit-content;
     border: none;
     padding: 12px 20px;
-    margin: 3px;
+    font-size: 15px;
+    margin: 20px;
     color: white;
     background-color: gray;
 }

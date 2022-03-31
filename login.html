@@ -14,29 +14,42 @@
     <div class="container">
         <div id="login">
             <h1>Login</h1>
-            <form>
-                <input type="text" placeholder="Email">
-                <input type="text" placeholder="Password">
-                
+            <form id="loginForm" method="post">
+                <input id="email" type="text" placeholder="Email">
+                <input id="password" type="password" placeholder="Password">
+                <div class="centerButton">
+                    <input type="submit" value="Login">
+                </div>
             </form>
+            
+            <br>
             <div class="centerButton">
-                <input type="submit" value="Login">
-            </div>
-            <div class="centerButton">
-                <input id="cancel" type="button" value="Cancel">
+                <a id="cancel" href="login.html">Cancel</a>
             </div>
                 
             <h2>Don't have an account?</h2>
             <div class="centerButton">
-                <input id="create" type="button" value="Create an Account">
+                <a id="create" href="register.html">Create an Account</a>
             </div>
         </div>
     </div>
-    
-</body>
+
 <script src="/socket.io/socket.io.js"></script>
 
 <script>
     var socket = io();
+    
+    var form = document.getElementById('loginForm');
+    var email = document.getElementById('email');
+    var pass = document.getElementById('password');
+
+    form.addEventListener('submit', function(e){
+        socket.emit('email', email.value);
+        socket.emit('password', password.value);
+        //verify in server?
+    });
+
 </script>
+</body>
+
 </html>
