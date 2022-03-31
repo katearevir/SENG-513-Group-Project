@@ -20,11 +20,12 @@
                     Rate My UofC Course
                 </div>
                 <div class="dropdownMenu">
-                    <button onclick="dropdownMenu()" class="menubtn">≡</button>
+                    <button onclick="dropdownMenu()" id="menubtn">≡</button>
                     <div id="myDropdown" class="menu-content">
-                      <a href="#home">Home</a>
-                      <a href="#about">About</a>
-                      <a href="#contact">Contact</a>
+                      <a id="addCourse" href="addCourses.html">Add Course</a>
+                      <a id="modifyCourse" href="modifyCourses.html">Modify Course</a>
+                      <a id="removeCourse" href="#remove">Remove Course</a>
+                      <a id="logout" href="index.html">Logout</a>
                     </div>
                 </div>
                   
@@ -82,7 +83,6 @@
                 <div class="course-contents">
                     <p><b>Description: </b>An overview of software engineering methods and technologies for developing web-based software systems.</p>
                     <p><b>Rating: </b>5/5 <b>from</b> 100 <b>students</b></p>
-                    <a href="#">Add a review</a>
                     <p><b>Comments:</b></p>
                     <iframe src="review.html" height="261" width="446" style="border:none" title="Iframe Example"></iframe>
                 </div>
@@ -110,25 +110,35 @@
             }
         });
     }
-    /*
-    // Close the dropdown if the user clicks outside of it
-window.onclick = function(event) {
-  if (!event.target.matches('.menubtn')) {
-    var dropdowns = document.getElementsByClassName("menu-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
-      }
+
+
+    /* When the user clicks on the button, 
+    toggle between hiding and showing the dropdown content */
+    function dropdownMenu() {
+        document.getElementById("myDropdown").classList.toggle("show");
+            var menuButton = document.getElementById("menubtn");
+            if(menuButton.innerText === "x"){
+                menuButton.innerText = "≡";
+            }
+            else{
+                menuButton.innerText = "x";
+            }
     }
-  }
-}
-*/
-/* When the user clicks on the button, 
-toggle between hiding and showing the dropdown content */
-function dropdownMenu() {
-  document.getElementById("myDropdown").classList.toggle("show");
+
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function(event) {
+    var menuButton = document.getElementById("menubtn");
+    if (!event.target.matches('#menubtn')) {
+        menuButton.innerText = "≡";
+        var dropdowns = document.getElementsByClassName("menu-content");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+            }
+        }
+    }
 }
 
 
