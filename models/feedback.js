@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const FeedbackSchema = new Schema({
     feedback_id: {
-        type: INT,
+        type: Number,
         required: true,
         index: true
     },
@@ -14,11 +14,11 @@ const FeedbackSchema = new Schema({
     comment: {message: String, date: Date, hidden: Boolean},
 
     rating: { //stars out of 5
-        type: INT, //might change depending on how starts is implemented
+        type: Number, //might change depending on how starts is implemented
         required: false,
     },
     comment_rating: { //upvotes/downvotes on that comment
-        type: INT,
+        type: Number,
         required: true,
     },
 
@@ -30,9 +30,5 @@ const FeedbackSchema = new Schema({
 }, {
     timestamps: true
 });
-
-
-
-
 
 module.exports = mongoose.model('Feedback', FeedbackSchema);
