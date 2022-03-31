@@ -277,7 +277,7 @@ header select {
     justify-content: center;
   }
 
-  .menubtn {
+  #menubtn {
     background: none;
     color: black;
     padding: 5px;
@@ -286,8 +286,10 @@ header select {
     cursor: pointer;
   }
   
-  .menubtn:hover, .menubtn:focus {
-    background-color: #3e8e41;
+  #menubtn:hover, .menubtn:focus {
+    border-radius: 8px;
+    background-color: black;
+    color: white;
   }
   
   .dropdownMenu {
@@ -298,8 +300,8 @@ header select {
   .menu-content {
     display: none;
     position: absolute;
-    background-color: #f1f1f1;
-    min-width: 160px;
+    background-color: white;
+    min-width: 170px;
     overflow: auto;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     right: 0;
@@ -307,10 +309,30 @@ header select {
   }
   
   .menu-content a {
-    color: black;
+    font-family: 'Comfortaa';
+    color: white;
     padding: 12px 16px;
+    border-radius: 4px;
+    margin: 3px;
     text-decoration: none;
     display: block;
+  }
+
+  #addCourse{
+      background-color: #2652CC;
+      
+  }
+
+  #modifyCourse{
+    background-color: #C18AFF;
+  }
+
+  #removeCourse{
+      background-color: #68CC58;
+  }
+
+  #logout{
+    background-color: #FFA300;
   }
   
   .dropdownMenu a:hover {background-color: #ddd;}
