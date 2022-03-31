@@ -13,29 +13,96 @@
 </head>
 <body>
 
-    <div class="container">
-        <div id="top">
-            <div id="WebAppTitle">
-                <h1>Rate My UofC Course</h1>
-            </div> 
-            <div class="dropdown">
-                <button class="dropbtn">Select a department 
-                    <i class="fa fa-caret-down"></i>
-                </button>
-                <div class="dropdown-content">
-                    <a href="#">MATH</a>
-                    <a href="#">SENG</a>
-                    <a href="#">GRST</a>
+    <div class="nav-container">
+        <div class="wrapper">
+            <nav>
+                <div class="logo">
+                    Rate My UofC Course
                 </div>
-            </div> 
-            <h2>OR</h2>
+                <ul class="nav-items">
+                    <li>
+                        <a href="login.html">Login</a>
+                    </li>
+                </ul>
+            </nav>
+            
         </div>
     </div>
+
+    <div class="header-container">
+        <div class="wrapper">
+            <header>
+                <div class="header-content">
+                    <div class="dept-select">
+                        <select name="department" id="department">
+                            <option value="" disabled selected hidden>Select a department</option>
+                            <option value="math">MATH</option>
+                            <option value="seng">SENG</option>
+                            <option value="grst">GRST</option>
+                        </select>
+                    </div>
+                    <h2>OR</h2>
+                    <div class="search-box">
+                        <input type="text" placeholder="Enter a specific course">
+                    </div>
+                </div>
+            </header>
+        </div>
+    </div>
+
+    <div class="body-container">
+        <div class="wrapper">
+            <h2>Popular Courses</h2>
+            <div class="filters">
+                <div class="course-filter">
+                    <select name="filter" id="filter">
+                        <option value="" disabled selected hidden>Filter</option>
+                        <option value="200">200 Levels</option>
+                        <option value="300">300 Levels</option>
+                        <option value="400">400 Levels</option>
+                        <option value="500">500 Levels</option>
+                    </select>
+                </div>
+                <div class="course-sort">
+                    <select name="sort-by" id="sort-by">
+                        <option value="" disabled selected hidden>Sort By</option>
+                        <option value="High-rating">Highest to Lowest Rated</option>
+                        <option value="Low-rating">Lowest to Highest Rated</option>
+                        <option value="Most">Most Rated</option>
+                        <option value="Least">Least Rated</option>
+                    </select>
+                </div>
+            </div>
+            <div class="course-content">
+                <button type="button" class="collapsible">SENG 300</button>
+                <div class="course-contents">
+                    <p><b>Description: </b>An overview of software engineering methods and technologies for developing web-based software systems.</p>
+                    <p><b>Rating: </b>5/5 <b>from</b> 100 <b>students</b></p>
+                    <a href="#">Add a review</a>
+                    <p><b>Comments:</b></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     
 </body>
-<script src="/socket.io/socket.io.js"></script>
 
 <script>
-    var socket = io();
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.display === "block") {
+                content.style.display = "none";
+            } else {
+                content.style.display = "block";
+            }
+        });
+    }
 </script>
 </html>
