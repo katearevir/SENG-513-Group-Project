@@ -61,3 +61,10 @@ socket.on('course_creation', (courseName, courseDescription) => {
         console.log("Course Created");
     })
 });
+
+socket.on('department_creation', (departmentName) => {
+    const department = new Department({department: departmentName});
+    department.save().then(() => {
+        console.log("Department Created");
+    })
+});
