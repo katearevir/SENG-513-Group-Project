@@ -7,6 +7,13 @@ const server = http.createServer(app);
 const io = new Server(server);
 
 const loginRouter = require('./routers/loginRouter')
+const registerRouter = require('./routers/registerRotuer')
+const addCourseRouter = require('./routers/addCourseRouter')
+const moderatorRouter = require('./routers/moderatorRouter')
+const modifyCoursesRouter = require('./routers/modifyCoursesRouter')
+const reviewRouter = require('./routers/reviewRouter')
+const userPageCommentsRouter = require('./routers/userPageCommentsRouter')
+const userPageRouter = require('./routers/userPageRouter')
 
 const mongoose = require('mongoose');
 const mongoDB = 'mongodb+srv://ahfhafh:jEYduRc7cZmHExJ@cluster0.3cy1i.mongodb.net/users-database?retryWrites=true&w=majority';
@@ -22,10 +29,17 @@ const Feedback = require('./models/feedback')
 app.use(express.static('public'));
 
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/register.html');
+    res.sendFile(__dirname + '/index.html');
 });
 
 app.use('/login', loginRouter);
+app.use('/register', registerRouter);
+app.use('/addCourse', addCourseRouter);
+app.use('/moderator', moderatorRouter);
+app.use('/modifyCourses', modifyCoursesRouter);
+app.use('/review', reviewRouter);
+app.use('/userPage', userPageRouter);
+app.use('/userPageComments', userPageCommentsRouter);
 
 server.listen(3000, () => {
     console.log('listening on *:3000');
