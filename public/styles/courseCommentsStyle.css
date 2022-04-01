@@ -1,0 +1,33 @@
+body {
+  background-color: #df929c;
+  font-family: 'Montserrat';
+}
+
+#date {
+  font-size: 14px;
+  color: gray;
+}
+
+.fa-star {
+  color: #E1E1E1;
+  font-size: 20px;
+  margin-right: 4px;
+}
+
+.checked {
+  color: #FFCF5C;
+}
+
+#comment {
+  font-size: 14px;
+}
+
+.keyword {
+  color: white;
+  background-color: #FFA300;
+  font-size: 14px;
+  padding: 5px 8px;
+  border-radius: 8px;
+  margin-right: 10px;
+}
+/*# sourceMappingURL=courseCommentsStyle.css.map */
