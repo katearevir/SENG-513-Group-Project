@@ -65,14 +65,14 @@ io.on('connection', (socket) => {
     })
 })
 
-socket.on('course_creation', (courseName, courseDescription) => {
+io.on('course_creation', (courseName, courseDescription) => {
     const course = new Course({course: courseName, desscription: courseDescription});
     course.save().then(() => {
         console.log("Course Created");
     })
 });
 
-socket.on('department_creation', (departmentName) => {
+io.on('department_creation', (departmentName) => {
     const department = new Department({department: departmentName});
     department.save().then(() => {
         console.log("Department Created");
