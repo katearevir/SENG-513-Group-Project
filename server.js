@@ -40,3 +40,10 @@ io.on('connection', (socket) => {
         })
     })
 })
+
+socket.on('course_creation', (courseName, courseDescription) => {
+    const course = new Course({course: courseName, desscription: courseDescription});
+    course.save().then(() => {
+        console.log("Course Created");
+    })
+});

@@ -17,14 +17,38 @@
                 <h2 style="text-align: left;">Add Course</h2>
                 <input id = "courseNameBox" type="text" placeholder="Enter the course name">
                 <h2 style="text-align: left;">Description</h2>
-                <textarea  placeholder="Enter the course description:"></textarea>
+                <textarea id="courseDescriptionBox" placeholder="Enter the course description:"></textarea>
                 
             </form>
             <div>
                <div class="confirmButtons"> <input  type="submit" id="cancel" value="Cancel" style="width: 20rem;" ></div>
-               <div class="confirmButtons" > <input type="submit" value="Add Course" style="width: 30rem;"></div>
+               <div class="confirmButtons" > <input type="submit" id="confirm" value="Add Course" style="width: 30rem;"></div>
             </div>
         </div>
     </div>
 </body>
+<script src="/socket.io/socket.io.js"></script>
+
+<script>
+    var socket = io("localhost:3000");
+
+    let courseName = document.getElementById("courseNameBox");
+    let courseDescription = document.getElementById("courseDescriptionBox");
+    let confirm = document.getElementById("confirm");
+
+    confirm.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        if (!courseName.value) {
+            console.log("Add Course: need course name");
+            return;
+        } else if (!courseDescription.value) {
+            console.log("Add Course Description: need course description");
+            return;
+        } 
+        console.log("Course added successfully");
+        socket.emit('course_creation', courseName.value, courseDescription.value);
+    })
+
+</script>
 </html>
