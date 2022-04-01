@@ -3,7 +3,7 @@ const path = require('path');
 
 const moderatorRouter = express.Router();
 
-moderatorRouter.get('/', function (req, res) {
+moderatorRouter.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'moderator.html'));
 });
 

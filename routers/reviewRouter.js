@@ -3,7 +3,7 @@ const path = require('path');
 
 const reviewRouter = express.Router();
 
-reviewRouter.get('/', function (req, res) {
+reviewRouter.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'review.html'));
 });
 

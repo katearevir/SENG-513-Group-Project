@@ -3,7 +3,7 @@ const path = require('path');
 
 const modifyCoursesRouter = express.Router();
 
-modifyCoursesRouter.get('/', function (req, res) {
+modifyCoursesRouter.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'modifyCourses.html'));
 });
 

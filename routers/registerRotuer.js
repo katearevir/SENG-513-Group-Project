@@ -3,7 +3,7 @@ const path = require('path');
 
 const registerRouter = express.Router();
 
-registerRouter.get('/', function (req, res) {
+registerRouter.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'register.html'));
 });
 
