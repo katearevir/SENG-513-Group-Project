@@ -236,6 +236,18 @@ header select {
       border-bottom-right-radius: 0px;
       border-bottom-left-radius: 0px;
   }
+  .collapsible:after {
+    content: '▼';
+    color: black;
+    font-weight: bold;
+    margin-left: 78%;
+    
+  }
+  
+  .active:after {
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+  }
   
   /* Style the collapsible content. Note: hidden by default */
   .course-contents {
