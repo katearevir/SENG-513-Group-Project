@@ -232,9 +232,15 @@ header select {
   
   /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
 
-  .active, .collapsible:hover {
+  .active {
       border-bottom-right-radius: 0px;
       border-bottom-left-radius: 0px;
+  }
+
+  .collapsible:hover{
+    background-color: #ad4351;
+    -webkit-transition-duration: 0.2s;
+          transition-duration: 0.2s;
   }
   .collapsible:after {
     content: '▼';
