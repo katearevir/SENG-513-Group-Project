@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,8 +12,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
+
 <body>
-    
+
     <div class="nav-container">
         <div class="wrapper">
             <nav>
@@ -22,15 +24,15 @@
                 <div class="dropdownMenu">
                     <button onclick="dropdownMenu()" id="menubtn">≡</button>
                     <div id="myDropdown" class="menu-content">
-                      <a id="addCourse" href="addCourses.html">Add Course</a>
-                      <a id="modifyCourse" href="modifyCourses.html">Modify Course</a>
-                      <a id="removeCourse" href="#remove">Remove Course</a>
-                      <a id="logout" href="index.html">Logout</a>
+                        <a id="addCourse" href="addCourses">Add Course</a>
+                        <a id="modifyCourse" href="modifyCourses">Modify Course</a>
+                        <a id="removeCourse" href="#remove">Remove Course</a>
+                        <a id="logout" href="index">Logout</a>
                     </div>
                 </div>
-                  
+
             </nav>
-            
+
         </div>
     </div>
 
@@ -81,17 +83,19 @@
             <div class="course-content">
                 <button type="button" class="collapsible">SENG 300</button>
                 <div class="course-contents">
-                    <p><b>Description: </b>An overview of software engineering methods and technologies for developing web-based software systems.</p>
+                    <p><b>Description: </b>An overview of software engineering methods and technologies for developing
+                        web-based software systems.</p>
                     <p><b>Rating: </b>5/5 <b>from</b> 100 <b>students</b></p>
                     <p><b>Comments:</b></p>
-                    <iframe src="review.html" height="261" width="446" style="border:none" title="Iframe Example"></iframe>
+                    <iframe src="review.html" height="261" width="446" style="border:none"
+                        title="Iframe Example"></iframe>
                 </div>
             </div>
         </div>
     </div>
 
 
-    
+
 </body>
 
 <script>
@@ -100,7 +104,7 @@
     var i;
 
     for (i = 0; i < coll.length; i++) {
-        coll[i].addEventListener("click", function() {
+        coll[i].addEventListener("click", function () {
             this.classList.toggle("active");
             var content = this.nextElementSibling;
             if (content.style.display === "block") {
@@ -116,31 +120,32 @@
     toggle between hiding and showing the dropdown content */
     function dropdownMenu() {
         document.getElementById("myDropdown").classList.toggle("show");
-            var menuButton = document.getElementById("menubtn");
-            if(menuButton.innerText === "x"){
-                menuButton.innerText = "≡";
-            }
-            else{
-                menuButton.innerText = "x";
-            }
+        var menuButton = document.getElementById("menubtn");
+        if (menuButton.innerText === "x") {
+            menuButton.innerText = "≡";
+        }
+        else {
+            menuButton.innerText = "x";
+        }
     }
 
     // Close the dropdown if the user clicks outside of it
-    window.onclick = function(event) {
-    var menuButton = document.getElementById("menubtn");
-    if (!event.target.matches('#menubtn')) {
-        menuButton.innerText = "≡";
-        var dropdowns = document.getElementsByClassName("menu-content");
-        var i;
-        for (i = 0; i < dropdowns.length; i++) {
-            var openDropdown = dropdowns[i];
-            if (openDropdown.classList.contains('show')) {
-                openDropdown.classList.remove('show');
+    window.onclick = function (event) {
+        var menuButton = document.getElementById("menubtn");
+        if (!event.target.matches('#menubtn')) {
+            menuButton.innerText = "≡";
+            var dropdowns = document.getElementsByClassName("menu-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
             }
         }
     }
-}
 
 
 </script>
+
 </html>

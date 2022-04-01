@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Review</title>
-    <link rel="stylesheet" href="public/styles/style.css">
+    <link rel="stylesheet" href="styles/style.css">
     <link href='https://fonts.googleapis.com/css?family=Comfortaa' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
     <script src="https://raw.githack.com/sabieber/token-autocomplete/master/built/token-autocomplete.js"></script>
-    <link href="public/styles/token-autocomplete.css" rel="stylesheet" type="text/css" media="all">
+    <link href="styles/token-autocomplete.css" rel="stylesheet" type="text/css" media="all">
 </head>
+
 <body>
     <div class="review">
         <h1>Review</h1>
@@ -30,62 +32,63 @@
         </div>
 
         <form id="review">
-        <textarea id="comment"></textarea>
-        <br>
-        <h3>Keywords</h3>
-        <div id="keywords"></div>
-        
-        <br><br>
-        <a id="cancel" href="index.html">Cancel</a>
-        <input id="addRating" type="button" value="Add Rating">
+            <textarea id="comment"></textarea>
+            <br>
+            <h3>Keywords</h3>
+            <div id="keywords"></div>
+
+            <br><br>
+            <a id="cancel" href="index">Cancel</a>
+            <input id="addRating" type="button" value="Add Rating">
         </form>
     </div>
-        
+
 
     <script>
         let tokenAutocomplete = new TokenAutocomplete({
-        name: 'keywords',
-        selector: '#keywords',
-        noMatchesText: 'No matching results...',
-        initialSuggestions: [
-            {value: 'lotsHomework', text: 'Lots of Homework'},
-            {value: 'lecHeavy', text: 'Lecture Heavy'},
-            {value: 'fun', text: 'Fun'},
-            {value: 'informative', text: 'Informative'},
-            {value: 'participMatters', text: 'Participation Matters'},
-            {value: 'clearGrading', text: 'Clear Grading Criteria'}
-        ],
-    });
-    //tokenAutocomplete.debug(true);
-    
-    //Click on "Add Rating", type=button for now, might change to type=submit if using POST method
-    document.getElementById("addRating").addEventListener("click", function () {
+            name: 'keywords',
+            selector: '#keywords',
+            noMatchesText: 'No matching results...',
+            initialSuggestions: [
+                { value: 'lotsHomework', text: 'Lots of Homework' },
+                { value: 'lecHeavy', text: 'Lecture Heavy' },
+                { value: 'fun', text: 'Fun' },
+                { value: 'informative', text: 'Informative' },
+                { value: 'participMatters', text: 'Participation Matters' },
+                { value: 'clearGrading', text: 'Clear Grading Criteria' }
+            ],
+        });
+        //tokenAutocomplete.debug(true);
 
-        //get rating
-        var ratings = document.getElementsByName('rate');
-        for (var i = 0; i < ratings.length; i++) {
-            if (ratings[i].checked){
-                console.log("Rating: " + ratings[i].value); //for testing, placeholder
-                break;
+        //Click on "Add Rating", type=button for now, might change to type=submit if using POST method
+        document.getElementById("addRating").addEventListener("click", function () {
+
+            //get rating
+            var ratings = document.getElementsByName('rate');
+            for (var i = 0; i < ratings.length; i++) {
+                if (ratings[i].checked) {
+                    console.log("Rating: " + ratings[i].value); //for testing, placeholder
+                    break;
+                }
             }
-        }
 
-        //get comment
-        var comment = document.getElementById('comment');
-        console.log("Comment: " + comment.value); //for testing, placeholder
+            //get comment
+            var comment = document.getElementById('comment');
+            console.log("Comment: " + comment.value); //for testing, placeholder
 
-        //get keywords
-        var keywords = document.getElementsByClassName('token-autocomplete-token');
-        var keywordArr = [];
-        for (var i = 0; i < keywords.length; i++) {
-        keywordArr.push(keywords[i].attributes[1].value);
-        }
-        console.log("Keywords: " + keywordArr); //for testing, placeholder
-        
-    });
-    
-    
+            //get keywords
+            var keywords = document.getElementsByClassName('token-autocomplete-token');
+            var keywordArr = [];
+            for (var i = 0; i < keywords.length; i++) {
+                keywordArr.push(keywords[i].attributes[1].value);
+            }
+            console.log("Keywords: " + keywordArr); //for testing, placeholder
+
+        });
+
+
     </script>
-    
+
 </body>
+
 </html>
