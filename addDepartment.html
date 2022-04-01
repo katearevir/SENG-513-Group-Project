@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin -Add Courses</title>
+    <title>Admin -Add Department</title>
     <link rel="stylesheet" href="styles/style.css">
     <link href='https://fonts.googleapis.com/css?family=Comfortaa' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
@@ -15,13 +15,10 @@
     <div class="container">
         <div>
             <!--id="login"-->
-            <h1 style="text-align: left;">Add Course</h1>
+            <h1 style="text-align: left;">Add Department</h1>
             <form>
-                <h2 style="text-align: left;">Add Course</h2>
-                <input id="courseNameBox" type="text" placeholder="Enter the course name">
-                <h2 style="text-align: left;">Description</h2>
-                <textarea id="courseDescriptionBox" placeholder="Enter the course description:"></textarea>
-                
+                <h2 style="text-align: left;">Add Department</h2>
+                <input id="departmentNameBox" type="text" placeholder="Enter the department name">
             </form>
             <div>
                <div class="confirmButtons"> <input  type="submit" id="cancel" value="Cancel" style="width: 20rem;" ></div>
@@ -35,22 +32,18 @@
 <script>
     var socket = io("localhost:3000");
 
-    let courseName = document.getElementById("courseNameBox");
-    let courseDescription = document.getElementById("courseDescriptionBox");
+    let departmentName = document.getElementById("departmentNameBox");
     let confirm = document.getElementById("confirm");
 
     confirm.addEventListener('click', (e) => {
         e.preventDefault();
 
-        if (!courseName.value) {
-            console.log("Add Course: need course name");
-            return;
-        } else if (!courseDescription.value) {
-            console.log("Add Course Description: need course description");
+        if (!departmentName.value) {
+            console.log("Add department: need department name");
             return;
         } 
-        console.log("Course added successfully");
-        socket.emit('course_creation', courseName.value, courseDescription.value);
+        console.log("Department created successfully");
+        socket.emit('department_creation', departmentName.value);
     })
 
 </script>
