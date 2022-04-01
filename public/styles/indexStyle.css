@@ -146,6 +146,10 @@ header select {
 
 /* Body Container */
 
+.course-contents {
+    margin: auto;
+}
+
 .body-container{
     display: flex;
     align-items: center;
@@ -203,6 +207,7 @@ header select {
 
 /* Style the button that is used to open and close the collapsible content */
 .collapsible {
+    margin: auto;
     background: rgba(214, 0, 28, 0.6);
     border-radius: 8px;
     cursor: pointer;
