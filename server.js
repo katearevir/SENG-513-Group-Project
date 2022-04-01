@@ -63,18 +63,18 @@ io.on('connection', (socket) => {
             console.log("User registered");
         })
     })
+
+    io.on('course_creation', (courseName, courseDescription) => {
+        const course = new Course({course: courseName, desscription: courseDescription});
+        course.save().then(() => {
+            console.log("Course Created");
+        })
+    });
+
+    io.on('department_creation', (departmentName) => {
+        const department = new Department({department: departmentName});
+        department.save().then(() => {
+            console.log("Department Created");
+        })
+    });  
 })
-
-io.on('course_creation', (courseName, courseDescription) => {
-    const course = new Course({course: courseName, desscription: courseDescription});
-    course.save().then(() => {
-        console.log("Course Created");
-    })
-});
-
-io.on('department_creation', (departmentName) => {
-    const department = new Department({department: departmentName});
-    department.save().then(() => {
-        console.log("Department Created");
-    })
-});
