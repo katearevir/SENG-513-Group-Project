@@ -22,12 +22,35 @@ body {
   font-size: 14px;
 }
 
-.keyword {
+.keywords {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  width: 100%;
+  text-align: center;
+}
+
+.keywords .keyword {
   color: white;
   background-color: #FFA300;
   font-size: 14px;
   padding: 5px 8px;
   border-radius: 8px;
-  margin-right: 10px;
+  margin-right: 8px;
+}
+
+.replyButtons {
+  text-align: center;
+}
+
+#reply, #showRep {
+  text-decoration: none;
+  color: white;
+  background-color: #68CC58;
+  border-radius: 8px;
+  padding: 5px 8px;
+}
+
+hr {
+  border: 0.3px solid black;
 }
 /*# sourceMappingURL=courseCommentsStyle.css.map */
