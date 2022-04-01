@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
-const CourseSchema = new Schema({
+const CourseSchema = new Schema({ 
     course: {
         type: String, // Example of input structure: DEPT NUM eg. SENG 513. may need to verify somewhere that it is in this format 
         required: true,

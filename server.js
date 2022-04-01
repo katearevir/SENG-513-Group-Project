@@ -16,6 +16,7 @@ const reviewRouter = require('./routers/reviewRouter')
 const userPageCommentsRouter = require('./routers/userPageCommentsRouter')
 const userPageRouter = require('./routers/userPageRouter')
 const courseCommentsRouter = require('./routers/courseCommentsRouter');
+const addDepartmentRouter = require('./routers/addDepartmentRouter')
 
 const mongoose = require('mongoose');
 const mongoDB = 'mongodb+srv://ahfhafh:jEYduRc7cZmHExJ@cluster0.3cy1i.mongodb.net/users-database?retryWrites=true&w=majority';
@@ -52,6 +53,7 @@ app.use('/review', reviewRouter);
 app.use('/userPage', userPageRouter);
 app.use('/userPageComments', userPageCommentsRouter);
 app.use('/courseComments', courseCommentsRouter);
+app.use('/addDepartment', addDepartmentRouter);
 
 server.listen(3000, () => {
     console.log('listening on *:3000');
@@ -66,14 +68,14 @@ io.on('connection', (socket) => {
         })
     })
 
-    io.on('course_creation', (courseName, courseDescription) => {
-        const course = new Course({course: courseName, desscription: courseDescription});
+    socket.on('course_creation', (courseName, courseDescription) => {
+        const course = new Course({course: courseName, description: courseDescription});
         course.save().then(() => {
             console.log("Course Created");
         })
     });
 
-    io.on('department_creation', (departmentName) => {
+    socket.on('department_creation', (departmentName) => {
         const department = new Department({department: departmentName});
         department.save().then(() => {
             console.log("Department Created");
