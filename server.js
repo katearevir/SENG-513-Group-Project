@@ -6,6 +6,7 @@ const http = require('http');
 const server = http.createServer(app);
 const io = new Server(server);
 
+const indexRouter = require('./routers/indexRouter')
 const loginRouter = require('./routers/loginRouter')
 const registerRouter = require('./routers/registerRotuer')
 const addCourseRouter = require('./routers/addCourseRouter')
@@ -20,18 +21,27 @@ const mongoDB = 'mongodb+srv://ahfhafh:jEYduRc7cZmHExJ@cluster0.3cy1i.mongodb.ne
 mongoose.connect(mongoDB).then(() => {
     console.log("Mongoose connected");
 }).catch((err) => console.log(err));
+const db = mongoose.connection;
 
 const User = require('./models/user')
 const Course = require('./models/course')
 const Department = require('./models/department')
 const Feedback = require('./models/feedback')
 
+const userQuery = require('./controllers/userController');
+const { response } = require('express');
+
 app.use(express.static('public'));
 
-app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/index.html');
-});
+// app.get('/', (req, res) => {
+    // res.sendFile(__dirname + '/index.ejs');
+    // allCoursesList = db.collection('courses').find({}).toArray((err, result) => {
+    //     if (err) throw err
+    //     res.send(result);
+    // })
+// });
 
+app.use('/', indexRouter);
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
 app.use('/addCourse', addCourseRouter);

@@ -1,10 +1,11 @@
 const express = require('express');
-const path = require('path');
+const Course = require('../models/course')
 
 const indexRouter = express.Router();
 
-indexRouter.get('/', function (req, res) {
-    res.render(path.join(__dirname, '..', 'index.ejs'));
+indexRouter.get('/', async (req, res) => {
+    const courses = await Course.find()
+    res.render(('index.ejs'), { Courses: courses});
 });
 
 module.exports = indexRouter;
