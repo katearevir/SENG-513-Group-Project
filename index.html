@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,6 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
+
 <body>
 
     <div class="nav-container">
@@ -21,11 +23,11 @@
                 </div>
                 <ul class="nav-items">
                     <li>
-                        <a href="login.html">Login</a>
+                        <a href="login">Login</a>
                     </li>
                 </ul>
             </nav>
-            
+
         </div>
     </div>
 
@@ -76,18 +78,19 @@
             <div class="course-content">
                 <button type="button" class="collapsible">SENG 300</button>
                 <div class="course-contents">
-                    <p><b>Description: </b>An overview of software engineering methods and technologies for developing web-based software systems.</p>
+                    <p><b>Description: </b>An overview of software engineering methods and technologies for developing
+                        web-based software systems.</p>
                     <p><b>Rating: </b>5/5 <b>from</b> 100 <b>students</b></p>
                     <a href="#">Add a review</a>
                     <p><b>Comments:</b></p>
-                    <iframe src="review.html" height="261" width="446" style="border:none" title="Iframe Example"></iframe>
+                    <iframe src="review" height="261" width="446" style="border:none" title="Iframe Example"></iframe>
                 </div>
             </div>
         </div>
     </div>
 
 
-    
+
 </body>
 
 <script>
@@ -95,7 +98,7 @@
     var i;
 
     for (i = 0; i < coll.length; i++) {
-        coll[i].addEventListener("click", function() {
+        coll[i].addEventListener("click", function () {
             this.classList.toggle("active");
             var content = this.nextElementSibling;
             if (content.style.display === "block") {
@@ -106,4 +109,5 @@
         });
     }
 </script>
+
 </html>
