@@ -55,8 +55,18 @@
             console.log("User registration: passwords do not match");
             return;
         }
-        console.log("User registration successful");
+
         socket.emit('user_registration', email.value, password.value);
+    })
+
+    socket.on("register_dup", () => {
+        console.log("Email has already been registered");
+        // error message
+    });
+
+    socket.on("register_success", () => {
+        console.log("User registration successful");
+        // redirect to...
     })
 
 </script>

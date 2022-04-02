@@ -36,11 +36,11 @@ const { response } = require('express');
 app.use(express.static('public'));
 
 // app.get('/', (req, res) => {
-    // res.sendFile(__dirname + '/index.ejs');
-    // allCoursesList = db.collection('courses').find({}).toArray((err, result) => {
-    //     if (err) throw err
-    //     res.send(result);
-    // })
+// res.sendFile(__dirname + '/index.ejs');
+// allCoursesList = db.collection('courses').find({}).toArray((err, result) => {
+//     if (err) throw err
+//     res.send(result);
+// })
 // });
 
 app.use('/', indexRouter);
@@ -62,23 +62,30 @@ server.listen(3000, () => {
 io.on('connection', (socket) => {
     console.log('user connection: ' + socket.id);
     socket.on('user_registration', (email, password) => {
-        const user = new User({email: email, password: password, isAdmin: false});
-        user.save().then(() => {
-            console.log("User registered");
-        })
-    })
+        const user = new User({ email: email, password: password, isAdmin: false });
+        user.save((err) => {
+            if (err.code === 11000) {
+                console.log("Email has already been registered");
+                socket.emit("register_dup");
+                return;
+            } else {
+                console.log("User registered");
+                socket.emit("register_success")
+            }
+        });
+    });
 
     socket.on('course_creation', (courseName, courseDescription) => {
-        const course = new Course({course: courseName, description: courseDescription});
+        const course = new Course({ course: courseName, description: courseDescription });
         course.save().then(() => {
             console.log("Course Created");
         })
     });
 
     socket.on('department_creation', (departmentName) => {
-        const department = new Department({department: departmentName});
+        const department = new Department({ department: departmentName });
         department.save().then(() => {
             console.log("Department Created");
         })
-    });  
+    });
 })
