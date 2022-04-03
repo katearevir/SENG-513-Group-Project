@@ -61,8 +61,8 @@ server.listen(3000, () => {
 
 io.on('connection', (socket) => {
     console.log('user connection: ' + socket.id);
-    socket.on('user_registration', (email, password) => {
-        const user = new User({ email: email, password: password, isAdmin: false });
+    socket.on('user_registration', async (email, password) => {
+        const user = await new User({ email: email, password: password, isAdmin: false });
         user.save((err) => {
             if (err.code === 11000) {
                 console.log("Email has already been registered");
@@ -74,6 +74,22 @@ io.on('connection', (socket) => {
             }
         });
     });
+
+    socket.on('user_login', async (email, password) => {
+        const user = await User.findOne({ email }).lean();
+        if (!user) {
+            socket.emit("login_fail");
+            console.log("No such user with email exists");
+            return;
+        } else if (password === user.password) {
+            socket.emit("login_success");
+            console.log("login success");
+        } else {
+            socket.emit("login_fail");
+            console.log("wrong password")
+        }
+
+    })
 
     socket.on('course_creation', (courseName, courseDescription) => {
         const course = new Course({ course: courseName, description: courseDescription });

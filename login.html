@@ -17,10 +17,10 @@
         <div id="login">
             <h1>Login</h1>
             <form id="loginForm" method="post">
-                <input id="email" type="text" placeholder="Email">
-                <input id="password" type="password" placeholder="Password">
+                <input id="email" type="text" placeholder="Email" required>
+                <input id="password" type="password" placeholder="Password" required>
                 <div class="centerButton">
-                    <input type="submit" value="Login">
+                    <input id="submit" type="submit" value="Login">
                 </div>
             </form>
 
@@ -38,4 +38,37 @@
 
 </body>
 
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    var socket = io("localhost:3000");
+
+    let email = document.getElementById("email");
+    let password = document.getElementById("password");
+    let submit = document.getElementById("submit");
+
+    submit.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        if (!email.value) {
+            console.log("User login: need email");
+            return;
+        } else if (!password.value) {
+            console.log("User login: need password");
+            return;
+        }
+
+        socket.emit('user_login', email.value, password.value);
+    })
+
+    socket.on("login_fail", () => {
+        console.log("Invalid email/password");
+        // error message...
+    })
+
+    socket.on("login_success", () => {
+        console.log("User login successful");
+        // redirect to...
+    })
+
+</script>
 </html>
