@@ -81,7 +81,14 @@
 
     <% Courses.forEach(course => { %>
         <div class="course-content">
-            <button type="button" class="collapsible"><%= course.course %></button>
+            <button type="button" class="collapsible"><%= course.course %>
+                <!--avg star rating example-->
+                <span class="fa fa-star fa-lg checked"></span>
+                <span class="fa fa-star fa-lg checked"></span>
+                <span class="fa fa-star fa-lg checked"></span> <!-- full star -->
+                <span class="fa fa-star-half-full fa-lg"></span> <!-- half star-->
+                <span class="fa fa-star fa-lg"></span> <!-- unrated -->
+            </button>
             <div class="course-contents">
                 <p><b>Description: </b><%= course.description %></p>
                 <p><b>Rating: </b>5/5 <b>from</b> 100 <b>students</b></p>
