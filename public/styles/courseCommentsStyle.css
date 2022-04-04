@@ -1,17 +1,20 @@
 body {
-  background-color: #df929c;
+  background-color: #e6b3ba;
   font-family: 'Montserrat';
 }
 
 #date {
+  display: inline;
   font-size: 14px;
   color: gray;
 }
 
+.starRating {
+  display: inline-block;
+}
+
 .fa-star {
   color: #E1E1E1;
-  font-size: 20px;
-  margin-right: 4px;
 }
 
 .checked {
@@ -48,6 +51,38 @@ body {
   background-color: #68CC58;
   border-radius: 8px;
   padding: 5px 8px;
+}
+
+.voting {
+  height: 80px;
+  width: 20px;
+  float: right;
+  text-align: center;
+}
+
+.voting #voteResults {
+  font-family: 'Monserrat';
+  background-color: #FFA300;
+  padding-left: 8px;
+  padding-right: 8px;
+  border-radius: 8px;
+}
+
+.voting > button {
+  background: none;
+  text-align: center;
+  margin: 3px;
+  padding: 0px;
+  width: 20px;
+  height: 20px;
+  border: 2px solid black;
+  border-radius: 50%;
+}
+
+.voting > button > span {
+  display: block;
+  height: 100%;
+  width: 100%;
 }
 
 hr {
