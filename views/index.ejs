@@ -38,9 +38,6 @@
                     <div class="dept-select">
                         <select name="department" id="department">
                             <option value="" disabled selected hidden>Select a department</option>
-                            <option value="math">MATH</option>
-                            <option value="seng">SENG</option>
-                            <option value="grst">GRST</option>
                             <% Departments.forEach(departments => { %>
                                 <option value="test"><%= departments.department %></option>
                           <% }) %>
