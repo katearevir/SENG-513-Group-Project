@@ -41,6 +41,9 @@
                             <option value="math">MATH</option>
                             <option value="seng">SENG</option>
                             <option value="grst">GRST</option>
+                            <% Departments.forEach(departments => { %>
+                                <option value="test"><%= departments.department %></option>
+                          <% }) %>
                         </select>
                     </div>
                     <h2>OR</h2>
