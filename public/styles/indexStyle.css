@@ -258,6 +258,7 @@ header select {
   .active:after {
     -webkit-transform: rotate(180deg);
     -moz-transform: rotate(180deg);
+    transform: rotate(180deg);
   }
   
   /* Style the collapsible content. Note: hidden by default */
