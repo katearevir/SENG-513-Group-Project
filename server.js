@@ -16,7 +16,8 @@ const reviewRouter = require('./routers/reviewRouter')
 const userPageCommentsRouter = require('./routers/userPageCommentsRouter')
 const userPageRouter = require('./routers/userPageRouter')
 const courseCommentsRouter = require('./routers/courseCommentsRouter');
-const addDepartmentRouter = require('./routers/addDepartmentRouter')
+const addDepartmentRouter = require('./routers/addDepartmentRouter');
+const courseCommsModRouter = require('./routers/courseCommsModRouter');
 
 const mongoose = require('mongoose');
 const mongoDB = 'mongodb+srv://ahfhafh:jEYduRc7cZmHExJ@cluster0.3cy1i.mongodb.net/users-database?retryWrites=true&w=majority';
@@ -54,6 +55,7 @@ app.use('/userPage', userPageRouter);
 app.use('/userPageComments', userPageCommentsRouter);
 app.use('/courseComments', courseCommentsRouter);
 app.use('/addDepartment', addDepartmentRouter);
+app.use('/courseCommsMod', courseCommsModRouter);
 
 server.listen(3000, () => {
     console.log('listening on *:3000');

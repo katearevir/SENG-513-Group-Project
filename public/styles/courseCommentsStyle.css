@@ -53,6 +53,15 @@ body {
   padding: 5px 8px;
 }
 
+#deleteRating {
+  font-family: 'Montserrat';
+  color: white;
+  background-color: #B00000;
+  border: none;
+  border-radius: 8px;
+  padding: 5px 70px;
+}
+
 .voting {
   height: 80px;
   width: 20px;
