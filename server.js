@@ -6,7 +6,6 @@ const http = require('http');
 const server = http.createServer(app);
 const io = new Server(server);
 const bcrypt = require('bcryptjs');
-const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
 require('dotenv').config()
@@ -43,8 +42,7 @@ const { checkUser } = require('./middleware/authMiddleware')
 const { response } = require('express');
 
 app.use(express.static('public'));
-// app.use(express.json());
-app.use(bodyParser.json())
+app.use(express.json());
 app.use(cookieParser());
 
 app.get('*', checkUser);
