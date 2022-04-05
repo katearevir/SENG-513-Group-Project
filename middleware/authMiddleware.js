@@ -4,7 +4,8 @@ const User = require('../models/user');
 const checkUser = (req, res, next) => {
     const token = req.cookies.jwt;
     if (token) {
-        jwt.verify(token, process.env.JWT_SECRET, async (err, decodedToken) => {
+        // temp jwt secret
+        jwt.verify(token, process.env.JWT_SECRET || 'cat', async (err, decodedToken) => {
             if (err) {
                 console.log(err.message);
                 res.locals.user = null;
