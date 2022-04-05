@@ -42,9 +42,9 @@
                     <div class="dept-select">
                         <select name="department" id="department">
                             <option value="" disabled selected hidden>Select a department</option>
-                            <option value="math">MATH</option>
-                            <option value="seng">SENG</option>
-                            <option value="grst">GRST</option>
+                            <% Departments.forEach(departments => { %>
+                                <option value="test"><%= departments.department %></option>
+                          <% }) %>
                         </select>
                     </div>
                     <h2>OR</h2>
@@ -85,15 +85,20 @@
 
     <% Courses.forEach( (course)=> { %>
         <div class="course-content">
-            <button type="button" class="collapsible">
-                <%= course.course %>
+            <button type="button" class="collapsible"><%= course.course %>
+                <!--avg star rating example-->
+                <span class="fa fa-star fa-lg checked"></span>
+                <span class="fa fa-star fa-lg checked"></span>
+                <span class="fa fa-star fa-lg checked"></span> <!-- full star -->
+                <span class="fa fa-star-half-full fa-lg"></span> <!-- half star-->
+                <span class="fa fa-star fa-lg"></span> <!-- unrated -->
             </button>
             <div class="course-contents">
                 <p><b>Description: </b>
                     <%= course.description %>
                 </p>
                 <p><b>Rating: </b>5/5 <b>from</b> 100 <b>students</b></p>
-                <a href="#">Add a review</a>
+                <a href="review">Add a review</a>
                 <p><b>Comments:</b></p>
                 <iframe src="courseComments" height="261" width="446" style="border: none;"
                     title="Iframe Example"></iframe>

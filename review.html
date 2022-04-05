@@ -38,11 +38,12 @@
             <div id="keywords"></div>
 
             <br><br>
-            <a id="cancel" href="index">Cancel</a>
+            <a id="cancel" href="/">Cancel</a>
             <input id="addRating" type="button" value="Add Rating">
         </form>
     </div>
 
+    <script src="/socket.io/socket.io.js"></script>
 
     <script>
         let tokenAutocomplete = new TokenAutocomplete({
@@ -60,16 +61,24 @@
         });
         //tokenAutocomplete.debug(true);
 
+
+        var socket = io("localhost:3000");
+
+
         //Click on "Add Rating", type=button for now, might change to type=submit if using POST method
         document.getElementById("addRating").addEventListener("click", function () {
 
             //get rating
             var ratings = document.getElementsByName('rate');
-            for (var i = 0; i < ratings.length; i++) {
+            var i = 0;
+            //for (var i = 0; i < ratings.length; i++) {
+                while (i < ratings.length) {
                 if (ratings[i].checked) {
                     console.log("Rating: " + ratings[i].value); //for testing, placeholder
+                   // console.log("i: " + i);
                     break;
                 }
+                i++;
             }
 
             //get comment
@@ -84,10 +93,43 @@
             }
             console.log("Keywords: " + keywordArr); //for testing, placeholder
 
+
+            if (!comment.value) {
+                console.log("Add comment: need comment");
+                return;
+             } 
+            console.log("Feedback createed successfully");
+            socket.emit('review_creation', ratings[i].value, comment.value, keywordArr);
+
         });
 
 
     </script>
+
+<!-- <script src="/socket.io/socket.io.js"></script>
+
+<script>
+    var socket = io("localhost:3000");
+
+    let courseName = document.getElementById("courseNameBox");
+    let reviewText = document.getElementById("comment");
+    let addRatingButton = document.getElementById("addRating");
+
+    addRating.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        if (!courseName.value) {
+            console.log("Add Course: need course name");
+            return;
+        } else if (!courseDescription.value) {
+            console.log("Add Course Description: need course description");
+            return;
+        } 
+        console.log("Course added successfully");
+        socket.emit('course_creation', courseName.value, courseDescription.value);
+    })
+
+</script> -->
 
 </body>
 
