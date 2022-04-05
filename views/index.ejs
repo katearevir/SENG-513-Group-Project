@@ -23,7 +23,11 @@
                 </div>
                 <ul class="nav-items">
                     <li>
-                        <a href="login">Login</a>
+                        <% if (user) { %>
+                            <%= user.email %>
+                          <% } else { %>
+                            <a href="/login">Login</a>
+                          <% } %>
                     </li>
                 </ul>
             </nav>
@@ -79,7 +83,7 @@
         </div>
     </div>
 
-    <% Courses.forEach(course => { %>
+    <% Courses.forEach( (course)=> { %>
         <div class="course-content">
             <button type="button" class="collapsible"><%= course.course %>
                 <!--avg star rating example-->
@@ -90,17 +94,21 @@
                 <span class="fa fa-star fa-lg"></span> <!-- unrated -->
             </button>
             <div class="course-contents">
-                <p><b>Description: </b><%= course.description %></p>
+                <p><b>Description: </b>
+                    <%= course.description %>
+                </p>
                 <p><b>Rating: </b>5/5 <b>from</b> 100 <b>students</b></p>
                 <a href="review">Add a review</a>
                 <p><b>Comments:</b></p>
-                <iframe src="courseComments" height="261" width="446" style="border: none;" title="Iframe Example"></iframe>
+                <iframe src="courseComments" height="261" width="446" style="border: none;"
+                    title="Iframe Example"></iframe>
             </div>
         </div>
-      <% }) %>
+        <% }) %>
 
 </body>
 
+<script src="/socket.io/socket.io.js"></script>
 <script>
     var coll = document.getElementsByClassName("collapsible");
     var i;
@@ -116,6 +124,7 @@
             }
         });
     }
+
 </script>
 
 </html>
