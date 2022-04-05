@@ -104,4 +104,11 @@ io.on('connection', (socket) => {
             console.log("Department Created");
         })
     });
+
+    socket.on('review_creation', (ratings, courseComment, keywordArr) => {
+        const feedback = new Feedback({ rating: ratings, comment: courseComment, keywords: keywordArr, comment_rating: 0 });
+        feedback.save().then(() => {
+            console.log("Feedback Created");
+        })
+    });
 })

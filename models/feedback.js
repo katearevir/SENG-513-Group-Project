@@ -4,14 +4,14 @@ const { Schema } = mongoose;
 const FeedbackSchema = new Schema({
     feedback_id: {
         type: Number,
-        required: true,
+       // required: true,
         index: true
     },
-   /*  comment: {
+    comment: {
         type: String,
         required: false,
-    }, */
-    comment: {message: String, date: Date, hidden: Boolean},
+    },
+    // comment: {message: String, date: Date, hidden: Boolean},
 
     rating: { //stars out of 5
         type: Number, //might change depending on how starts is implemented
