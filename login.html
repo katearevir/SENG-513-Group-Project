@@ -38,37 +38,43 @@
 
 </body>
 
-<script src="/socket.io/socket.io.js"></script>
 <script>
-    var socket = io("localhost:3000");
-
-    let email = document.getElementById("email");
-    let password = document.getElementById("password");
     let submit = document.getElementById("submit");
 
-    submit.addEventListener('click', (e) => {
+    submit.addEventListener('click', async (e) => {
         e.preventDefault();
 
-        if (!email.value) {
-            console.log("User login: need email");
+        let email = document.getElementById("email").value;
+        let password = document.getElementById("password").value;
+
+        if (!email) {
+            alert("User login: need email");
             return;
-        } else if (!password.value) {
-            console.log("User login: need password");
+        } else if (!password) {
+            alert("User login: need password");
             return;
         }
 
-        socket.emit('user_login', email.value, password.value);
-    })
+        const result = await fetch('/api/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email,
+                password
+            })
+        }).then((res) => res.json());
 
-    socket.on("login_fail", () => {
-        console.log("Invalid email/password");
-        // error message...
-    })
+        if (result.status === 'ok') {
 
-    socket.on("login_success", () => {
-        console.log("User login successful");
-        // redirect to...
+            alert('Login success');
+        } else {
+            alert(result.error);
+        }
+
     })
 
 </script>
+
 </html>

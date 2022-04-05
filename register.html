@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,6 +10,7 @@
     <link href='https://fonts.googleapis.com/css?family=Comfortaa' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
 </head>
+
 <body>
     <div class="container">
         <div id="login">
@@ -21,9 +23,9 @@
                 <div class="centerButton">
                     <input id="submit" type="submit" value="Next">
                 </div>
-                
+
             </form>
-            
+
             <br>
 
             <div class="centerButton">
@@ -32,42 +34,45 @@
         </div>
     </div>
 </body>
-<script src="/socket.io/socket.io.js"></script>
 
 <script>
-    var socket = io("localhost:3000");
-
-    let email = document.getElementById("email");
-    let password = document.getElementById("password");
-    let confirmPassword = document.getElementById("confirmPassword");
     let submit = document.getElementById("submit");
 
-    submit.addEventListener('click', (e) => {
+    submit.addEventListener('click', async (e) => {
         e.preventDefault();
+        let email = document.getElementById("email").value;
+        let password = document.getElementById("password").value;
+        let confirmPassword = document.getElementById("confirmPassword").value;
 
-        if (!email.value) {
-            console.log("User registration: need email");
+        if (!email) {
+            alert("User registration: need email");
             return;
-        } else if (!password.value) {
-            console.log("User registration: need password");
+        } else if (!password) {
+            alert("User registration: need password");
             return;
-        } else if (password.value !== confirmPassword.value) {
-            console.log("User registration: passwords do not match");
+        } else if (password !== confirmPassword) {
+            alert("User registration: passwords do not match");
             return;
         }
 
-        socket.emit('user_registration', email.value, password.value);
-    })
+        const result = await fetch('/api/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email,
+                password
+            })
+        }).then((res) => res.json());
 
-    socket.on("register_dup", () => {
-        console.log("Email has already been registered");
-        // error message
-    });
-
-    socket.on("register_success", () => {
-        console.log("User registration successful");
-        // redirect to...
+        if (result.status === 'ok') {
+            alert('Registration success');
+        } else {
+            alert(result.error);
+        }
     })
 
 </script>
+
 </html>

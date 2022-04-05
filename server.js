@@ -5,6 +5,9 @@ const { Server } = require('socket.io');
 const http = require('http');
 const server = http.createServer(app);
 const io = new Server(server);
+const bcrypt = require('bcryptjs');
+const bodyParser = require('body-parser');
+const jwt = require('jsonwebtoken');
 
 const indexRouter = require('./routers/indexRouter')
 const loginRouter = require('./routers/loginRouter')
@@ -34,14 +37,7 @@ const userQuery = require('./controllers/userController');
 const { response } = require('express');
 
 app.use(express.static('public'));
-
-// app.get('/', (req, res) => {
-// res.sendFile(__dirname + '/index.ejs');
-// allCoursesList = db.collection('courses').find({}).toArray((err, result) => {
-//     if (err) throw err
-//     res.send(result);
-// })
-// });
+app.use(bodyParser.json())
 
 app.use('/', indexRouter);
 app.use('/login', loginRouter);
@@ -55,53 +51,62 @@ app.use('/userPageComments', userPageCommentsRouter);
 app.use('/courseComments', courseCommentsRouter);
 app.use('/addDepartment', addDepartmentRouter);
 
+// move to .env
+const JWT_SECRET = "cat";
+
+app.post('/api/login', async (req, res) => {
+    const { email, password } = req.body;
+    const user = await User.findOne({ email }).lean();
+
+    if (!user) {
+        console.log("Wrong email or password");
+        return res.json({ status: 'error', error: 'Wrong email or password'})
+    } else if (await bcrypt.compare(password, user.password)) {
+        const token = jwt.sign({ id: user._id, email: user.email}, JWT_SECRET)
+        console.log("Login successful");
+        return res.json({ status: 'ok' })
+    }
+    
+    console.log("Wrong email or password");
+    res.json({ status: 'error', error: 'Wrong email or password'});
+})
+
+app.post('/api/register', async (req, res) => {
+    const { email, password: textPassword } = req.body;
+    const password = await bcrypt.hash(textPassword, 5);
+    const user = await new User({ email: email, password: password, isAdmin: false });
+    user.save((err) => {
+        if (err) {
+            if (err.code === 11000) {
+                console.log("Email has already been registered");
+                return res.json({ status: 'error', error: 'Email has already been registered'});
+            } else {
+                console.log(err);
+                return res.json({ status: 'error', error: err});
+            }
+        }
+        console.log("User registered");
+        res.json({ status: 'ok' });
+    });
+    
+})
+
 server.listen(3000, () => {
     console.log('listening on *:3000');
 });
 
-io.on('connection', (socket) => {
-    console.log('user connection: ' + socket.id);
-    socket.on('user_registration', async (email, password) => {
-        const user = await new User({ email: email, password: password, isAdmin: false });
-        user.save((err) => {
-            if (err.code === 11000) {
-                console.log("Email has already been registered");
-                socket.emit("register_dup");
-                return;
-            } else {
-                console.log("User registered");
-                socket.emit("register_success")
-            }
-        });
-    });
+// io.on('connection', (socket) => {
+//     socket.on('course_creation', (courseName, courseDescription) => {
+//         const course = new Course({ course: courseName, description: courseDescription });
+//         course.save().then(() => {
+//             console.log("Course Created");
+//         })
+//     });
 
-    socket.on('user_login', async (email, password) => {
-        const user = await User.findOne({ email }).lean();
-        if (!user) {
-            socket.emit("login_fail");
-            console.log("No such user with email exists");
-            return;
-        } else if (password === user.password) {
-            socket.emit("login_success");
-            console.log("login success");
-        } else {
-            socket.emit("login_fail");
-            console.log("wrong password")
-        }
-
-    })
-
-    socket.on('course_creation', (courseName, courseDescription) => {
-        const course = new Course({ course: courseName, description: courseDescription });
-        course.save().then(() => {
-            console.log("Course Created");
-        })
-    });
-
-    socket.on('department_creation', (departmentName) => {
-        const department = new Department({ department: departmentName });
-        department.save().then(() => {
-            console.log("Department Created");
-        })
-    });
-})
+//     socket.on('department_creation', (departmentName) => {
+//         const department = new Department({ department: departmentName });
+//         department.save().then(() => {
+//             console.log("Department Created");
+//         })
+//     });
+// })
