@@ -97,7 +97,11 @@ app.post('/api/register', async (req, res) => {
         console.log("User registered");
         res.json({ status: 'ok' });
     });
+})
 
+app.get('/logout', async (req, res) => {
+    res.cookie('jwt', '', { maxAge: 1 });
+    res.redirect('/');
 })
 
 server.listen(3000, () => {
