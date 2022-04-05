@@ -14,11 +14,11 @@ For our project, we made a course rating website for the University of Calgary.
 
 To test the admin/moderator view, please use one of the following credentials for logging in:
 
-**Email:** <br/>
-**Password:**
+**Email: admin@admin.com ** <br/>
+**Password: abc **
 
-**Email:** <br/>
-**Password:**
+**Email: bob@admin.com ** <br/>
+**Password: abc **
 
-**Email:** <br/>
-**Password:**
+**Email: pam@admin.com ** <br/>
+**Password: abc **
