@@ -9,3 +9,16 @@ For our project, we made a course rating website for the University of Calgary.
 3. Install MongoDB by entering `npm install mongodb` into the terminal.
 4. Enter `node server.js` to run the server.
 5. On your preferred browser, go to http://localhost:3000/.
+
+## Admin/Moderator Login
+
+To test the admin/moderator view, please use one of the following credentials for logging in:
+
+**Email:** <br/>
+**Password:**
+
+**Email:** <br/>
+**Password:**
+
+**Email:** <br/>
+**Password:**
