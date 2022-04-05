@@ -116,6 +116,10 @@ header select {
     height: 47px;
 }
 
+input::placeholder{
+    overflow: visible;
+}
+
 .search-box input{
     width: 473px;
     height: 47px;
