@@ -23,7 +23,11 @@
                 </div>
                 <ul class="nav-items">
                     <li>
-                        <a href="login">Login</a>
+                        <% if (user) { %>
+                            <%= user.email %>
+                          <% } else { %>
+                            <a href="/login">Login</a>
+                          <% } %>
                     </li>
                 </ul>
             </nav>

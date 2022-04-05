@@ -67,8 +67,8 @@
         }).then((res) => res.json());
 
         if (result.status === 'ok') {
-
-            alert('Login success');
+            localStorage.setItem('token', result.data);
+            location.assign('/');
         } else {
             alert(result.error);
         }

@@ -8,6 +8,8 @@ const io = new Server(server);
 const bcrypt = require('bcryptjs');
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
+const cookieParser = require('cookie-parser');
+require('dotenv').config()
 
 const indexRouter = require('./routers/indexRouter')
 const loginRouter = require('./routers/loginRouter')
@@ -34,11 +36,17 @@ const Department = require('./models/department')
 const Feedback = require('./models/feedback')
 
 const userQuery = require('./controllers/userController');
+
+const { checkUser } = require('./middleware/authMiddleware')
+
 const { response } = require('express');
 
 app.use(express.static('public'));
+// app.use(express.json());
 app.use(bodyParser.json())
+app.use(cookieParser());
 
+app.get('*', checkUser);
 app.use('/', indexRouter);
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
@@ -60,15 +68,16 @@ app.post('/api/login', async (req, res) => {
 
     if (!user) {
         console.log("Wrong email or password");
-        return res.json({ status: 'error', error: 'Wrong email or password'})
+        return res.json({ status: 'error', error: 'Wrong email or password' });
     } else if (await bcrypt.compare(password, user.password)) {
-        const token = jwt.sign({ id: user._id, email: user.email}, JWT_SECRET)
+        const token = jwt.sign({ id: user._id, email: user.email }, JWT_SECRET);
+        res.cookie('jwt', token, { httpOnly: true });
         console.log("Login successful");
-        return res.json({ status: 'ok' })
+        return res.json({ status: 'ok', data: token });
     }
-    
+
     console.log("Wrong email or password");
-    res.json({ status: 'error', error: 'Wrong email or password'});
+    res.json({ status: 'error', error: 'Wrong email or password' });
 })
 
 app.post('/api/register', async (req, res) => {
@@ -79,16 +88,16 @@ app.post('/api/register', async (req, res) => {
         if (err) {
             if (err.code === 11000) {
                 console.log("Email has already been registered");
-                return res.json({ status: 'error', error: 'Email has already been registered'});
+                return res.json({ status: 'error', error: 'Email has already been registered' });
             } else {
                 console.log(err);
-                return res.json({ status: 'error', error: err});
+                return res.json({ status: 'error', error: err });
             }
         }
         console.log("User registered");
         res.json({ status: 'ok' });
     });
-    
+
 })
 
 server.listen(3000, () => {
