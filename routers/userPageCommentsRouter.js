@@ -1,9 +1,9 @@
 const express = require('express');
 const path = require('path');
-
+const { requireLogin } = require('../middleware/authMiddleware');
 const userPageCommentsRouter = express.Router();
 
-userPageCommentsRouter.get('/', (req, res) => {
+userPageCommentsRouter.get('/', requireLogin, (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'userPageComments.html'));
 });
 

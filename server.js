@@ -70,7 +70,7 @@ app.post('/api/login', async (req, res) => {
         console.log("Wrong email or password");
         return res.json({ status: 'error', error: 'Wrong email or password' });
     } else if (await bcrypt.compare(password, user.password)) {
-        const token = jwt.sign({ id: user._id, email: user.email }, JWT_SECRET);
+        const token = jwt.sign({ id: user._id, isAdmin: user.isAdmin}, JWT_SECRET, { expiresIn: "24h" });
         res.cookie('jwt', token, { httpOnly: true });
         console.log("Login successful");
         return res.json({ status: 'ok', data: token });

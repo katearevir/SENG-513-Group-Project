@@ -22,4 +22,29 @@ const checkUser = (req, res, next) => {
     }
 };
 
-module.exports = { checkUser };
+const requireLogin = (req, res, next) => {
+    const token = req.cookies.jwt;
+    if (token) {
+        // temp jwt secret
+        jwt.verify(token, process.env.JWT_SECRET || 'cat', (err, decodedToken) => {
+            if (err) {
+                console.log(err.message);
+                res.redirect('/');
+            } else {
+                // console.log(decodedToken);
+                next();
+            }
+        });
+    } else {
+        res.redirect('/');
+    }
+};
+
+const requireAdmin = async (req, res, next) => {
+    if (!req.cookies.isAdmin) {
+        return res.redirect('/');
+    }
+    next();
+};
+
+module.exports = { checkUser, requireLogin, requireAdmin };
