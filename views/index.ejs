@@ -156,22 +156,22 @@
 
     const courseNameHandler = (event, courseSearch) => {
         if (event.keyCode == 13){
-            /* if search is empty refill page
+            var courses = document.getElementsByClassName("course-content");
             if (courseSearch == ""){
+                
+                for (var i = 0; i < courses.length; i++) {
+                    courses[i].style.display = "block";
+                }
             }
             else{
-
-            }
-            */
-            console.log(courseSearch);
-            courseSearch = courseSearch.split(' ').join('');
-            var courses = document.getElementsByClassName("course-content");
-            for (var i = 0; i < courses.length; i++) {
-                let courseName = courses[i].children[0].innerText.replace(/\s/g, '');
-                if (courseName.toLowerCase() === courseSearch.toLowerCase()) {
-                    courses[i].style.display = "block";
-                } else {
-                    courses[i].style.display = "none";
+                courseSearch = courseSearch.split(' ').join('');
+                for (var i = 0; i < courses.length; i++) {
+                    let courseName = courses[i].children[0].innerText.replace(/\s/g, '');
+                    if (courseName.toLowerCase() === courseSearch.toLowerCase()) {
+                        courses[i].style.display = "block";
+                    } else {
+                        courses[i].style.display = "none";
+                    }
                 }
             }
         }
