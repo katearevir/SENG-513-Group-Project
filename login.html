@@ -68,7 +68,7 @@
 
         if (result.status === 'ok') {
             // localStorage.setItem('token', result.data);
-            location.assign('/');
+            window.location.replace('/');
         } else {
             alert(result.error);
         }

@@ -29,6 +29,7 @@ const requireLogin = (req, res, next) => {
         jwt.verify(token, process.env.JWT_SECRET || 'cat', (err, decodedToken) => {
             if (err) {
                 console.log(err.message);
+                // console.log("Need to be logged in");
                 res.redirect('/');
             } else {
                 // console.log(decodedToken);
@@ -41,7 +42,8 @@ const requireLogin = (req, res, next) => {
 };
 
 const requireAdmin = async (req, res, next) => {
-    if (!req.cookies.isAdmin) {
+    if (!res.locals.user.isAdmin) {
+        // console.log("Need to be admin");
         return res.redirect('/');
     }
     next();

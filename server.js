@@ -72,7 +72,7 @@ app.post('/api/login', async (req, res) => {
     } else if (await bcrypt.compare(password, user.password)) {
         const token = jwt.sign({ id: user._id, isAdmin: user.isAdmin}, JWT_SECRET, { expiresIn: "24h" });
         res.cookie('jwt', token, { httpOnly: true });
-        console.log("Login successful");
+        // console.log("Login successful");
         return res.json({ status: 'ok', data: token });
     }
 
