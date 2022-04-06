@@ -40,10 +40,10 @@
             <header>
                 <div class="header-content">
                     <div class="dept-select">
-                        <select name="department" id="department">
+                        <select name="department" id="department" onchange="selectDepartmentHandler(value)">
                             <option value="" disabled selected hidden>Select a department</option>
                             <% Departments.forEach(departments=> { %>
-                                <option value="test">
+                                <option value="<%- departments.department %>">
                                     <%= departments.department %>
                                 </option>
                                 <% }) %>
@@ -111,7 +111,9 @@
 
 </body>
 
-<script src="/socket.io/socket.io.js"></script>
+<script type='text/javascript'>
+    var Departments =<%-JSON.stringify(Departments)%>;
+</script>
 <script>
     var coll = document.getElementsByClassName("collapsible");
     var i;
@@ -131,8 +133,20 @@
     const filterHandler = (lvl) => {
         var courses = document.getElementsByClassName("course-content");
         for (var i = 0; i < courses.length; i++) {
-            let courseName = courses[i].children[0].innerText.replace(/\s/g,'');
+            let courseName = courses[i].children[0].innerText.replace(/\s/g, '');
             if ((courseName.charAt(courseName.length - 3)) === lvl.slice(0, 1)) {
+                courses[i].style.display = "block";
+            } else {
+                courses[i].style.display = "none";
+            }
+        }
+    };
+
+    const selectDepartmentHandler = (department) => {
+        var courses = document.getElementsByClassName("course-content");
+        for (var i = 0; i < courses.length; i++) {
+            let courseName = courses[i].children[0].innerText.replace(/\s/g, '');
+            if ((courseName.slice(0, 4)) === department) {
                 courses[i].style.display = "block";
             } else {
                 courses[i].style.display = "none";
