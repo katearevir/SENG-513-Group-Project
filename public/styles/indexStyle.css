@@ -172,7 +172,7 @@ input::placeholder{
     letter-spacing: -0.5px;
     color: #000000;
     margin: 33px;
-    margin-left: 154px;
+    margin-left: 70px;
 }
 
 .course-filter select{
@@ -187,7 +187,7 @@ input::placeholder{
     line-height: 20px;
     /* identical to box height, or 83% */
     color: #EAE6ED;
-    margin-left: 76px;
+    margin-left: 15px;
 }
 
 .course-sort select{

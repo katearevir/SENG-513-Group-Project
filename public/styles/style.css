@@ -54,12 +54,6 @@ input[type=submit], #addRating {
   background-color: #D6001C;
 }
 
-input[type=submit]:Hover {
-  -moz-box-shadow:    inset 0 0 10px #000000;
-  -webkit-box-shadow: inset 0 0 10px #000000;
-  box-shadow:         inset 0 0 10px #000000;
-}
-
 #create {
   text-decoration: none;
   font-family: 'Comfortaa';
