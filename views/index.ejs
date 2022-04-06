@@ -51,7 +51,7 @@
                     </div>
                     <h2>OR</h2>
                     <div class="search-box">
-                        <input type="text" placeholder="Enter a specific course">
+                        <input type="text" placeholder="Enter a specific course" onkeypress="courseNameHandler(event, value)"/>
                     </div>
                 </div>
             </header>
@@ -152,6 +152,30 @@
                 courses[i].style.display = "none";
             }
         }
+    };
+
+    const courseNameHandler = (event, courseSearch) => {
+        if (event.keyCode == 13){
+            /* if search is empty refill page
+            if (courseSearch == ""){
+            }
+            else{
+
+            }
+            */
+            console.log(courseSearch);
+            courseSearch = courseSearch.split(' ').join('');
+            var courses = document.getElementsByClassName("course-content");
+            for (var i = 0; i < courses.length; i++) {
+                let courseName = courses[i].children[0].innerText.replace(/\s/g, '');
+                if (courseName.toLowerCase() === courseSearch.toLowerCase()) {
+                    courses[i].style.display = "block";
+                } else {
+                    courses[i].style.display = "none";
+                }
+            }
+        }
+        
     };
 
 </script>
