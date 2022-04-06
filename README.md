@@ -8,8 +8,9 @@ For our project, we made a course rating website for the University of Calgary.
 2. Install Node.js Express by entering `npm install express` into the terminal.
 3. Install MongoDB by entering `npm install mongodb` into the terminal.
 4. Install Mongoose by entering `npm install mongoose` into the terminal.
-5. Enter `node server.js` to run the server.
-6. On your preferred browser, go to http://localhost:3000/.
+5. Install bcryptJS by entering `npm install bcryptjs` into the terminal.
+6. Enter `node server.js` to run the server.
+7. On your preferred browser, go to http://localhost:3000/.
 
 ## Admin/Moderator Login
 
