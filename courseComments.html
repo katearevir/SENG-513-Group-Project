@@ -15,8 +15,8 @@
     <div class="review">
         <div class="voting">
             <span id="voteResults">0</span>
-            <button id="upvote" type="button"><span>▲</span></button>
-            <button id="downvote" type="button"><span>▼</span></button>
+            <button id="upvote" onclick="upvote()" type="button"><span>▲</span></button>
+            <button id="downvote" onclick="downvote()" type="button"><span>▼</span></button>
         </div>
 
             <p id="date">March 12, 2022 
@@ -46,9 +46,34 @@
             <a id="showRep" href="#">Show Replies</a>
         </div>
             
-        
+        <hr>
+
     </div>
 
-    <hr>
+    <script>
+        var i = 0; 
+        document.getElementById('voteResults').innerHTML = i;
+        
+        /*For mongoDB if using ejs?
+        var i = 0;
+        i = document.getElementById('voteResults').innerHTML;
+        */
+        
+        function upvote() {
+            i++;
+            document.getElementById('voteResults').innerHTML = i;
+        }
+
+        function downvote(){
+            /* if it can't be negative
+            if(i >= 0){
+                i--;
+                document.getElementById('voteResults').innerHTML = i;
+            }
+            */
+            i--;
+            document.getElementById('voteResults').innerHTML = i;
+        }
+    </script>
 </body>
 </html>
