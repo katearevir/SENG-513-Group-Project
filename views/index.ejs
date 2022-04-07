@@ -101,14 +101,22 @@
 
     const filterHandler = (lvl) => {
         var courses = document.getElementsByClassName("course-content");
-        for (var i = 0; i < courses.length; i++) {
-            let courseName = courses[i].children[0].innerText.replace(/\s/g, '');
-            if ((courseName.charAt(courseName.length - 3)) === lvl.slice(0, 1)) {
+        if (lvl == ""){
+            for (var i = 0; i < courses.length; i++) {
                 courses[i].style.display = "block";
-            } else {
-                courses[i].style.display = "none";
             }
         }
+        else{
+            for (var i = 0; i < courses.length; i++) {
+                let courseName = courses[i].children[0].innerText.replace(/\s/g, '');
+                if ((courseName.charAt(courseName.length - 3)) === lvl.slice(0, 1)) {
+                    courses[i].style.display = "block";
+                } else {
+                    courses[i].style.display = "none";
+                }
+            }
+        }
+        
     };
 
     const selectDepartmentHandler = (department) => {
