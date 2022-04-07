@@ -60,7 +60,7 @@
 
     <div class="body-container">
         <div class="wrapper">
-            <h2>Popular Courses</h2>
+            <h2 id="popularTitle">Popular Courses</h2>
             <div class="filters">
                 <div class="course-filter">
                     <select name="filter" id="filter" onchange="filterHandler(value)">
@@ -144,12 +144,15 @@
 
     const selectDepartmentHandler = (department) => {
         var courses = document.getElementsByClassName("course-content");
+        var popularTitle = document.getElementById("popularTitle");
         if (department == ""){
+            popularTitle.style.visibility = "visible";
             for (var i = 0; i < courses.length; i++) {
                 courses[i].style.display = "block";
             }
         }
         else {
+            popularTitle.style.visibility = "hidden";
             for (var i = 0; i < courses.length; i++) {
                 let courseName = courses[i].children[0].innerText.replace(/\s/g, '');
                 if ((courseName.slice(0, 4)) === department) {
@@ -165,12 +168,13 @@
         if (event.keyCode == 13){
             var courses = document.getElementsByClassName("course-content");
             if (courseSearch == ""){
-                
+                popularTitle.style.visibility = "visible";
                 for (var i = 0; i < courses.length; i++) {
                     courses[i].style.display = "block";
                 }
             }
             else{
+                popularTitle.style.visibility = "hidden";
                 courseSearch = courseSearch.split(' ').join('');
                 for (var i = 0; i < courses.length; i++) {
                     let courseName = courses[i].children[0].innerText.replace(/\s/g, '');
