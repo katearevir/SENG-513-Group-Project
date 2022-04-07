@@ -68,6 +68,17 @@
 
         if (result.status === 'ok') {
             alert('Registration success');
+            const login_result = await fetch('/api/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email,
+                    password
+                })
+            }).then((res) => res.json());
+            window.location = '/';
         } else {
             alert(result.error);
         }

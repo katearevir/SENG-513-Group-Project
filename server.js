@@ -102,17 +102,27 @@ app.get('/logout', async (req, res) => {
     res.redirect('/');
 })
 
+app.post('/api/addCourse', async (req, res) => {
+    const { courseName, courseDescription } = req.body;
+    const course = await new Course({ course: courseName, description: courseDescription });
+    course.save((err) => {
+        if (err) {
+            if (err.code === 11000) {
+                console.log("This course already exists");
+                return res.json({ status: 'error', error: 'This course already exists' });
+            } else {
+                console.log(err);
+                return res.json({ status: 'error', error: err });
+            }
+        }
+        console.log("Course registered");
+        res.json({ status: 'ok' });
+    })
+})
+
 server.listen(3000, () => {
     console.log('listening on *:3000');
 });
-
-// io.on('connection', (socket) => {
-//     socket.on('course_creation', (courseName, courseDescription) => {
-//         const course = new Course({ course: courseName, description: courseDescription });
-//         course.save().then(() => {
-//             console.log("Course Created");
-//         })
-//     });
 
 //     socket.on('department_creation', (departmentName) => {
 //         const department = new Department({ department: departmentName });
