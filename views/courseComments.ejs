@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,7 +12,9 @@
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
     <title>Reviews</title>
 </head>
+
 <body>
+    <% Reviews.forEach( (review) => { %>
     <div class="review">
         <div class="voting">
             <span id="voteResults">0</span>
@@ -19,52 +22,53 @@
             <button id="downvote" onclick="downvote()" type="button"><span>▼</span></button>
         </div>
 
-            <p id="date">March 12, 2022 
-                <div class="starRating">
-                    <span class="fa fa-star fa-lg checked"></span>
-                    <span class="fa fa-star fa-lg checked"></span>
-                    <span class="fa fa-star fa-lg checked"></span>
-                    <span class="fa fa-star fa-lg"></span>
-                    <span class="fa fa-star fa-lg"></span>
-                </div>
-                
-            </p>
-    
-            <p id="comment">I found this course really cool. Learned about web dev a lot. I’d reccomend taking
-                this course. </p>
-    
-            <div class="keywords">
-                <span class="keyword">Easy</span>
-                <span class="keyword">Informative</span>
-                <span class="keyword">Fun</span>
-            </div>
+        <p id="date">
+            <% let timestamp = review._id.toString().substring(0, 8); 
+            let options = { year: 'numeric', month: 'short', day: 'numeric' };%>
+            <%- (new Date(parseInt(timestamp, 16) * 1000)).toLocaleDateString("en-US", options); %>
+        </p>
+        <div class="starRating">
+            <% let nonChecked = 5 - review.rating; for (let i = 0; i < review.rating; i++) { %>
+                <span class="fa fa-star fa-lg checked"></span>
+            <% }; review.rating--; for (; review.rating < 4; review.rating++) { %>
+                <span class="fa fa-star fa-lg"></span>
+            <% }; %>
+        </div>
 
-        
+        <p id="comment"><%- review.comment %> </p>
+
+        <div class="keywords">
+            <span class="keyword">Easy</span>
+            <span class="keyword">Informative</span>
+            <span class="keyword">Fun</span>
+        </div>
+
 
         <div class="replyButtons">
             <a id="reply" href="#">Reply to Comment</a>
             <a id="showRep" href="#">Show Replies</a>
         </div>
-            
+
         <hr>
 
     </div>
+    <% }) %>
 
     <script>
-        var i = 0; 
+        var i = 0;
         document.getElementById('voteResults').innerHTML = i;
-        
+
         /*For mongoDB if using ejs?
         var i = 0;
         i = document.getElementById('voteResults').innerHTML;
         */
-        
+
         function upvote() {
             i++;
             document.getElementById('voteResults').innerHTML = i;
         }
 
-        function downvote(){
+        function downvote() {
             /* if it can't be negative
             if(i >= 0){
                 i--;
@@ -76,4 +80,5 @@
         }
     </script>
 </body>
+
 </html>

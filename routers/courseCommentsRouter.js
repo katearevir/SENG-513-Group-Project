@@ -1,10 +1,11 @@
 const express = require('express');
-const path = require('path');
+const Feedback = require('../models/feedback');
 
 const courseCommentsRouter = express.Router();
 
-courseCommentsRouter.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'courseComments.html'));
+courseCommentsRouter.get('/', async (req, res) => {
+    const reviews = await Feedback.find();
+    res.render(('courseComments.ejs'), { Reviews: reviews });
 });
 
 module.exports = courseCommentsRouter;
