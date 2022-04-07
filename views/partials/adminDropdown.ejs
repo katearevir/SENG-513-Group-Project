@@ -1,0 +1,58 @@
+<div class="dropdownMenu">
+    <button onclick="dropdownMenu()" id="menubtn">≡</button>
+    <div id="myDropdown" class="menu-content">
+        <a id="addCourse" href="addCourse">Add Course</a>
+        <a id="modifyCourse" href="modifyCourses">Modify Course</a>
+        <a id="removeCourse" href="#remove">Remove Course</a>
+        <a id="logout" href="/logout">Logout</a>
+    </div>
+</div>
+<script>
+
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.display === "block") {
+                content.style.display = "none";
+            } else {
+                content.style.display = "block";
+            }
+        });
+    }
+
+
+    /* When the user clicks on the button, 
+    toggle between hiding and showing the dropdown content */
+    function dropdownMenu() {
+        document.getElementById("myDropdown").classList.toggle("show");
+        var menuButton = document.getElementById("menubtn");
+        if (menuButton.innerText === "x") {
+            menuButton.innerText = "≡";
+        }
+        else {
+            menuButton.innerText = "x";
+        }
+    }
+
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function (event) {
+        var menuButton = document.getElementById("menubtn");
+        if (!event.target.matches('#menubtn')) {
+            menuButton.innerText = "≡";
+            var dropdowns = document.getElementsByClassName("menu-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
+        }
+    }
+
+
+</script>

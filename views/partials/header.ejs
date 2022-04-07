@@ -1,0 +1,49 @@
+<div class="header-container">
+    <div class="wrapper">
+        <header>
+            <div class="header-content">
+                <div class="dept-select">
+                    <select name="department" id="department" onchange="selectDepartmentHandler(value)">
+                        <option value="" selected>Select a department</option>
+                        <% Departments.forEach(departments=> { %>
+                            <option value="<%- departments.department %>">
+                                <%= departments.department %>
+                            </option>
+                            <% }) %>
+                    </select>
+                </div>
+                <h2>OR</h2>
+                <div class="search-box">
+                    <input type="text" placeholder="Enter a specific course" onkeypress="courseNameHandler(event, value)"/>
+                </div>
+            </div>
+        </header>
+    </div>
+</div>
+
+<div class="body-container">
+    <div class="wrapper">
+        <h2 id="popularTitle">Popular Courses</h2>
+        <div class="filters">
+            <div class="course-filter">
+                <select name="filter" id="filter" onchange="filterHandler(value)">
+                    <option value="" disabled selected hidden>Filter</option>
+                    <option value="200">200 Levels</option>
+                    <option value="300">300 Levels</option>
+                    <option value="400">400 Levels</option>
+                    <option value="500">500 Levels</option>
+                </select>
+            </div>
+            <div class="course-sort">
+                <select name="sort-by" id="sort-by">
+                    <option value="" disabled selected hidden>Sort By</option>
+                    <option value="High-rating">Highest to Lowest Rated</option>
+                    <option value="Low-rating">Lowest to Highest Rated</option>
+                    <option value="Most">Most Rated</option>
+                    <option value="Least">Least Rated</option>
+                </select>
+            </div>
+        </div>
+
+    </div>
+</div>
