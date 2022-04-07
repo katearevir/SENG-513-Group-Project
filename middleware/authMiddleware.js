@@ -4,7 +4,7 @@ const User = require('../models/user');
 const checkUser = (req, res, next) => {
     const token = req.cookies.jwt;
     if (token) {
-        // temp jwt secret
+        // TODO: temp jwt secret
         jwt.verify(token, process.env.JWT_SECRET || 'cat', async (err, decodedToken) => {
             if (err) {
                 console.log(err.message);
@@ -25,7 +25,7 @@ const checkUser = (req, res, next) => {
 const requireLogin = (req, res, next) => {
     const token = req.cookies.jwt;
     if (token) {
-        // temp jwt secret
+        // TODO: temp jwt secret
         jwt.verify(token, process.env.JWT_SECRET || 'cat', (err, decodedToken) => {
             if (err) {
                 console.log(err.message);
