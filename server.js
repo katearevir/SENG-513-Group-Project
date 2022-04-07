@@ -57,7 +57,7 @@ app.use('/courseComments', courseCommentsRouter);
 app.use('/addDepartment', addDepartmentRouter);
 app.use('/courseCommsMod', courseCommsModRouter);
 
-// move to .env
+// TODO: move to .env
 const JWT_SECRET = "cat";
 
 app.post('/api/login', async (req, res) => {
@@ -68,7 +68,7 @@ app.post('/api/login', async (req, res) => {
         console.log("Wrong email or password");
         return res.json({ status: 'error', error: 'Wrong email or password' });
     } else if (await bcrypt.compare(password, user.password)) {
-        const token = jwt.sign({ id: user._id, isAdmin: user.isAdmin}, JWT_SECRET, { expiresIn: "24h" });
+        const token = jwt.sign({ id: user._id, isAdmin: user.isAdmin }, JWT_SECRET, { expiresIn: "24h" });
         res.cookie('jwt', token, { httpOnly: true });
         // console.log("Login successful");
         return res.json({ status: 'ok', data: token });
@@ -102,6 +102,7 @@ app.get('/logout', async (req, res) => {
     res.redirect('/');
 })
 
+// adds course to Courses and new department if it doesn't exist yet
 app.post('/api/addCourse', async (req, res) => {
     const { courseName, courseDescription } = req.body;
     const course = await new Course({ course: courseName, description: courseDescription });
@@ -116,18 +117,23 @@ app.post('/api/addCourse', async (req, res) => {
             }
         }
         console.log("Course registered");
-        res.json({ status: 'ok' });
-    })
+    });
+
+    let departmentName = courseName.replace(/[^A-Za-z]/g, '').toUpperCase();
+    let findDepartment = await Department.findOne({ department: departmentName }).lean();
+    if (!findDepartment) {
+        const newDepartment = await new Department({ department: departmentName });
+        newDepartment.save((err) => {
+            if (err) {
+                console.log(err);
+                return res.json({ status: 'error', error: err });
+            }
+            console.log("Department registered");
+        });
+    }
+    res.json({ status: 'ok' });
 })
 
-server.listen(3000, () => {
+server.listen(process.env.PORT || 3000, () => {
     console.log('listening on *:3000');
 });
-
-//     socket.on('department_creation', (departmentName) => {
-//         const department = new Department({ department: departmentName });
-//         department.save().then(() => {
-//             console.log("Department Created");
-//         })
-//     });
-// })

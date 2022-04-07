@@ -5,7 +5,8 @@ const DepartmentSchema = new Schema({
     department: {
         type: String,
         required: true,
-        index: true
+        index: true,
+        unique: true
     },
 
     //holds the courses that belong to the department from CoursesSchema
