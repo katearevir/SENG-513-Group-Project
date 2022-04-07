@@ -254,12 +254,12 @@ input::placeholder{
 
   .fa-star{
     color: #E1E1E1;
-    margin-left: 7px;
+    margin-left: auto;
   }
   
   .fa-star-half-full{
     color: #FFCF5C;
-    margin-left: 7px;
+    margin-left: auto;
   }
   .checked{
     color: #FFCF5C;
@@ -272,7 +272,7 @@ input::placeholder{
     content: '▼';
     color: black;
     font-weight: bold;
-    margin-left: 50%;
+    margin-left: auto;
     
   }
   
