@@ -18,13 +18,13 @@
             <h1 style="text-align: left;">Modify Course</h1>
             <form>
                 <h2 style="text-align: left;">Course Name</h2>
-                <input id="courseNameBox" type="text" placeholder="Enter the course name">
+                <input id="courseNameBox" type="text" placeholder="Enter the course name" required autocomplete="off">
                 <h2 style="text-align: left;">Description</h2>
                 <textarea> old description here</textarea> <!-- find a way to enter the previous information later-->
 
             </form>
             <div>
-                <div class="confirmButtons"> <input type="submit" id="cancel" value="Cancel" style="width: 20rem;">
+                <div class="confirmButtons"> <input type="submit" id="cancel" value="Cancel" onclick="location.href='/'" style="width: 20rem;">
                 </div>
                 <div class="confirmButtons"> <input type="submit" value="Add Course" style="width: 30rem;"></div>
             </div>

@@ -18,16 +18,16 @@
             <h1 style="text-align: left;">Add Course</h1>
             <form>
                 <h2 style="text-align: left;">Add Course</h2>
-                <input id="courseNameBox" type="text" placeholder="Enter the course name">
+                <input id="courseNameBox" type="text" placeholder="Enter the course name" required autocomplete="off">
                 <h2 style="text-align: left;">Description</h2>
-                <textarea id="courseDescriptionBox" placeholder="Enter the course description:"></textarea>
+                <textarea id="courseDescriptionBox" placeholder="Enter the course description:" required></textarea>
 
             </form>
             <div>
-                <div class="confirmButtons"> <input type="submit" id="cancel" value="Cancel" required
-                        style="width: 20rem;"></div>
-                <div class="confirmButtons"> <input type="submit" id="confirm" value="Add Course" required
-                        style="width: 30rem;"></div>
+                <div class="confirmButtons"> <input type="submit" id="cancel" value="Cancel" onclick="location.href='/'" style="width: 20rem;">
+                </div>
+                <div class="confirmButtons"> <input type="submit" id="confirm" value="Add Course" style="width: 30rem;">
+                </div>
             </div>
         </div>
     </div>
@@ -41,7 +41,7 @@
         let courseName = document.getElementById("courseNameBox").value;
         let courseDescription = document.getElementById("courseDescriptionBox").value;
 
-        // TODO: regex coursename to letters, space, and then number
+        // TODO: regex coursename to all cap letters, space, and then number
         if (!courseName) {
             alert("Need course name");
             return;
