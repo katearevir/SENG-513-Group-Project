@@ -41,7 +41,7 @@
                 <div class="header-content">
                     <div class="dept-select">
                         <select name="department" id="department" onchange="selectDepartmentHandler(value)">
-                            <option value="" disabled selected hidden>Select a department</option>
+                            <option value="" selected>Select a department</option>
                             <% Departments.forEach(departments=> { %>
                                 <option value="<%- departments.department %>">
                                     <%= departments.department %>
@@ -144,12 +144,19 @@
 
     const selectDepartmentHandler = (department) => {
         var courses = document.getElementsByClassName("course-content");
-        for (var i = 0; i < courses.length; i++) {
-            let courseName = courses[i].children[0].innerText.replace(/\s/g, '');
-            if ((courseName.slice(0, 4)) === department) {
+        if (department == ""){
+            for (var i = 0; i < courses.length; i++) {
                 courses[i].style.display = "block";
-            } else {
-                courses[i].style.display = "none";
+            }
+        }
+        else {
+            for (var i = 0; i < courses.length; i++) {
+                let courseName = courses[i].children[0].innerText.replace(/\s/g, '');
+                if ((courseName.slice(0, 4)) === department) {
+                    courses[i].style.display = "block";
+                }else {
+                    courses[i].style.display = "none";
+                }
             }
         }
     };
