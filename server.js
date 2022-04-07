@@ -14,7 +14,6 @@ const indexRouter = require('./routers/indexRouter')
 const loginRouter = require('./routers/loginRouter')
 const registerRouter = require('./routers/registerRotuer')
 const addCourseRouter = require('./routers/addCourseRouter')
-const moderatorRouter = require('./routers/moderatorRouter')
 const modifyCoursesRouter = require('./routers/modifyCoursesRouter')
 const reviewRouter = require('./routers/reviewRouter')
 const userPageCommentsRouter = require('./routers/userPageCommentsRouter')
@@ -50,7 +49,6 @@ app.use('/', indexRouter);
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
 app.use('/addCourse', addCourseRouter);
-app.use('/moderator', moderatorRouter);
 app.use('/modifyCourses', modifyCoursesRouter);
 app.use('/review', reviewRouter);
 app.use('/userPage', userPageRouter);

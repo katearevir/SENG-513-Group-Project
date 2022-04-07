@@ -21,98 +21,57 @@
                 <div class="logo">
                     Rate My UofC Course
                 </div>
+                <% if (isAdmin) { %>
+                <%- include('./partials/adminDropdown') %>
+                <% } else { %>
                 <ul class="nav-items">
                     <li>
                         <% if (user) { %>
-                            <a href="/userPage">Profile</a>
-                            <% } else { %>
-                                <a href="/login">Login</a>
-                                <% } %>
+                        <a href="/userPage">Profile</a>
+                        <% } else { %>
+                        <a href="/login">Login</a>
+                        <% } %>
                     </li>
                 </ul>
+                <% } %>
             </nav>
 
         </div>
     </div>
 
-    <div class="header-container">
-        <div class="wrapper">
-            <header>
-                <div class="header-content">
-                    <div class="dept-select">
-                        <select name="department" id="department" onchange="selectDepartmentHandler(value)">
-                            <option value="" selected>Select a department</option>
-                            <% Departments.forEach(departments=> { %>
-                                <option value="<%- departments.department %>">
-                                    <%= departments.department %>
-                                </option>
-                                <% }) %>
-                        </select>
-                    </div>
-                    <h2>OR</h2>
-                    <div class="search-box">
-                        <input type="text" placeholder="Enter a specific course" onkeypress="courseNameHandler(event, value)"/>
-                    </div>
-                </div>
-            </header>
-        </div>
-    </div>
-
-    <div class="body-container">
-        <div class="wrapper">
-            <h2 id="popularTitle">Popular Courses</h2>
-            <div class="filters">
-                <div class="course-filter">
-                    <select name="filter" id="filter" onchange="filterHandler(value)">
-                        <option value="" disabled selected hidden>Filter</option>
-                        <option value="200">200 Levels</option>
-                        <option value="300">300 Levels</option>
-                        <option value="400">400 Levels</option>
-                        <option value="500">500 Levels</option>
-                    </select>
-                </div>
-                <div class="course-sort">
-                    <select name="sort-by" id="sort-by">
-                        <option value="" disabled selected hidden>Sort By</option>
-                        <option value="High-rating">Highest to Lowest Rated</option>
-                        <option value="Low-rating">Lowest to Highest Rated</option>
-                        <option value="Most">Most Rated</option>
-                        <option value="Least">Least Rated</option>
-                    </select>
-                </div>
-            </div>
-
-        </div>
-    </div>
+    <%- include('./partials/header'); %>
 
     <% Courses.forEach( (course)=> { %>
-        <div class="course-content">
-            <button type="button" class="collapsible">
-                <%= course.course %>
-                    <!--avg star rating example-->
-                    <span class="fa fa-star fa-lg checked"></span>
-                    <span class="fa fa-star fa-lg checked"></span>
-                    <span class="fa fa-star fa-lg checked"></span> <!-- full star -->
-                    <span class="fa fa-star-half-full fa-lg"></span> <!-- half star-->
-                    <span class="fa fa-star fa-lg"></span> <!-- unrated -->
-            </button>
-            <div class="course-contents">
-                <p><b>Description: </b>
-                    <%= course.description %>
-                </p>
-                <p><b>Rating: </b>5/5 <b>from</b> 100 <b>students</b></p>
-                <a href="review">Add a review</a>
-                <p><b>Comments:</b></p>
-                <iframe src="courseComments" height="261" width="446" style="border: none;"
-                    title="Iframe Example"></iframe>
-            </div>
+    <div class="course-content">
+        <button type="button" class="collapsible">
+            <%= course.course %>
+            <!--avg star rating example-->
+            <span class="fa fa-star fa-lg checked"></span>
+            <span class="fa fa-star fa-lg checked"></span>
+            <span class="fa fa-star fa-lg checked"></span> <!-- full star -->
+            <span class="fa fa-star-half-full fa-lg"></span> <!-- half star-->
+            <span class="fa fa-star fa-lg"></span> <!-- unrated -->
+        </button>
+        <div class="course-contents">
+            <p><b>Description: </b>
+                <%= course.description %>
+            </p>
+            <p><b>Rating: </b>5/5 <b>from</b> 100 <b>students</b></p>
+            <a href="review">Add a review</a>
+            <p><b>Comments:</b></p>
+            <% if (isAdmin) { %>
+            <iframe src="courseCommsMod" height="261" width="446" style="border:none" title="Iframe Example"></iframe>
+            <% } else { %>
+            <iframe src="courseComments" height="261" width="446" style="border: none;" title="Iframe Example"></iframe>
+            <% } %>
         </div>
-        <% }) %>
+    </div>
+    <% }) %>
 
 </body>
 
 <script type='text/javascript'>
-    var Departments =<%-JSON.stringify(Departments)%>;
+    var Departments = <% -JSON.stringify(Departments) %>;
 </script>
 <script>
     var coll = document.getElementsByClassName("collapsible");
@@ -155,7 +114,7 @@
     const selectDepartmentHandler = (department) => {
         var courses = document.getElementsByClassName("course-content");
         var popularTitle = document.getElementById("popularTitle");
-        if (department == ""){
+        if (department == "") {
             popularTitle.style.visibility = "visible";
             for (var i = 0; i < courses.length; i++) {
                 courses[i].style.display = "block";
@@ -167,7 +126,7 @@
                 let courseName = courses[i].children[0].innerText.replace(/\s/g, '');
                 if ((courseName.slice(0, 4)) === department) {
                     courses[i].style.display = "block";
-                }else {
+                } else {
                     courses[i].style.display = "none";
                 }
             }
@@ -175,15 +134,15 @@
     };
 
     const courseNameHandler = (event, courseSearch) => {
-        if (event.keyCode == 13){
+        if (event.keyCode == 13) {
             var courses = document.getElementsByClassName("course-content");
-            if (courseSearch == ""){
+            if (courseSearch == "") {
                 popularTitle.style.visibility = "visible";
                 for (var i = 0; i < courses.length; i++) {
                     courses[i].style.display = "block";
                 }
             }
-            else{
+            else {
                 popularTitle.style.visibility = "hidden";
                 courseSearch = courseSearch.split(' ').join('');
                 for (var i = 0; i < courses.length; i++) {
@@ -196,7 +155,7 @@
                 }
             }
         }
-        
+
     };
 
 </script>
