@@ -27,42 +27,37 @@ const mongoDB = 'mongodb+srv://ahfhafh:jEYduRc7cZmHExJ@cluster0.3cy1i.mongodb.ne
 mongoose.connect(mongoDB).then(() => {
     console.log("Mongoose connected");
 }).catch((err) => console.log(err));
-const db = mongoose.connection;
 
-const User = require('./models/user')
-const Course = require('./models/course')
-const Department = require('./models/department')
-const Feedback = require('./models/feedback')
+const UserModel = require('./models/user');
+const CourseModel = require('./models/course');
+const DepartmentModel = require('./models/department');
+const FeedbackModel = require('./models/feedback');
 
-const userQuery = require('./controllers/userController');
-
-const { checkUser } = require('./middleware/authMiddleware')
-
-const { response } = require('express');
+const { checkUser } = require('./middleware/authMiddleware');
 
 app.use(express.static('public'));
 app.use(express.json());
 app.use(cookieParser());
 
 app.get('*', checkUser);
-app.use('/', indexRouter);
-app.use('/login', loginRouter);
-app.use('/register', registerRouter);
-app.use('/addCourse', addCourseRouter);
-app.use('/modifyCourses', modifyCoursesRouter);
-app.use('/review', reviewRouter);
-app.use('/userPage', userPageRouter);
-app.use('/userPageComments', userPageCommentsRouter);
-app.use('/courseComments', courseCommentsRouter);
-app.use('/addDepartment', addDepartmentRouter);
-app.use('/courseCommsMod', courseCommsModRouter);
+app.use(indexRouter);
+app.use(loginRouter);
+app.use( registerRouter);
+app.use(addCourseRouter);
+app.use(modifyCoursesRouter);
+app.use(reviewRouter);
+app.use(userPageRouter);
+app.use(userPageCommentsRouter);
+app.use(courseCommentsRouter);
+app.use(addDepartmentRouter);
+app.use(courseCommsModRouter);
 
 // TODO: move to .env
 const JWT_SECRET = "cat";
 
 app.post('/api/login', async (req, res) => {
     const { email, password } = req.body;
-    const user = await User.findOne({ email }).lean();
+    const user = await UserModel.findOne({ email }).lean();
 
     if (!user) {
         console.log("Wrong email or password");
@@ -81,7 +76,7 @@ app.post('/api/login', async (req, res) => {
 app.post('/api/register', async (req, res) => {
     const { email, password: textPassword } = req.body;
     const password = await bcrypt.hash(textPassword, 5);
-    const user = await new User({ email: email, password: password, isAdmin: false });
+    const user = await new UserModel({ email: email, password: password, isAdmin: false });
     user.save((err) => {
         if (err) {
             if (err.code === 11000) {
@@ -105,7 +100,7 @@ app.get('/logout', async (req, res) => {
 // adds course to Courses and new department if it doesn't exist yet
 app.post('/api/addCourse', async (req, res) => {
     const { courseName, courseDescription } = req.body;
-    const course = await new Course({ course: courseName, description: courseDescription });
+    const course = await new CourseModel({ course: courseName, description: courseDescription });
     course.save((err) => {
         if (err) {
             if (err.code === 11000) {
@@ -120,9 +115,9 @@ app.post('/api/addCourse', async (req, res) => {
     });
 
     let departmentName = courseName.replace(/[^A-Za-z]/g, '').toUpperCase();
-    let findDepartment = await Department.findOne({ department: departmentName }).lean();
+    let findDepartment = await DepartmentModel.findOne({ department: departmentName }).lean();
     if (!findDepartment) {
-        const newDepartment = await new Department({ department: departmentName });
+        const newDepartment = await new DepartmentModel({ department: departmentName });
         newDepartment.save((err) => {
             if (err) {
                 console.log(err);
@@ -130,9 +125,27 @@ app.post('/api/addCourse', async (req, res) => {
             }
             console.log("Department registered");
         });
+    } else {
+        await DepartmentModel.updateOne({ department: departmentName }, { "$push": { courses: course } });
     }
     res.json({ status: 'ok' });
-})
+});
+
+app.post('/api/addReview', checkUser, async (req, res) => {
+    const { rating, comment, keywordArr, courseName } = req.body;
+    const course = await CourseModel.findOne({ course: courseName });
+    const feedback = await new FeedbackModel({ from_user: res.locals.user.id, comment: comment, rating: rating, comment_votes: 0, keywords: keywordArr, course: course._id });
+    feedback.save((err) => {
+        if (err) {
+            console.log(err);
+            return res.json({ status: 'error', error: err });
+        }
+        console.log("Review added");
+    });
+    await CourseModel.updateOne({ course: courseName }, { "$push": { messages: feedback } });
+    await UserModel.updateOne({ _id: res.locals.user.id }, { "$push": { messages: feedback } });
+    res.json({ status: 'ok' })
+});
 
 server.listen(process.env.PORT || 3000, () => {
     console.log('listening on *:3000');

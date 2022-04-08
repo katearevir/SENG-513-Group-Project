@@ -57,12 +57,12 @@
                 <%- course.description %>
             </p>
             <p><b>Rating: </b>5/5 <b>from</b> 100 <b>students</b></p>
-            <a href="review">Add a review</a>
+            <a onclick="reviewButtonHandler('<%- course.course %>')">Add a review</a>
             <p><b>Comments:</b></p>
             <% if (isAdmin) { %>
             <iframe src="courseCommsMod" height="261" width="446" style="border:none" title="Iframe Example"></iframe>
             <% } else { %>
-            <iframe src="courseComments" height="261" width="446" style="border: none;" title="Iframe Example"></iframe>
+            <iframe src="courseComments/<%- course.course %> " height="261" width="446" style="border: none;" title="Iframe Example"></iframe>
             <% } %>
         </div>
     </div>
@@ -166,6 +166,12 @@
         }
 
     };
+
+    const reviewButtonHandler = (course) => {
+        url = 'review?course=' + encodeURIComponent(course);
+        document.location.href = url;
+    };
+    
 
 </script>
 

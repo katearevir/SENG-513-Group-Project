@@ -17,7 +17,7 @@
     <% Reviews.forEach( (review) => { %>
     <div class="review">
         <div class="voting">
-            <span id="voteResults">0</span>
+            <span id="voteResults"><%- review.comment_votes %> </span>
             <button id="upvote" onclick="upvote()" type="button"><span>▲</span></button>
             <button id="downvote" onclick="downvote()" type="button"><span>▼</span></button>
         </div>
@@ -27,20 +27,21 @@
             let options = { year: 'numeric', month: 'short', day: 'numeric' };%>
             <%- (new Date(parseInt(timestamp, 16) * 1000)).toLocaleDateString("en-US", options); %>
         </p>
+
         <div class="starRating">
             <% let nonChecked = 5 - review.rating; for (let i = 0; i < review.rating; i++) { %>
-                <span class="fa fa-star fa-lg checked"></span>
+            <span class="fa fa-star fa-lg checked"></span>
             <% }; review.rating--; for (; review.rating < 4; review.rating++) { %>
-                <span class="fa fa-star fa-lg"></span>
+            <span class="fa fa-star fa-lg"></span>
             <% }; %>
         </div>
 
         <p id="comment"><%- review.comment %> </p>
 
         <div class="keywords">
-            <span class="keyword">Easy</span>
-            <span class="keyword">Informative</span>
-            <span class="keyword">Fun</span>
+            <% for (let i = 0; i < review.keywords.length; i++) { %>
+            <span class="keyword"><%- review.keywords[i] %> </span>
+            <% } %> 
         </div>
 
 

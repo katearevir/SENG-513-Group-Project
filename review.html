@@ -18,6 +18,7 @@
         <h1>Review</h1>
         <div class="rating">
             <div class="rate">
+                <!-- select no stars? -->
                 <input type="radio" id="star5" name="rate" value="5" />
                 <label for="star5" title="text">5 stars</label>
                 <input type="radio" id="star4" name="rate" value="4" />
@@ -43,8 +44,6 @@
         </form>
     </div>
 
-    <script src="/socket.io/socket.io.js"></script>
-
     <script>
         let tokenAutocomplete = new TokenAutocomplete({
             name: 'keywords',
@@ -61,29 +60,46 @@
         });
         //tokenAutocomplete.debug(true);
 
+        // try select no star
+        // const star1 = document.getElementById("star1");
+        // star1.addEventListener("click", () => {
+        //     if (star1.checked) {
+        //         star1.checked = false;
+        //     } else {
+        //         star1.checked = true;
+        //     }
+        // });
 
-        var socket = io("localhost:3000");
-
+        // get course name from url
+        var courseName;
+        window.onload = function () {
+            var url = document.location.href,
+                params = url.split('?')[1],
+                tmp = params.split('=')[1];
+            courseName = decodeURIComponent(tmp);
+        }
 
         //Click on "Add Rating", type=button for now, might change to type=submit if using POST method
-        document.getElementById("addRating").addEventListener("click", function () {
+        document.getElementById("addRating").addEventListener("click", async function () {
 
             //get rating
             var ratings = document.getElementsByName('rate');
             var i = 0;
+            var rating = 0;
             //for (var i = 0; i < ratings.length; i++) {
-                while (i < ratings.length) {
+            while (i < ratings.length) {
                 if (ratings[i].checked) {
-                    console.log("Rating: " + ratings[i].value); //for testing, placeholder
-                   // console.log("i: " + i);
+                    rating = ratings[i].value;
+                    // console.log("Rating: " + ratings[i].value); //for testing, placeholder
+                    // console.log("i: " + i);
                     break;
                 }
                 i++;
             }
 
             //get comment
-            var comment = document.getElementById('comment');
-            console.log("Comment: " + comment.value); //for testing, placeholder
+            var comment = document.getElementById('comment').value;
+            // console.log("Comment: " + comment); //for testing, placeholder
 
             //get keywords
             var keywords = document.getElementsByClassName('token-autocomplete-token');
@@ -91,45 +107,36 @@
             for (var i = 0; i < keywords.length; i++) {
                 keywordArr.push(keywords[i].attributes[1].value);
             }
-            console.log("Keywords: " + keywordArr); //for testing, placeholder
+            // console.log("Keywords: " + keywordArr); //for testing, placeholder
 
 
-            if (!comment.value) {
+            if (!comment) {
                 console.log("Add comment: need comment");
                 return;
-             } 
-            console.log("Feedback createed successfully");
-            socket.emit('review_creation', ratings[i].value, comment.value, keywordArr);
+            }
 
+            const result = await fetch('/api/addReview', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    rating,
+                    comment,
+                    keywordArr,
+                    courseName
+                })
+            }).then((res) => res.json());
+
+            if (result.status === 'ok') {
+                alert('Review added');
+                window.location = '/';
+            } else {
+                alert(result.err);
+            }
         });
-
-
+        
     </script>
-
-<!-- <script src="/socket.io/socket.io.js"></script>
-
-<script>
-    var socket = io("localhost:3000");
-
-    let courseName = document.getElementById("courseNameBox");
-    let reviewText = document.getElementById("comment");
-    let addRatingButton = document.getElementById("addRating");
-
-    addRating.addEventListener('click', (e) => {
-        e.preventDefault();
-
-        if (!courseName.value) {
-            console.log("Add Course: need course name");
-            return;
-        } else if (!courseDescription.value) {
-            console.log("Add Course Description: need course description");
-            return;
-        } 
-        console.log("Course added successfully");
-        socket.emit('course_creation', courseName.value, courseDescription.value);
-    })
-
-</script> -->
 
 </body>
 

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
+const Feedback = require('./feedback');
 
 const UserSchema = Schema({
     email: {

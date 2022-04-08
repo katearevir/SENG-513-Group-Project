@@ -1,11 +1,16 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
+const User = require('./user');
 
 const FeedbackSchema = new Schema({
     feedback_id: {
         type: Number,
        // required: true,
         index: true
+    },
+    from_user: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
     },
     comment: {
         type: String,
@@ -17,9 +22,12 @@ const FeedbackSchema = new Schema({
         type: Number, //might change depending on how starts is implemented
         required: false,
     },
-    comment_rating: { //upvotes/downvotes on that comment
+    comment_votes: { //upvotes/downvotes on that comment
         type: Number,
         required: true,
+    },
+    keywords: {
+        type: Array
     },
 
     course: {
