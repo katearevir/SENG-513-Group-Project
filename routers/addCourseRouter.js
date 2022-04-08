@@ -4,7 +4,7 @@ const { requireLogin, requireAdmin } = require('../middleware/authMiddleware');
 
 const addCourseRouter = express.Router();
 
-addCourseRouter.get('/', requireLogin, requireAdmin, (req, res) => {
+addCourseRouter.get('/addCourse', requireLogin, requireAdmin, (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'addCourse.html'));
 });
 

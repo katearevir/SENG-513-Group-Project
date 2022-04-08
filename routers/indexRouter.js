@@ -1,14 +1,14 @@
 const express = require('express');
-const Course = require('../models/course')
-const Department = require('../models/department')
-const Feedback = require('../models/feedback')
+const CourseModel = require('../models/course')
+const DepartmentModel = require('../models/department')
+const FeedbackModel = require('../models/feedback')
 
 const indexRouter = express.Router();
 
 indexRouter.get('/', async (req, res) => {
-    const courses = await Course.find().sort({ "course": 1 })
-    const departments = await Department.find().sort({ "department": 1 });
-    const allRatings = await Feedback.find({}, { rating: 1, _id: 0 });
+    const courses = await CourseModel.find().sort({ "course": 1 })
+    const departments = await DepartmentModel.find().sort({ "department": 1 });
+    const allRatings = await FeedbackModel.find({}, { rating: 1, _id: 0 });
     let allRatingsTotal = 0;
     for (let i = 0; i < allRatings.length; i++) {
         allRatingsTotal += allRatings[i].rating;

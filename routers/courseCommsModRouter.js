@@ -4,7 +4,7 @@ const { requireLogin, requireAdmin } = require('../middleware/authMiddleware');
 
 const courseCommsModRouter = express.Router();
 
-courseCommsModRouter.get('/', requireLogin, requireAdmin, (req, res) => {
+courseCommsModRouter.get('/courseCommsMod', requireLogin, requireAdmin, (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'courseCommsMod.html'));
 });
 

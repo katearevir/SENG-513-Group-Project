@@ -1,10 +1,12 @@
 const express = require('express');
-const Feedback = require('../models/feedback');
+const courseModel = require('../models/course');
+const FeedbackModel = require('../models/feedback');
 
 const courseCommentsRouter = express.Router();
 
-courseCommentsRouter.get('/', async (req, res) => {
-    const reviews = await Feedback.find();
+courseCommentsRouter.get('/courseComments/:coursename', async (req, res) => {
+    const course = await courseModel.findOne({ course: req.params.coursename}).lean();
+    const reviews = await FeedbackModel.find({ course: course._id });
     res.render(('courseComments.ejs'), { Reviews: reviews });
 });
 
