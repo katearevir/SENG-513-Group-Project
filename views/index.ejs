@@ -59,20 +59,13 @@
             <p><b>Rating: </b>5/5 <b>from</b> 100 <b>students</b></p>
             <a onclick="reviewButtonHandler('<%- course.course %>')">Add a review</a>
             <p><b>Comments:</b></p>
-            <% if (isAdmin) { %>
-            <iframe src="courseCommsMod" height="261" width="446" style="border:none" title="Iframe Example"></iframe>
-            <% } else { %>
             <iframe src="courseComments/<%- course.course %> " height="261" width="446" style="border: none;" title="Iframe Example"></iframe>
-            <% } %>
         </div>
     </div>
     <% }) %>
 
 </body>
 
-<script type='text/javascript'>
-    var Departments = <% -JSON.stringify(Departments) %>;
-</script>
 <script>
     var coll = document.getElementsByClassName("collapsible");
     var i;

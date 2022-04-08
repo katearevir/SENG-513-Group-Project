@@ -46,8 +46,12 @@
 
 
         <div class="replyButtons">
-            <a id="reply" href="#">Reply to Comment</a>
-            <a id="showRep" href="#">Show Replies</a>
+            <% if (isAdmin) { %> 
+                <button id="deleteRating" type="button">Delete Rating</a>
+            <% } else { %> 
+                <a id="reply" href="#">Reply to Comment</a>
+                <a id="showRep" href="#">Show Replies</a>
+            <% } %> 
         </div>
 
         <hr>
