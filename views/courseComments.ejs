@@ -15,15 +15,16 @@
 
 <body>
     <% Reviews.forEach( (review) => { %>
+    <% const reviewID = review._id; %>
     <div class="review">
         <div class="voting">
             <span id="voteResults"><%- review.comment_votes %> </span>
-            <button id="upvote" onclick="upvote()" type="button"><span>▲</span></button>
-            <button id="downvote" onclick="downvote()" type="button"><span>▼</span></button>
+            <button id="upvote" onclick="upvote('<%- reviewID %>')" type="button"><span>▲</span></button>
+            <button id="downvote" onclick="downvote('<%- reviewID %>')" type="button"><span>▼</span></button>
         </div>
 
         <p id="date">
-            <% let timestamp = review._id.toString().substring(0, 8); 
+            <% let timestamp = reviewID.toString().substring(0, 8); 
             let options = { year: 'numeric', month: 'short', day: 'numeric' };%>
             <%- (new Date(parseInt(timestamp, 16) * 1000)).toLocaleDateString("en-US", options); %>
         </p>
@@ -41,17 +42,17 @@
         <div class="keywords">
             <% for (let i = 0; i < review.keywords.length; i++) { %>
             <span class="keyword"><%- review.keywords[i] %> </span>
-            <% } %> 
+            <% } %>
         </div>
 
 
         <div class="replyButtons">
-            <% if (isAdmin) { %> 
-                <button id="deleteRating" type="button">Delete Rating</a>
-            <% } else { %> 
+            <% if (isAdmin) { %>
+            <button id="deleteRating" type="button">Delete Rating</a>
+                <% } else { %>
                 <a id="reply" href="#">Reply to Comment</a>
                 <a id="showRep" href="#">Show Replies</a>
-            <% } %> 
+                <% } %>
         </div>
 
         <hr>
@@ -60,28 +61,58 @@
     <% }) %>
 
     <script>
-        var i = 0;
-        document.getElementById('voteResults').innerHTML = i;
+        var votes = document.getElementById('voteResults')?.innerText;
+        let last = +new Date();
 
-        /*For mongoDB if using ejs?
-        var i = 0;
-        i = document.getElementById('voteResults').innerHTML;
-        */
+        async function upvote(reviewID) {
+            const now = +new Date();
+            // limit clicks for 1 second
+            if (now - last > 1000) {
+                last = now;
 
-        function upvote() {
-            i++;
-            document.getElementById('voteResults').innerHTML = i;
+                const result = await fetch('/api/upvote', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        reviewID
+                    })
+                }).then((res) => res.json());
+
+                if (result.status === 'ok') {
+                    votes++;
+                    document.getElementById('voteResults').innerHTML = votes;
+                } else {
+                    console.log(result.error);
+                }
+            }
+
         }
 
-        function downvote() {
-            /* if it can't be negative
-            if(i >= 0){
-                i--;
-                document.getElementById('voteResults').innerHTML = i;
+        async function downvote(reviewID) {
+            const now = +new Date();
+            // limit clicks for 1 second
+            if (now - last > 1000) {
+                last = now;
+
+                const result = await fetch('/api/downvote', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        reviewID
+                    })
+                }).then((res) => res.json());
+
+                if (result.status === 'ok') {
+                    votes--;
+                    document.getElementById('voteResults').innerHTML = votes;
+                } else {
+                    console.log(result.error);
+                }
             }
-            */
-            i--;
-            document.getElementById('voteResults').innerHTML = i;
         }
     </script>
 </body>

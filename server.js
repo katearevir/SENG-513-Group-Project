@@ -20,7 +20,6 @@ const userPageCommentsRouter = require('./routers/userPageCommentsRouter')
 const userPageRouter = require('./routers/userPageRouter')
 const courseCommentsRouter = require('./routers/courseCommentsRouter');
 const addDepartmentRouter = require('./routers/addDepartmentRouter');
-const courseCommsModRouter = require('./routers/courseCommsModRouter');
 
 const mongoose = require('mongoose');
 const mongoDB = 'mongodb+srv://ahfhafh:jEYduRc7cZmHExJ@cluster0.3cy1i.mongodb.net/users-database?retryWrites=true&w=majority';
@@ -42,7 +41,7 @@ app.use(cookieParser());
 app.get('*', checkUser);
 app.use(indexRouter);
 app.use(loginRouter);
-app.use( registerRouter);
+app.use(registerRouter);
 app.use(addCourseRouter);
 app.use(modifyCoursesRouter);
 app.use(reviewRouter);
@@ -50,7 +49,6 @@ app.use(userPageRouter);
 app.use(userPageCommentsRouter);
 app.use(courseCommentsRouter);
 app.use(addDepartmentRouter);
-app.use(courseCommsModRouter);
 
 // TODO: move to .env
 const JWT_SECRET = "cat";
@@ -126,7 +124,11 @@ app.post('/api/addCourse', async (req, res) => {
             console.log("Department registered");
         });
     } else {
-        await DepartmentModel.updateOne({ department: departmentName }, { "$push": { courses: course } });
+        try {
+            await DepartmentModel.updateOne({ department: departmentName }, { "$push": { courses: course } });
+        } catch (err) {
+            return res.json({ status: 'error', error: err });
+        }
     }
     res.json({ status: 'ok' });
 });
@@ -142,10 +144,38 @@ app.post('/api/addReview', checkUser, async (req, res) => {
         }
         console.log("Review added");
     });
-    await CourseModel.updateOne({ course: courseName }, { "$push": { messages: feedback } });
-    await UserModel.updateOne({ _id: res.locals.user.id }, { "$push": { messages: feedback } });
-    res.json({ status: 'ok' })
+
+    try {
+        await CourseModel.updateOne({ course: courseName }, { "$push": { messages: feedback } });
+        await UserModel.updateOne({ _id: res.locals.user.id }, { "$push": { messages: feedback } });
+    } catch (err) {
+        return res.json({ status: 'error', error: err });
+    }
+
+    res.json({ status: 'ok' });
 });
+
+app.post('/api/upvote', async (req, res) => {
+    const { reviewID } = req.body;
+    try {
+        await FeedbackModel.updateOne({ _id: reviewID }, { "$inc": { comment_votes: 1 } })
+    } catch (err) {
+        return res.json({ status: 'error', error: err });
+    }
+
+    res.json({ status: 'ok' });
+})
+
+app.post('/api/downvote', async (req, res) => {
+    const { reviewID } = req.body;
+    try {
+        await FeedbackModel.updateOne({ _id: reviewID }, { "$inc": { comment_votes: -1 } })
+    } catch (err) {
+        return res.json({ status: 'error', error: err });
+    }
+
+    res.json({ status: 'ok' });
+})
 
 server.listen(process.env.PORT || 3000, () => {
     console.log('listening on *:3000');
