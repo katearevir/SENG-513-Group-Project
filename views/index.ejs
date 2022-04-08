@@ -45,21 +45,24 @@
     <div class="course-content">
         <button type="button" class="collapsible">
             <%- course.course %>
-            <!--avg star rating example-->
-            <span class="fa fa-star fa-lg checked"></span>
-            <span class="fa fa-star fa-lg checked"></span>
-            <span class="fa fa-star fa-lg checked"></span> <!-- full star -->
-            <span class="fa fa-star-half-full fa-lg"></span> <!-- half star-->
-            <span class="fa fa-star fa-lg"></span> <!-- unrated -->
+            <% let avgRating = (Math.round(course.avgRating * 2) / 2).toFixed(1); %>
+            <% for (let i = 0; i < avgRating-0.5; i++) { %>
+                <span class="fa fa-star fa-lg checked"></span> <!-- full star -->
+            <% }; if ((avgRating % 1) === 0.5) { avgRating = Math.round(avgRating); %>
+                <span class="fa fa-star-half-full fa-lg"></span> <!-- half star-->
+            <% }; for (; avgRating < 5; avgRating++) { %>
+                <span class="fa fa-star fa-lg"></span> <!-- unrated -->
+            <% }; %>
         </button>
         <div class="course-contents">
             <p><b>Description: </b>
                 <%- course.description %>
             </p>
-            <p><b>Rating: </b>5/5 <b>from</b> 100 <b>students</b></p>
+            <p><b>Rating: </b><%- course.avgRating %>/5 <b>from</b> <%- course.messages.length %>  <b>students</b></p>
             <a onclick="reviewButtonHandler('<%- course.course %>')">Add a review</a>
             <p><b>Comments:</b></p>
-            <iframe src="courseComments/<%- course.course %> " height="261" width="446" style="border: none;" title="Iframe Example"></iframe>
+            <iframe src="courseComments/<%- course.course %> " height="261" width="446" style="border: none;"
+                title="Iframe Example"></iframe>
         </div>
     </div>
     <% }) %>
@@ -95,12 +98,12 @@
     // TODO: select department and filter and sort working together
     const filterHandler = (lvl) => {
         var courses = document.getElementsByClassName("course-content");
-        if (lvl == ""){
+        if (lvl == "") {
             for (var i = 0; i < courses.length; i++) {
                 courses[i].style.display = "block";
             }
         }
-        else{
+        else {
             for (var i = 0; i < courses.length; i++) {
                 let courseName = courses[i].children[0].innerText.replace(/\s/g, '');
                 if ((courseName.charAt(courseName.length - 3)) === lvl.slice(0, 1)) {
@@ -110,7 +113,7 @@
                 }
             }
         }
-        
+
     };
 
     const selectDepartmentHandler = (department) => {
@@ -164,7 +167,7 @@
         url = 'review?course=' + encodeURIComponent(course);
         document.location.href = url;
     };
-    
+
 
 </script>
 
