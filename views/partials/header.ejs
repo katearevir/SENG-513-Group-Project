@@ -85,10 +85,12 @@
                 if (deleteCoursesList.options[i].value == course)
                 deleteCoursesList.remove(i);
             }
-        }
+        }  
 
-        
+    }
 
+    const clearDeletedCoursesList = () => {
+        document.getElementById("deleteCoursesList").innerHTML = "";
     }
     
 </script>

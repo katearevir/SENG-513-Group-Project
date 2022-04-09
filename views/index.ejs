@@ -54,7 +54,7 @@
                 <span class="fa fa-star fa-lg"></span> <!-- unrated -->
             <% }; %>
             <label class="checkbox">
-                <input type="checkbox" onchange="ModifyDeletedCoursesList(this, '<%- course.course %>')"/>
+                <input class="inputCheckbox" type="checkbox" onchange="ModifyDeletedCoursesList(this, '<%- course.course %>')"/>
             </label>
             <span class="arrow">▼</span>
         </button>
@@ -198,6 +198,13 @@
         for (var i = 0; i < checkboxes.length; i++){
             checkboxes[i].style.display = "none";
         }
+
+        //uncheck all checkboxes
+        var checkboxesInput = document.getElementsByClassName("inputCheckbox");
+        for (var i = 0; i < checkboxes.length; i++){
+            checkboxesInput[i].checked = false;
+        }
+        clearDeletedCoursesList();
 
         var coll = document.getElementsByClassName("collapsible");
         var arrow = document.getElementsByClassName("arrow");
