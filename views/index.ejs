@@ -53,6 +53,10 @@
             <% }; for (; avgRating < 5; avgRating++) { %>
                 <span class="fa fa-star fa-lg"></span> <!-- unrated -->
             <% }; %>
+            <label class="checkbox">
+                <input type="checkbox">
+            </label>
+            <span class="arrow">▼</span>
         </button>
         <div class="course-contents">
             <p><b>Description: </b>
@@ -168,6 +172,39 @@
         document.location.href = url;
     };
 
+    const removeCoursesHandler = () => {
+        var checkboxes = document.getElementsByClassName("checkbox");
+        
+
+        for (var i = 0; i < checkboxes.length; i++){
+            checkboxes[i].style.display = "inline-flex";
+        }
+
+        var coll = document.getElementsByClassName("collapsible");
+        var arrow = document.getElementsByClassName("arrow");
+
+        for (var i = 0; i < coll.length; i++) {
+            arrow[i].style.display = "none";
+            coll[i].disabled = true;
+            
+        }
+    }
+
+    const cancelRemoveCoursesHandler = () => {
+        var checkboxes = document.getElementsByClassName("checkbox");
+
+        for (var i = 0; i < checkboxes.length; i++){
+            checkboxes[i].style.display = "none";
+        }
+
+        var coll = document.getElementsByClassName("collapsible");
+        var arrow = document.getElementsByClassName("arrow");
+        for (var i = 0; i < coll.length; i++) {
+            arrow[i].style.display = "block";
+            coll[i].disabled = false;
+        }
+
+    }
 
 </script>
 
