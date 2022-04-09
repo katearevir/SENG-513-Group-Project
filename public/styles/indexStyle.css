@@ -102,6 +102,13 @@ header h2 {
     padding-left: 188px;
 }
 
+header h1{
+  font-family: 'Montserrat';
+  font-style: bold;
+  padding-left: 15px;
+  margin: 15px;
+}
+
 header select {
     background: #9C0534;
     border-radius: 6px;
@@ -115,6 +122,8 @@ header select {
     width: 473px;
     height: 47px;
 }
+
+
 
 input::placeholder{
     overflow: visible;
@@ -440,3 +449,26 @@ input::placeholder{
   .dropdownMenu a:hover {background-color: #ddd;}
   
   .show {display: block;}
+
+  @media only screen and (max-width: 768px){
+    header select{
+      width: 350px;
+    }
+
+    header h2{
+      margin: 15px;
+      padding-left: 145px;
+    }
+
+    header h1{
+      font-size: 20px;
+      padding-left: 30px;
+    }
+
+    .search-box input{
+      width: 350px;
+    }
+    .collapsible{
+      width: 350px;
+    }
+}

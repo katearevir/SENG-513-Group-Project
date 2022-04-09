@@ -173,8 +173,9 @@
     };
 
     const removeCoursesHandler = () => {
+        showDeletedCoursesList();
+
         var checkboxes = document.getElementsByClassName("checkbox");
-        
 
         for (var i = 0; i < checkboxes.length; i++){
             checkboxes[i].style.display = "inline-flex";
@@ -191,6 +192,7 @@
     }
 
     const cancelRemoveCoursesHandler = () => {
+        hideDeletedCoursesList();
         var checkboxes = document.getElementsByClassName("checkbox");
 
         for (var i = 0; i < checkboxes.length; i++){
@@ -202,7 +204,7 @@
         for (var i = 0; i < coll.length; i++) {
             arrow[i].style.display = "block";
             coll[i].disabled = false;
-        }
+        } 
 
     }
 

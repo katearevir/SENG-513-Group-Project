@@ -16,6 +16,13 @@
                 <div class="search-box">
                     <input type="text" placeholder="Enter a specific course" onkeypress="courseNameHandler(event, value)"/>
                 </div>
+                <h1 id="deleteCoursesHeader" style="display: none;">Selected courses to delete</h1>
+                <div id="deleteCoursesDiv" style="display: none;" >
+                    <select>
+                     <option>SOCI 201</option>
+                    </select>
+                </div>
+                
             </div>
         </header>
     </div>
@@ -47,3 +54,20 @@
 
     </div>
 </div>
+
+<script>
+    function showDeletedCoursesList(){
+        var deleteCoursesHeader = document.getElementById("deleteCoursesHeader")
+        var deleteCoursesDiv = document.getElementById("deleteCoursesDiv");
+        deleteCoursesHeader.style.display = "block";
+        deleteCoursesDiv.style.display = "block";
+    }
+
+    function hideDeletedCoursesList(){
+        var deleteCoursesHeader = document.getElementById("deleteCoursesHeader")
+        var deleteCoursesDiv = document.getElementById("deleteCoursesDiv");
+        deleteCoursesHeader.style.display = "none";
+        deleteCoursesDiv.style.display = "none";
+    }
+    
+</script>
