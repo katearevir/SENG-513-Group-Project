@@ -18,8 +18,7 @@
                 </div>
                 <h1 id="deleteCoursesHeader" style="display: none;">Selected courses to delete</h1>
                 <div id="deleteCoursesDiv" style="display: none;" >
-                    <select>
-                     <option>SOCI 201</option>
+                    <select id="deleteCoursesList">
                     </select>
                 </div>
                 
@@ -68,6 +67,28 @@
         var deleteCoursesDiv = document.getElementById("deleteCoursesDiv");
         deleteCoursesHeader.style.display = "none";
         deleteCoursesDiv.style.display = "none";
+    }
+
+    //TODO: get course value
+    const ModifyDeletedCoursesList = (value, course) => {
+        var deleteCoursesList = document.getElementById("deleteCoursesList");
+
+        if (value.checked == true)
+        {
+            var option = document.createElement("option");
+            option.text = course;
+            option.value = course;
+            deleteCoursesList.add(option);
+        }
+        else{
+            for (var i=0; i < deleteCoursesList.length; i++) {
+                if (deleteCoursesList.options[i].value == course)
+                deleteCoursesList.remove(i);
+            }
+        }
+
+        
+
     }
     
 </script>
