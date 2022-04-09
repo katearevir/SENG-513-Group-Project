@@ -7,7 +7,7 @@
         <button type="button" id="removeCourse" onclick="hideButton();removeCoursesHandler();">Remove Course</button>
         <a id="logout" href="/logout">Logout</a>
     </div>
-    <button id="deleteCoures" style="display:none;">Delete Courses</button>
+    <button id="deleteCourses" style="display:none;">Delete Courses</button>
     <button id="cancelRemove" style="display:none;" onclick="showButton();cancelRemoveCoursesHandler();">X</button>
 </div>
 <script>
@@ -29,13 +29,13 @@
 
     // Hide and show dropdown button when remove courses is clicked
     function hideButton() {
-        document.getElementById("deleteCoures").style.display = "block";
-        document.getElementById("cancelRemove").style.display = "block";
+        document.getElementById("deleteCourses").style.display = "inline-block";
+        document.getElementById("cancelRemove").style.display = "inline-block";
         document.getElementById("menubtn").style.display = "none";
     }
 
     function showButton(){
-        document.getElementById("deleteCoures").style.display = "none";
+        document.getElementById("deleteCourses").style.display = "none";
         document.getElementById("cancelRemove").style.display = "none";
         document.getElementById("menubtn").style.display = "block";
     }
