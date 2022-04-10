@@ -76,7 +76,7 @@
         Array.from(deleteCoursesList.options).forEach(async (course) => {
             let courseName = course.value;
             const result = await fetch('/api/deleteCourse', {
-                method: 'POST',
+                method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json'
                 },

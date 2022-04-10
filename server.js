@@ -209,7 +209,7 @@ app.post('/api/downvote', async (req, res) => {
     res.json({ status: 'ok' });
 });
 
-app.post('/api/deleteCourse', async (req, res) => {
+app.delete('/api/deleteCourse', async (req, res) => {
     const { courseName } = req.body;
     try {
         await CourseModel.deleteOne( {course: courseName} );
