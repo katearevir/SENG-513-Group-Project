@@ -19,8 +19,8 @@
     <div class="review">
         <div class="voting">
             <span id="voteResults"><%- review.comment_votes %> </span>
-            <button id="upvote" onclick="upvote('<%- reviewID %>')" type="button"><span>▲</span></button>
-            <button id="downvote" onclick="downvote('<%- reviewID %>')" type="button"><span>▼</span></button>
+            <button id="upvote" onclick="upvote('<%- reviewID %>', this)" type="button"><span>▲</span></button>
+            <button id="downvote" onclick="downvote('<%- reviewID %>', this)" type="button"><span>▼</span></button>
         </div>
 
         <p id="date">
@@ -50,22 +50,43 @@
             <% if (isAdmin) { %>
             <button id="deleteRating" type="button">Delete Rating</a>
                 <% } else { %>
-                <a id="reply" href="#">Reply to Comment</a>
-                <a id="showRep" href="#">Show Replies</a>
+                <a id="replyButton" href="#">Reply to Comment</a>
+                <a class="showRep">Show Replies</a>
                 <% } %>
         </div>
 
         <hr>
 
+        <div class="replies">
+            <h3>Replies</h3>
+            <div class="reply">    
+                <span>User: </span><p>word.</p>
+            </div>
+            <hr>
+    
+            <div class="reply">
+                <span>User: </span><p>this!!!!!!!</p>
+            </div>
+            <hr>
+            
+            <div class="reply">
+                <span>User: </span><p>i disagree :/</p>
+            </div>
+            <hr>
+            
+        </div>
     </div>
+    
     <% }) %>
 
+    
+
     <script>
-        var votes = document.getElementById('voteResults')?.innerText;
         let last = +new Date();
 
         // TODO: limit upvote/downvote to 1 time per user
-        async function upvote(reviewID) {
+        async function upvote(reviewID, element) {
+            var votes = element.previousElementSibling.innerText;
             const now = +new Date();
             // limit clicks for 1 second
             if (now - last > 1000) {
@@ -83,7 +104,7 @@
 
                 if (result.status === 'ok') {
                     votes++;
-                    document.getElementById('voteResults').innerHTML = votes;
+                    element.previousElementSibling.innerHTML = votes;
                 } else {
                     console.log(result.error);
                 }
@@ -91,7 +112,8 @@
 
         }
 
-        async function downvote(reviewID) {
+        async function downvote(reviewID, element) {
+            var votes = element.previousElementSibling.previousElementSibling.innerText;
             const now = +new Date();
             // limit clicks for 1 second
             if (now - last > 1000) {
@@ -109,12 +131,32 @@
 
                 if (result.status === 'ok') {
                     votes--;
-                    document.getElementById('voteResults').innerHTML = votes;
+                    element.previousElementSibling.previousElementSibling.innerHTML = votes;
                 } else {
                     console.log(result.error);
                 }
             }
         }
+
+        
+        var showRep = document.getElementsByClassName("showRep");
+    
+        for (var i = 0; i < showRep.length; i++) {
+            showRep[i].addEventListener("click", function () {
+            var parentNode = this.parentNode;
+
+            var replies = parentNode.nextElementSibling.nextElementSibling;
+
+            if (replies.style.display === "block") {
+                replies.style.display = "none";
+                this.innerText = "Show Replies";
+            } else {
+                replies.style.display = "block";
+                this.innerText = "Hide Replies";
+            }
+            
+        });
+    }
     </script>
 </body>
 

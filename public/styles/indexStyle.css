@@ -354,6 +354,7 @@ input::placeholder{
   }
 
   .course-contents a {
+    cursor: pointer;
     text-decoration: none;
     font-family: 'Comfortaa';
     font-style: normal;
@@ -427,11 +428,17 @@ input::placeholder{
       
   }
 
+  #addDepartment{
+    background-color: #34b5d9;
+    
+}
+
   #modifyCourse{
     background-color: #C18AFF;
   }
 
   #removeCourse{
+    cursor: pointer;
     font-family: 'Comfortaa';
     font-size: 16.5px;
     border: none;

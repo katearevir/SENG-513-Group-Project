@@ -45,12 +45,29 @@ body {
   text-align: center;
 }
 
-#reply, #showRep {
+#replyButton, .showRep {
+  cursor: pointer;
   text-decoration: none;
   color: white;
   background-color: #68CC58;
   border-radius: 8px;
   padding: 5px 8px;
+}
+
+.replies {
+  display: none;
+  margin-left: 20px;
+  font-size: 14px;
+}
+
+.replies > .reply > span {
+  font-weight: 700;
+}
+
+.replies > .reply > p {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
 }
 
 #deleteRating {
@@ -95,6 +112,6 @@ body {
 }
 
 hr {
-  border: 0.3px solid black;
+  border: 0.3px solid gray;
 }
 /*# sourceMappingURL=courseCommentsStyle.css.map */

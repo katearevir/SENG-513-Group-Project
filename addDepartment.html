@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin -Add Departments</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link href='https://fonts.googleapis.com/css?family=Comfortaa' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+</head>
+
+<body>
+    <div class="container">
+        <div>
+            <h1 style="text-align: left;">Add Department</h1>
+            <form>
+                <h2 style="text-align: left;">Add Department</h2>
+                <input id="departmentNameBox" type="text" placeholder="Enter the department name" required autocomplete="off">
+            </form>
+            <div>
+                <div class="confirmButtons"> <input type="submit" id="cancel" value="Cancel" onclick="location.href='/'" style="width: 20rem;">
+                </div>
+                <div class="confirmButtons"> <input type="submit" id="confirm" value="Add Department" style="width: 30rem;">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+    let confirm = document.getElementById("confirm");
+
+    confirm.addEventListener('click', async (e) => {
+        e.preventDefault();
+        let departmentNameToAdd = document.getElementById("departmentNameBox").value;
+
+        if (!departmentNameToAdd) {
+            alert("Need department name");
+            return;
+        } 
+        const result = await fetch('/api/addDepartment', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                departmentNameToAdd
+            })
+        }).then((res) => res.json());
+
+        if (result.status === 'ok') {
+            console.log("Department added successfully");
+            alert('Department added successfully');
+            window.location = '/';
+        } else {
+            alert(result.error);
+        }
+
+    })
+
+</script>
+
+</html>

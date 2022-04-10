@@ -138,6 +138,33 @@ app.post('/api/addCourse', async (req, res) => {
     res.json({ status: 'ok' });
 });
 
+
+
+// adds department to Departments 
+app.post('/api/addDepartment', async (req, res) => {
+    const { departmentNameToAdd } = req.body;
+    let departmentName = departmentNameToAdd.replace(/[^A-Za-z]/g, '').toUpperCase();
+    let findDepartment = await DepartmentModel.findOne({ department: departmentName }).lean();
+    var course;
+    if (!findDepartment) {
+        const newDepartment = await new DepartmentModel({ department: departmentName });
+        newDepartment.save((err) => {
+            if (err) {
+                console.log(err);
+                return res.json({ status: 'error', error: err });
+            }
+            console.log("Department registered");
+        });
+    } else {
+        console.log("Department has previously been registered");
+    }
+    res.json({ status: 'ok' });
+});
+
+
+
+
+
 app.post('/api/addReview', checkUser, async (req, res) => {
     const { rating, comment, keywordArr, courseName } = req.body;
     const course = await CourseModel.findOne({ course: courseName });
