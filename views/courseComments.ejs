@@ -64,6 +64,7 @@
         var votes = document.getElementById('voteResults')?.innerText;
         let last = +new Date();
 
+        // TODO: limit upvote/downvote to 1 time per user
         async function upvote(reviewID) {
             const now = +new Date();
             // limit clicks for 1 second
