@@ -43,12 +43,29 @@ body{
 .replyButtons{
     text-align: center;
 }
-#reply, #showRep{
+#replyButton, .showRep{
+    cursor: pointer;
     text-decoration: none;
     color: white;
     background-color: #68CC58;
     border-radius: 8px;
     padding:5px 8px;
+}
+
+.replies{
+    display: none;
+    margin-left: 20px;
+    font-size: 14px;
+
+    > .reply > span{
+        font-weight: 700;
+    }
+
+    > .reply > p{
+        display: inline-flex;
+    }
+
+
 }
 
 #deleteRating{

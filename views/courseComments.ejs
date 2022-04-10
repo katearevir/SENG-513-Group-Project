@@ -50,15 +50,36 @@
             <% if (isAdmin) { %>
             <button id="deleteRating" type="button">Delete Rating</a>
                 <% } else { %>
-                <a id="reply" href="#">Reply to Comment</a>
-                <a id="showRep" href="#">Show Replies</a>
+                <a id="replyButton" href="#">Reply to Comment</a>
+                <a class="showRep">Show Replies</a>
                 <% } %>
         </div>
 
         <hr>
 
+        <div class="replies">
+            <h3>Replies</h3>
+            <div class="reply">    
+                <span>User: </span><p>word.</p>
+            </div>
+            <hr>
+    
+            <div class="reply">
+                <span>User: </span><p>this!!!!!!!</p>
+            </div>
+            <hr>
+            
+            <div class="reply">
+                <span>User: </span><p>i disagree :/</p>
+            </div>
+            <hr>
+            
+        </div>
     </div>
+    
     <% }) %>
+
+    
 
     <script>
         var votes = document.getElementById('voteResults')?.innerText;
@@ -115,6 +136,26 @@
                 }
             }
         }
+
+        
+        var showRep = document.getElementsByClassName("showRep");
+    
+        for (var i = 0; i < showRep.length; i++) {
+            showRep[i].addEventListener("click", function () {
+            var parentNode = this.parentNode;
+
+            var replies = parentNode.nextElementSibling.nextElementSibling;
+
+            if (replies.style.display === "block") {
+                replies.style.display = "none";
+                this.innerText = "Show Replies";
+            } else {
+                replies.style.display = "block";
+                this.innerText = "Hide Replies";
+            }
+            
+        });
+    }
     </script>
 </body>
 
