@@ -22,9 +22,9 @@ To test the admin/moderator view, please use one of the following credentials fo
 **Email:** pam@admin.com  <br/>
 **Password:** abc 
 
-## Existing Users Login
+## Existing Student Users Login
 
-To test a pre-existing user, please use please use one of the following credentials for logging in:
+To test a pre-existing student user (non-moderator), please use please use one of the following credentials for logging in:
 
 **Email:** user@user.com <br/>
 **Password:** abc <br/>
