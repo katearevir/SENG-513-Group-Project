@@ -138,7 +138,7 @@ app.post('/api/addCourse', async (req, res) => {
 app.post('/api/addReview', checkUser, async (req, res) => {
     const { rating, comment, keywordArr, courseName } = req.body;
     const course = await CourseModel.findOne({ course: courseName });
-    const feedback = await new FeedbackModel({ from_user: res.locals.user.id, comment: comment, rating: rating, comment_votes: 0, keywords: keywordArr, course: course._id });
+    const feedback = await new FeedbackModel({ from_user: res.locals.user?.id, comment: comment, rating: rating, comment_votes: 0, keywords: keywordArr, course: course._id });
     feedback.save((err) => {
         if (err) {
             console.log(err);

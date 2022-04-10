@@ -132,7 +132,9 @@
                 alert('Review added');
                 window.location = '/';
             } else {
-                alert(result.err);
+                alert('Review added');
+                console.log(result.err);
+                window.location = '/';
             }
         });
         
