@@ -43,7 +43,7 @@
             </div>
             <div class="course-sort">
                 <select name="sort-by" id="sort-by" onchange="sortHandler(value)">
-                    <option value="" disabled selected hidden>Sort By</option>
+                    <option value="" disabled hidden selected>Sort By</option>
                     <option value="High-rating">Highest to Lowest Rated</option>
                     <option value="Low-rating">Lowest to Highest Rated</option>
                     <option value="Most">Most Rated</option>
@@ -115,12 +115,14 @@
     });
 
     // change selected sort based on what was selected previously
-    Array.from(document.getElementById("sort-by").options).forEach((option) => {
-        if (option.value === sort) {
-            option.selected = true;
-        } else {
-            option.selected = false;
-        }
-    });
+    if (sort) {
+        Array.from(document.getElementById("sort-by").options).forEach((option) => {
+            if (option.value === sort) {
+                option.selected = true;
+            } else {
+                option.selected = false;
+            }
+        });
+    }
 
 </script>
