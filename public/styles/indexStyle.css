@@ -428,6 +428,11 @@ input::placeholder{
       
   }
 
+  #addDepartment{
+    background-color: #34b5d9;
+    
+}
+
   #modifyCourse{
     background-color: #C18AFF;
   }
