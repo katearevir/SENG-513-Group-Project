@@ -142,6 +142,7 @@
 
     const courseNameHandler = (event, courseSearch) => {
         if (event.keyCode == 13) {
+            
             var courses = document.getElementsByClassName("course-content");
             if (courseSearch == "") {
                 popularTitle.style.visibility = "visible";
@@ -154,6 +155,8 @@
                 courseSearch = courseSearch.split(' ').join('');
                 for (var i = 0; i < courses.length; i++) {
                     let courseName = courses[i].children[0].innerText.replace(/\s/g, '');
+                    courseName = courseName.slice(0, -1); //remove arrow at the end
+                    console.log(courseName);
                     if (courseName.toLowerCase() === courseSearch.toLowerCase()) {
                         courses[i].style.display = "block";
                     } else {
