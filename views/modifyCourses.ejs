@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin -Modify Courses</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link href='https://fonts.googleapis.com/css?family=Comfortaa' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+</head>
+
+<body>
+    <div class="container">
+        <div>
+            <!--id="login"-->
+            <h1 style="text-align: left;">Modify Course</h1>
+            <form>
+                <h2 style="text-align: left;">Course Name</h2>
+                <input id="courseNameBox" type="text" placeholder="Enter the course name" autocomplete="off"
+                    onkeypress="courseNameHandler(event, value)">
+                <h2 style="text-align: left;">Description</h2>
+                <textarea id="textarea">^enter a course above^</textarea>
+                <!-- find a way to enter the previous information later-->
+            </form>
+
+            <div>
+                <div class="confirmButtons"> <input type="submit" id="cancel" value="Cancel" onclick="location.href='/'"
+                        style="width: 20rem;">
+                </div>
+                <div class="confirmButtons"> <input type="submit" id="changeCourse" value="Modify Course"
+                        style="width: 30rem;"></div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+    const courseNameHandler = async (event, courseSearch) => {
+        if (event.keyCode == 13) {
+            event.preventDefault()
+            const result = await fetch('/api/getCourseInfo_modify', {   // get course info
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    courseSearch
+                })
+            }).then((res) => res.json());
+
+            if (result.status === 'ok') {
+                const submit = document.getElementById('changeCourse');
+                const textarea = document.getElementById('textarea');
+                const courseDescription = result.data.description;
+
+                textarea.innerText = courseDescription;       // change default text area text to course description
+                submit.addEventListener('click', async () => {            // when user clicks modify course
+                    const updated_textarea = document.getElementById('textarea').value;
+                    const result = await fetch('/api/modifyCourse', {   // get course info
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            courseSearch,
+                            updated_textarea
+                        })
+                    }).then((res) => res.json());
+
+                    if (result.status === 'ok') {
+                        alert("Course modified successfuly");
+                        window.location.replace('/');
+                    } else {
+                        alert(result.error);
+                    }
+                })
+            } else {
+                alert(result.error);
+            }
+        }
+    };
+</script>
+
+</html>

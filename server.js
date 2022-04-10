@@ -108,7 +108,7 @@ app.post('/api/addCourse', async (req, res) => {
             }
             console.log("Department registered");
         });
-        
+
     } else {
         course = await new CourseModel({ course: courseName, level: courseLevel, description: courseDescription, department: findDepartment._id });
     }
@@ -177,38 +177,74 @@ app.post('/api/addReview', checkUser, async (req, res) => {
     res.json({ status: 'ok' });
 });
 
-app.post('/api/upvote', async (req, res) => {
+app.post('/api/upvote', (req, res) => {
     const { reviewID } = req.body;
-    try {
-        await FeedbackModel.updateOne({ _id: reviewID }, { "$inc": { comment_votes: 1 } })
-    } catch (err) {
-        return res.json({ status: 'error', error: err });
-    }
+    FeedbackModel.updateOne({ _id: reviewID }, { "$inc": { comment_votes: 1 } }, (err, result) => {
+        if (err) throw err;
+        else if (result) {
+            return res.json({ status: 'ok' });
+        } else {
+            console.log('Could not find course')
+            return res.json({ status: 'error', error: "Could not find course" });
+        }
+    })
+});
+
+app.post('/api/downvote', (req, res) => {
+    const { reviewID } = req.body;
+    FeedbackModel.updateOne({ _id: reviewID }, { "$inc": { comment_votes: -1 } }, (err, result) => {
+        if (err) throw err;
+        else if (result) {
+            return res.json({ status: 'ok' });
+        } else {
+            console.log('Could not find course')
+            return res.json({ status: 'error', error: "Could not find course" });
+        }
+    })
 
     res.json({ status: 'ok' });
 });
 
-app.post('/api/downvote', async (req, res) => {
-    const { reviewID } = req.body;
-    try {
-        await FeedbackModel.updateOne({ _id: reviewID }, { "$inc": { comment_votes: -1 } })
-    } catch (err) {
-        return res.json({ status: 'error', error: err });
-    }
-
-    res.json({ status: 'ok' });
-});
-
-app.delete('/api/deleteCourse', async (req, res) => {
+app.delete('/api/deleteCourse', (req, res) => {
     const { courseName } = req.body;
-    try {
-        await CourseModel.deleteOne( {course: courseName} );
-    } catch (err) {
-        return res.json({ status: 'error', error: err });
-    }
-    
-    res.json({ status: 'ok' });
-})
+    CourseModel.deleteOne({ course: courseName }, (err, result) => {
+        if (err) throw err;
+        else if (result) {
+            return res.json({ status: 'ok' });
+        } else {
+            console.log('Could not find course')
+            return res.json({ status: 'error', error: "Could not find course" });
+        }
+    });
+});
+
+app.post('/api/getCourseInfo_modify', (req, res) => {
+    const { courseSearch } = req.body;
+    CourseModel.findOne({ course: courseSearch }, (err, result) => {
+        if (err) {
+            console.log(err);
+            return res.json({ status: 'error', error: err });
+        } else if (result) {
+            return res.json({ status: 'ok', data: result});
+        } else {
+            console.log("can't find course");
+            return res.json({ status: 'error', error: "can't find course" });
+        }
+    });
+});
+
+app.post('/api/modifyCourse', (req, res) => {
+    const {courseSearch, updated_textarea} = req.body;
+    CourseModel.updateOne({ course: courseSearch }, { "$set": { description: updated_textarea }}, (err, result) => {
+        if (err) throw err;
+        else if (result) {
+            return res.json({ status: 'ok' });
+        } else {
+            console.log('Could not find course')
+            return res.json({ status: 'error', error: "Could not find course" });
+        }
+    });
+});
 
 app.listen(process.env.PORT || 3000, () => {
     console.log('listening on *:3000');
