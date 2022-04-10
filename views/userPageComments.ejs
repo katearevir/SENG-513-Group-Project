@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Page Comments</title>
     <link rel="stylesheet" href="styles/userPageCommentsStyle.css">
+    <link rel="stylesheet" href="styles/indexStyle.css">
     <link href='https://fonts.googleapis.com/css?family=Comfortaa' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -66,6 +67,9 @@
     <% for (let i = 0; i < message.rating; i++) { %>
       <span class="fa fa-star fa-lg checked"></span> <!-- full star -->
   <% }; %>
+  <% for (let i = 5-message.rating; i > 0; i--) { %>
+    <span class="fa fa-star fa-lg"></span> <!-- full star -->
+<% }; %>
   </button>
   <div class="content">
       <p><% let timestamp = message._id.toString().substring(0, 8); 
