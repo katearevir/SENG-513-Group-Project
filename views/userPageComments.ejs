@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="styles/userPageCommentsStyle.css">
     <link href='https://fonts.googleapis.com/css?family=Comfortaa' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <style>
         .collapsible {
@@ -61,7 +62,11 @@
 
 <!-- START put in some loop for all comments -->
 <% user.messages.forEach((message) => { %> 
-  <button type="button" class="collapsible"><%- message.course?.course %></button>
+  <button type="button" class="collapsible"><%- message.course?.course %>
+    <% for (let i = 0; i < message.rating; i++) { %>
+      <span class="fa fa-star fa-lg checked"></span> <!-- full star -->
+  <% }; %>
+  </button>
   <div class="content">
       <p><% let timestamp = message._id.toString().substring(0, 8); 
         let options = { year: 'numeric', month: 'short', day: 'numeric' };%>
