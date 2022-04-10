@@ -6,22 +6,23 @@
                     <select name="department" id="department" onchange="selectDepartmentHandler(value)">
                         <option value="" selected>Select a department</option>
                         <% Departments.forEach(departments=> { %>
-                            <option value="<%- departments.department %>">
-                                <%= departments.department %>
-                            </option>
-                            <% }) %>
+                        <option value="<%- departments.department %>">
+                            <%= departments.department %>
+                        </option>
+                        <% }) %>
                     </select>
                 </div>
                 <h2>OR</h2>
                 <div class="search-box">
-                    <input type="text" placeholder="Enter a specific course" onkeypress="courseNameHandler(event, value)"/>
+                    <input type="text" placeholder="Enter a specific course"
+                        onkeypress="courseNameHandler(event, value)" />
                 </div>
                 <h1 id="deleteCoursesHeader" style="display: none;">Selected courses to delete</h1>
-                <div id="deleteCoursesDiv" style="display: none;" >
+                <div id="deleteCoursesDiv" style="display: none;">
                     <select id="deleteCoursesList">
                     </select>
                 </div>
-                
+
             </div>
         </header>
     </div>
@@ -33,7 +34,7 @@
         <div class="filters">
             <div class="course-filter">
                 <select name="filter" id="filter" onchange="filterHandler(value)">
-                    <option value="" selected>Level</option>
+                    <option value="">Level</option>
                     <option value="200">200 Levels</option>
                     <option value="300">300 Levels</option>
                     <option value="400">400 Levels</option>
@@ -41,7 +42,7 @@
                 </select>
             </div>
             <div class="course-sort">
-                <select name="sort-by" id="sort-by">
+                <select name="sort-by" id="sort-by" onchange="sortHandler(value)">
                     <option value="" disabled selected hidden>Sort By</option>
                     <option value="High-rating">Highest to Lowest Rated</option>
                     <option value="Low-rating">Lowest to Highest Rated</option>
@@ -55,14 +56,14 @@
 </div>
 
 <script>
-    function showDeletedCoursesList(){
+    function showDeletedCoursesList() {
         var deleteCoursesHeader = document.getElementById("deleteCoursesHeader")
         var deleteCoursesDiv = document.getElementById("deleteCoursesDiv");
         deleteCoursesHeader.style.display = "block";
         deleteCoursesDiv.style.display = "block";
     }
 
-    function hideDeletedCoursesList(){
+    function hideDeletedCoursesList() {
         var deleteCoursesHeader = document.getElementById("deleteCoursesHeader")
         var deleteCoursesDiv = document.getElementById("deleteCoursesDiv");
         deleteCoursesHeader.style.display = "none";
@@ -72,24 +73,54 @@
     const ModifyDeletedCoursesList = (value, course) => {
         var deleteCoursesList = document.getElementById("deleteCoursesList");
 
-        if (value.checked == true)
-        {
+        if (value.checked == true) {
             var option = document.createElement("option");
             option.text = course;
             option.value = course;
             deleteCoursesList.add(option);
         }
-        else{
-            for (var i=0; i < deleteCoursesList.length; i++) {
+        else {
+            for (var i = 0; i < deleteCoursesList.length; i++) {
                 if (deleteCoursesList.options[i].value == course)
-                deleteCoursesList.remove(i);
+                    deleteCoursesList.remove(i);
             }
-        }  
+        }
 
     }
 
     const clearDeletedCoursesList = () => {
         document.getElementById("deleteCoursesList").innerHTML = "";
     }
-    
+
+    var filter_lvl = <%- JSON.stringify(filter_lvl) %>
+    var filter_department = <%- JSON.stringify(filter_department) %>
+    var sort = <%- JSON.stringify(sort) %>
+
+    // change selected course level filter based on what was selected previously
+    Array.from(document.getElementById("filter").options).forEach((option) => {
+        if (option.value === filter_lvl) {
+            option.selected = true;
+        } else {
+            option.selected = false;
+        }
+    });
+
+    // change selected department filter based on what was selected previously
+    Array.from(document.getElementById("department").options).forEach((option) => {
+        if (option.value === filter_department) {
+            option.selected = true;
+        } else {
+            option.selected = false;
+        }
+    });
+
+    // change selected sort based on what was selected previously
+    Array.from(document.getElementById("sort-by").options).forEach((option) => {
+        if (option.value === sort) {
+            option.selected = true;
+        } else {
+            option.selected = false;
+        }
+    });
+
 </script>

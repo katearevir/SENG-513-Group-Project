@@ -7,6 +7,10 @@ const CourseSchema = new Schema({
         required: true,
         index: true
     },
+    level: {
+        type: Number,
+        required: true
+    },
     description: {
         type: String,
         required: true,

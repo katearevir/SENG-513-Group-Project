@@ -99,11 +99,12 @@ app.get('/logout', async (req, res) => {
 app.post('/api/addCourse', async (req, res) => {
     const { courseName, courseDescription } = req.body;
     let departmentName = courseName.replace(/[^A-Za-z]/g, '').toUpperCase();
+    let courseLevel = courseName.replace(/[^0-9]/g, '').slice(0, -2) + '00';
     let findDepartment = await DepartmentModel.findOne({ department: departmentName }).lean();
     var course;
     if (!findDepartment) {
         const newDepartment = await new DepartmentModel({ department: departmentName });
-        course = await new CourseModel({ course: courseName, description: courseDescription, department: newDepartment._id });
+        course = await new CourseModel({ course: courseName, level: courseLevel, description: courseDescription, department: newDepartment._id });
         newDepartment.save((err) => {
             if (err) {
                 console.log(err);
@@ -113,7 +114,7 @@ app.post('/api/addCourse', async (req, res) => {
         });
         
     } else {
-        course = await new CourseModel({ course: courseName, description: courseDescription, department: findDepartment._id });
+        course = await new CourseModel({ course: courseName, level: courseLevel, description: courseDescription, department: findDepartment._id });
     }
 
     try {
