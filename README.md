@@ -26,8 +26,8 @@ To test the admin/moderator view, please use one of the following credentials fo
 
 To test a pre-existing user, please use please use one of the following credentials for logging in:
 
-**Email:** <br/>
-**Password:** <br/>
+**Email:** user@user.com <br/>
+**Password:** abc <br/>
 
-**Email:**
-**Password:** <br/>
+**Email:** sam@ucalgary.ca <br/>
+**Password:** abc
