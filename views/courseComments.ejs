@@ -19,8 +19,8 @@
     <div class="review">
         <div class="voting">
             <span id="voteResults"><%- review.comment_votes %> </span>
-            <button id="upvote" onclick="upvote('<%- reviewID %>')" type="button"><span>▲</span></button>
-            <button id="downvote" onclick="downvote('<%- reviewID %>')" type="button"><span>▼</span></button>
+            <button id="upvote" onclick="upvote('<%- reviewID %>', this)" type="button"><span>▲</span></button>
+            <button id="downvote" onclick="downvote('<%- reviewID %>', this)" type="button"><span>▼</span></button>
         </div>
 
         <p id="date">
@@ -82,11 +82,11 @@
     
 
     <script>
-        var votes = document.getElementById('voteResults')?.innerText;
         let last = +new Date();
 
         // TODO: limit upvote/downvote to 1 time per user
-        async function upvote(reviewID) {
+        async function upvote(reviewID, element) {
+            var votes = element.previousElementSibling.innerText;
             const now = +new Date();
             // limit clicks for 1 second
             if (now - last > 1000) {
@@ -104,7 +104,7 @@
 
                 if (result.status === 'ok') {
                     votes++;
-                    document.getElementById('voteResults').innerHTML = votes;
+                    element.previousElementSibling.innerHTML = votes;
                 } else {
                     console.log(result.error);
                 }
@@ -112,7 +112,8 @@
 
         }
 
-        async function downvote(reviewID) {
+        async function downvote(reviewID, element) {
+            var votes = element.previousElementSibling.previousElementSibling.innerText;
             const now = +new Date();
             // limit clicks for 1 second
             if (now - last > 1000) {
@@ -130,7 +131,7 @@
 
                 if (result.status === 'ok') {
                     votes--;
-                    document.getElementById('voteResults').innerHTML = votes;
+                    element.previousElementSibling.previousElementSibling.innerHTML = votes;
                 } else {
                     console.log(result.error);
                 }
