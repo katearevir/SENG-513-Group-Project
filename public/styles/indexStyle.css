@@ -354,6 +354,7 @@ input::placeholder{
   }
 
   .course-contents a {
+    cursor: pointer;
     text-decoration: none;
     font-family: 'Comfortaa';
     font-style: normal;
@@ -432,6 +433,7 @@ input::placeholder{
   }
 
   #removeCourse{
+    cursor: pointer;
     font-family: 'Comfortaa';
     font-size: 16.5px;
     border: none;
