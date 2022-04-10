@@ -1,10 +1,6 @@
 const express = require('express');
 const app = express();
 app.use(express.urlencoded({ extended: true }));
-const { Server } = require('socket.io');
-const http = require('http');
-const server = http.createServer(app);
-const io = new Server(server);
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
@@ -138,8 +134,6 @@ app.post('/api/addCourse', async (req, res) => {
     res.json({ status: 'ok' });
 });
 
-
-
 // adds department to Departments 
 app.post('/api/addDepartment', async (req, res) => {
     const { departmentNameToAdd } = req.body;
@@ -160,10 +154,6 @@ app.post('/api/addDepartment', async (req, res) => {
     }
     res.json({ status: 'ok' });
 });
-
-
-
-
 
 app.post('/api/addReview', checkUser, async (req, res) => {
     const { rating, comment, keywordArr, courseName } = req.body;
@@ -220,6 +210,6 @@ app.delete('/api/deleteCourse', async (req, res) => {
     res.json({ status: 'ok' });
 })
 
-server.listen(process.env.PORT || 3000, () => {
+app.listen(process.env.PORT || 3000, () => {
     console.log('listening on *:3000');
 });
