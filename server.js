@@ -98,7 +98,28 @@ app.get('/logout', async (req, res) => {
 // adds course to Courses and new department if it doesn't exist yet
 app.post('/api/addCourse', async (req, res) => {
     const { courseName, courseDescription } = req.body;
-    const course = await new CourseModel({ course: courseName, description: courseDescription });
+    let departmentName = courseName.replace(/[^A-Za-z]/g, '').toUpperCase();
+    let findDepartment = await DepartmentModel.findOne({ department: departmentName }).lean();
+    var course;
+    if (!findDepartment) {
+        const newDepartment = await new DepartmentModel({ department: departmentName });
+        course = await new CourseModel({ course: courseName, description: courseDescription, department: newDepartment._id });
+        newDepartment.save((err) => {
+            if (err) {
+                console.log(err);
+                return res.json({ status: 'error', error: err });
+            }
+            console.log("Department registered");
+        });
+    } else {
+        course = await new CourseModel({ course: courseName, description: courseDescription, department: findDepartment._id });
+        try {
+            await DepartmentModel.updateOne({ department: departmentName }, { "$push": { courses: course } });
+        } catch (err) {
+            return res.json({ status: 'error', error: err });
+        }
+    }
+
     course.save((err) => {
         if (err) {
             if (err.code === 11000) {
@@ -111,25 +132,6 @@ app.post('/api/addCourse', async (req, res) => {
         }
         console.log("Course registered");
     });
-
-    let departmentName = courseName.replace(/[^A-Za-z]/g, '').toUpperCase();
-    let findDepartment = await DepartmentModel.findOne({ department: departmentName }).lean();
-    if (!findDepartment) {
-        const newDepartment = await new DepartmentModel({ department: departmentName });
-        newDepartment.save((err) => {
-            if (err) {
-                console.log(err);
-                return res.json({ status: 'error', error: err });
-            }
-            console.log("Department registered");
-        });
-    } else {
-        try {
-            await DepartmentModel.updateOne({ department: departmentName }, { "$push": { courses: course } });
-        } catch (err) {
-            return res.json({ status: 'error', error: err });
-        }
-    }
     res.json({ status: 'ok' });
 });
 

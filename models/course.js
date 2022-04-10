@@ -11,7 +11,10 @@ const CourseSchema = new Schema({
         type: String,
         required: true,
     },
-
+    department: {
+        type: Schema.Types.ObjectId,
+        ref: "Department"
+    },
     messages: [{
         type: Schema.Types.ObjectId,
         ref: "Feedback"
