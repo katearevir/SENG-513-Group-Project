@@ -111,13 +111,15 @@ app.post('/api/addCourse', async (req, res) => {
             }
             console.log("Department registered");
         });
+        
     } else {
         course = await new CourseModel({ course: courseName, description: courseDescription, department: findDepartment._id });
-        try {
-            await DepartmentModel.updateOne({ department: departmentName }, { "$push": { courses: course } });
-        } catch (err) {
-            return res.json({ status: 'error', error: err });
-        }
+    }
+
+    try {
+        await DepartmentModel.updateOne({ department: departmentName }, { "$push": { courses: course } });
+    } catch (err) {
+        return res.json({ status: 'error', error: err });
     }
 
     course.save((err) => {
@@ -166,7 +168,7 @@ app.post('/api/upvote', async (req, res) => {
     }
 
     res.json({ status: 'ok' });
-})
+});
 
 app.post('/api/downvote', async (req, res) => {
     const { reviewID } = req.body;
@@ -176,6 +178,17 @@ app.post('/api/downvote', async (req, res) => {
         return res.json({ status: 'error', error: err });
     }
 
+    res.json({ status: 'ok' });
+});
+
+app.post('/api/deleteCourse', async (req, res) => {
+    const { courseName } = req.body;
+    try {
+        await CourseModel.deleteOne( {course: courseName} );
+    } catch (err) {
+        return res.json({ status: 'error', error: err });
+    }
+    
     res.json({ status: 'ok' });
 })
 

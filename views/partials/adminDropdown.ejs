@@ -1,13 +1,13 @@
 <div class="dropdownMenu">
     <button onclick="dropdownMenu()" id="menubtn">≡</button>
-    
+
     <div id="myDropdown" class="menu-content">
         <a id="addCourse" href="addCourse">Add Course</a>
         <a id="modifyCourse" href="modifyCourses">Modify Course</a>
         <button type="button" id="removeCourse" onclick="hideButton();removeCoursesHandler();">Remove Course</button>
         <a id="logout" href="/logout">Logout</a>
     </div>
-    <button id="deleteCourses" style="display:none;">Delete Courses</button>
+    <button id="deleteCourses" style="display:none;" onclick="deleteCoursesHandler();">Delete Courses</button>
     <button id="cancelRemove" style="display:none;" onclick="showButton();cancelRemoveCoursesHandler();">X</button>
 </div>
 <script>
@@ -34,7 +34,7 @@
         document.getElementById("menubtn").style.display = "none";
     }
 
-    function showButton(){
+    function showButton() {
         document.getElementById("deleteCourses").style.display = "none";
         document.getElementById("cancelRemove").style.display = "none";
         document.getElementById("menubtn").style.display = "block";
@@ -69,5 +69,32 @@
         }
     }
 
+    // Send delete course request to server
+    const deleteCoursesHandler = () => {
+        deleteCoursesList = document.getElementById("deleteCoursesList");
+        Array.from(deleteCoursesList.options).forEach(async (course) => {
+            let courseName = course.value;
+            const result = await fetch('/api/deleteCourse', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    courseName
+                })
+            }).then((res) => res.json());
+
+            if (result.status === 'ok') {
+                console.log(courseName + " deleted successfully");
+            } else {
+                console.log(result.error);
+                alert(result.error);
+            }
+        });
+
+        alert('Courses deleted successfully');
+        window.location = '/';
+
+    };
 
 </script>
