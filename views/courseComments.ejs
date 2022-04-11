@@ -48,7 +48,7 @@
 
         <div class="replyButtons">
             <% if (isAdmin) { %>
-            <button id="deleteRating" type="button">Delete Rating</a>
+            <button id="deleteRating" type="button" onclick="deleteRatingHandler('<%- reviewID %>')">Delete Rating</a>
                 <% } else { %>
                 <a id="replyButton" href="#">Reply to Comment</a>
                 <a class="showRep">Show Replies</a>
@@ -59,27 +59,30 @@
 
         <div class="replies">
             <h3>Replies</h3>
-            <div class="reply">    
-                <span>User: </span><p>word.</p>
-            </div>
-            <hr>
-    
             <div class="reply">
-                <span>User: </span><p>this!!!!!!!</p>
+                <span>User: </span>
+                <p>word.</p>
             </div>
             <hr>
-            
+
             <div class="reply">
-                <span>User: </span><p>i disagree :/</p>
+                <span>User: </span>
+                <p>this!!!!!!!</p>
             </div>
             <hr>
-            
+
+            <div class="reply">
+                <span>User: </span>
+                <p>i disagree :/</p>
+            </div>
+            <hr>
+
         </div>
     </div>
-    
+
     <% }) %>
 
-    
+
 
     <script>
         let last = +new Date();
@@ -138,25 +141,47 @@
             }
         }
 
-        
+
         var showRep = document.getElementsByClassName("showRep");
-    
+
         for (var i = 0; i < showRep.length; i++) {
             showRep[i].addEventListener("click", function () {
-            var parentNode = this.parentNode;
+                var parentNode = this.parentNode;
 
-            var replies = parentNode.nextElementSibling.nextElementSibling;
+                var replies = parentNode.nextElementSibling.nextElementSibling;
 
-            if (replies.style.display === "block") {
-                replies.style.display = "none";
-                this.innerText = "Show Replies";
+                if (replies.style.display === "block") {
+                    replies.style.display = "none";
+                    this.innerText = "Show Replies";
+                } else {
+                    replies.style.display = "block";
+                    this.innerText = "Hide Replies";
+                }
+
+            });
+        }
+
+        const deleteRatingHandler = async (reviewID) => {
+            // are u sure u want to delete this
+
+            const result = await fetch('/api/deleteRating', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    reviewID
+                })
+            }).then((res) => res.json());
+
+            if (result.status === 'ok') {
+                console.log("Review deleted successfully");
+                alert('Review deleted successfully');
+                location.reload();
             } else {
-                replies.style.display = "block";
-                this.innerText = "Hide Replies";
+                alert(result.error);
             }
-            
-        });
-    }
+        };
     </script>
 </body>
 

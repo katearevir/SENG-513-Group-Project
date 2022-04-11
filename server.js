@@ -225,7 +225,7 @@ app.post('/api/getCourseInfo_modify', (req, res) => {
             console.log(err);
             return res.json({ status: 'error', error: err });
         } else if (result) {
-            return res.json({ status: 'ok', data: result});
+            return res.json({ status: 'ok', data: result });
         } else {
             console.log("can't find course");
             return res.json({ status: 'error', error: "can't find course" });
@@ -234,8 +234,8 @@ app.post('/api/getCourseInfo_modify', (req, res) => {
 });
 
 app.post('/api/modifyCourse', (req, res) => {
-    const {courseSearch, updated_textarea} = req.body;
-    CourseModel.updateOne({ course: courseSearch }, { "$set": { description: updated_textarea }}, (err, result) => {
+    const { courseSearch, updated_textarea } = req.body;
+    CourseModel.updateOne({ course: courseSearch }, { "$set": { description: updated_textarea } }, (err, result) => {
         if (err) throw err;
         else if (result) {
             return res.json({ status: 'ok' });
@@ -245,6 +245,19 @@ app.post('/api/modifyCourse', (req, res) => {
         }
     });
 });
+
+app.post('/api/deleteRating', (req, res) => {
+    const { reviewID } = req.body;
+    FeedbackModel.deleteOne({ _id: reviewID }, (err, result) => {
+        if (err) throw err;
+        else if (result) {
+            return res.json({ status: 'ok' });
+        } else {
+            console.log('Could not find review')
+            return res.json({ status: 'error', error: "Could not find review" });
+        }
+    });
+})
 
 app.listen(process.env.PORT || 3000, () => {
     console.log('listening on *:3000');
