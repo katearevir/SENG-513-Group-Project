@@ -63,7 +63,7 @@
             <p><b>Description: </b>
                 <%- course.description %>
             </p>
-            <p><b>Rating: </b><%- course.avgRating %>/5 <b>from</b> <%- course.messages.length %> <b>students</b></p>
+            <p><b>Rating: </b><%- Number(course.avgRating).toFixed(2); %> /5 <b>from</b> <%- course.messages.length %> <b>students</b></p>
             <a onclick="reviewButtonHandler('<%- course.course %>')">Add a review</a>
             <p><b>Comments:</b></p>
             <iframe src="courseComments/<%- course.course %> " height="261" width="446" style="border: none;"
