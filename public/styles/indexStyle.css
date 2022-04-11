@@ -467,6 +467,59 @@ input::placeholder{
   
   .show {display: block;}
 
+  /*https://www.w3schools.com/howto/howto_css_modals.asp*/
+  /* The Modal (background) */
+.modal {
+  display: block; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 200px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  font-family: 'Comfortaa';
+  text-align: center;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 30%;
+}
+
+#noDelete{
+  text-decoration: none;
+  font-family: 'Comfortaa';
+  text-align: center;
+  border-radius: 8px;
+  width: fit-content;
+  border: none;
+  padding: 10px 30px;
+  font-size: 15px;
+  color: white;
+  background-color: gray;
+}
+
+#yesDelete{
+  text-decoration: none;
+  font-family: 'Comfortaa';
+  text-align: center;
+  border-radius: 8px;
+  width: fit-content;
+  border: none;
+  padding: 10px 30px;
+  font-size: 15px;
+  color: white;
+  background-color: #D6001C;
+}
+
   @media only screen and (max-width: 768px){
     header select{
       width: 350px;

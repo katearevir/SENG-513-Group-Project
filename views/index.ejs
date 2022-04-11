@@ -72,6 +72,18 @@
     </div>
     <% }) %>
 
+    <div id="myModal" style="display:none;" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+          <p>ARE YOU SURE YOU WANT TO DELETE?</p>
+          <button id="noDelete" type="button" onclick="deleteConfirmation(false)">No</button>
+          <button id="yesDelete" type="button" onclick="deleteConfirmation(true)">Yes</button>
+        </div>
+      
+      </div>
+      
+
 </body>
 
 <script>
@@ -215,6 +227,18 @@
         }
 
     };
+
+    function displayConfirmation(){
+        var modal = document.getElementById("myModal");
+        modal.style.display = "block";
+    }
+    
+    function deleteConfirmation(confirm){
+        var modal = document.getElementById("myModal");
+        modal.style.display = "none";
+        if(confirm)
+            deleteCoursesHandler();
+    }
 
 </script>
 
