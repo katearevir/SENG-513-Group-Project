@@ -77,8 +77,8 @@
         <!-- Modal content -->
         <div class="modal-content">
           <p>ARE YOU SURE YOU WANT TO DELETE?</p>
-          <button id="noDelete" type="button" onclick="deleteConfirmation(false)">No</button>
-          <button id="yesDelete" type="button" onclick="deleteConfirmation(true)">Yes</button>
+          <button id="noDelete" type="button">No</button>
+          <button id="yesDelete" type="button">Yes</button>
         </div>
       
       </div>
@@ -233,11 +233,22 @@
         modal.style.display = "block";
     }
     
-    function deleteConfirmation(confirm){
+    function deleteConfirmation(){
         var modal = document.getElementById("myModal");
-        modal.style.display = "none";
-        if(confirm)
-            deleteCoursesHandler();
+        var noButton = document.getElementById("noDelete");
+        var yesButton = document.getElementById("yesDelete");
+
+        return new Promise(function(resolve, reject) {
+          noButton.onclick = function() {
+                    modal.style.display = "none";
+                    resolve(false);
+
+          }
+          yesButton.onclick = function() {
+                    modal.style.display = "none";
+                    resolve(true);
+          }
+     });
     }
 
 </script>

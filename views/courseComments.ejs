@@ -48,7 +48,7 @@
 
         <div class="replyButtons">
             <% if (isAdmin) { %>
-            <button id="deleteRating" type="button" onclick="deleteRatingHandler('<%- reviewID %>')">Delete Rating</a>
+            <button id="deleteRating" type="button" onclick="window.parent.displayConfirmation();deleteRatingHandler('<%- reviewID %>');">Delete Rating</a>
                 <% } else { %>
                 <a id="replyButton" href="#">Reply to Comment</a>
                 <a class="showRep">Show Replies</a>
@@ -163,8 +163,11 @@
 
         const deleteRatingHandler = async (reviewID) => {
             // are u sure u want to delete this
+            const confirmation = await window.parent.deleteConfirmation();
 
-            const result = await fetch('/api/deleteRating', {
+            if (confirmation == true)
+            {
+                const result = await fetch('/api/deleteRating', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -181,6 +184,8 @@
             } else {
                 alert(result.error);
             }
+            }
+            
         };
     </script>
 </body>

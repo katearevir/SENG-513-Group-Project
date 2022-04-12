@@ -8,7 +8,7 @@
         <button type="button" id="removeCourse" onclick="hideButton();removeCoursesHandler();">Remove Course</button>
         <a id="logout" href="/logout">Logout</a>
     </div>
-    <button id="deleteCourses" style="display:none;" onclick="displayConfirmation();">Delete Courses</button>
+    <button id="deleteCourses" style="display:none;" onclick="displayConfirmation();deleteCoursesHandler();">Delete Courses</button>
     <button id="cancelRemove" style="display:none;" onclick="showButton();cancelRemoveCoursesHandler();">X</button>
 </div>
 <script>
@@ -71,8 +71,11 @@
     }
 
     // Send delete course request to server
-    const deleteCoursesHandler = () => {
-            deleteCoursesList = document.getElementById("deleteCoursesList");
+    const deleteCoursesHandler = async () => {
+        const confirmation = await window.parent.deleteConfirmation();
+        deleteCoursesList = document.getElementById("deleteCoursesList");
+        if (confirmation == true){
+            
         Array.from(deleteCoursesList.options).forEach(async (course) => {
             let courseName = course.value;
             const result = await fetch('/api/deleteCourse', {
@@ -95,6 +98,8 @@
 
         alert('Courses deleted successfully');
         window.location = '/';
+        }
+            
         
 
     };
