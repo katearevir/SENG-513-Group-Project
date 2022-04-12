@@ -18,7 +18,8 @@ const courseCommentsRouter = require('./routers/courseCommentsRouter');
 const addDepartmentRouter = require('./routers/addDepartmentRouter');
 
 const mongoose = require('mongoose');
-const mongoDB = 'mongodb+srv://ahfhafh:jEYduRc7cZmHExJ@cluster0.3cy1i.mongodb.net/users-database?retryWrites=true&w=majority';
+// TODO: move to .env
+const mongoDB = process.env.MONGO_URI || 'mongodb+srv://ahfhafh:jEYduRc7cZmHExJ@cluster0.3cy1i.mongodb.net/users-database?retryWrites=true&w=majority';
 mongoose.connect(mongoDB).then(() => {
     console.log("Mongoose connected");
 }).catch((err) => console.log(err));
