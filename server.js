@@ -202,8 +202,6 @@ app.post('/api/downvote', (req, res) => {
             return res.json({ status: 'error', error: "Could not find course" });
         }
     })
-
-    res.json({ status: 'ok' });
 });
 
 app.delete('/api/deleteCourse', (req, res) => {
