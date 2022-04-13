@@ -1,5 +1,7 @@
 # SENG513 Group 4 - Rate My UofC Course
 
+# Github Repository Link: https://github.com/katearevir/SENG-513-Group-Project
+
 For our project, we made a course rating website for the University of Calgary.
 
 ## Getting Started
