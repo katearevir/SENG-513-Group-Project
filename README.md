@@ -29,7 +29,7 @@ To test the admin/moderator view, please use one of the following credentials fo
 
 To test a pre-existing user, please use one of the following credentials for logging in:
 
-**Email:** et@test.ca <br/>
+**Email:** et@test.com <br/>
 **Password:** abc
 
 **Email:** user@user.com <br/>
