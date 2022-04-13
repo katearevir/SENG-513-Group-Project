@@ -7,10 +7,10 @@ For our project, we made a course rating website for the University of Calgary.
 ## Getting Started
 
 1. Open project folder in the terminal. 
-2. Sample path: "yourProjectDownloadPath"/SENG-513-Group-Project where "yourProjectDownloadPath" is the path from where you downloaded the file.
-3. Install the required node modules by entering `npm install` into the terminal.
-4. Enter `node server.js` to run the server.
-5. On your preferred browser, go to http://localhost:3000/.
+   Sample path: "yourProjectDownloadPath"/SENG-513-Group-Project where "yourProjectDownloadPath" is the path from where you downloaded the file.
+2. Install the required node modules by entering `npm install` into the terminal.
+3. Enter `node server.js` to run the server.
+4. On your preferred browser, go to http://localhost:3000/.
 
 ## Admin/Moderator Login
 
